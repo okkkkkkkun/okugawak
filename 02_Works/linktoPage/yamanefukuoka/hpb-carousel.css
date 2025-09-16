@@ -93,12 +93,12 @@
 
 .bx-wrapper .bx-prev{
 	left: 0px;
-	background: url(controls.png) no-repeat 0 -32px;
+	background: url(https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/controls.png) no-repeat 0 -32px;
 }
 
 .bx-wrapper .bx-next{
 	right: 0px;
-	background: url(controls.png) no-repeat -43px -32px;
+	background: url(https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/controls.png) no-repeat -43px -32px;
 }
 
 .bx-wrapper .bx-prev:hover{
@@ -205,3 +205,4 @@
 	transition:opacity 1.2s linear; 
 
 }
+
