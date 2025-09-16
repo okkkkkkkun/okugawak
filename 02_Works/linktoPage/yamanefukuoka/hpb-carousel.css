@@ -134,7 +134,7 @@
 	width: 10px;
 	height: 11px;
 	outline: 0;
-	background: url(controls.png) -86px -11px no-repeat;
+	background: url(https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/controls.png) -86px -11px no-repeat;
 	margin: 0 3px;
 }
 
@@ -149,7 +149,7 @@
 	width: 9px;
 	height: 11px;
 	outline: 0;
-	background: url(controls.png) -86px -44px no-repeat;
+	background: url(https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/controls.png) -86px -44px no-repeat;
 	margin: 0 3px;
 }
 
@@ -203,4 +203,5 @@
 .hpb-slider1-pager a.active img {
 	opacity: 1;
 	transition:opacity 1.2s linear; 
+
 }
