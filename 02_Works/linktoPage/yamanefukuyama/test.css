@@ -1,0 +1,13 @@
+#pageTop {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+ }
+
+ 
+
+#pageTop i {
+   padding-top: 6px
+ }
+
+ 
