@@ -1,10 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\01_Profile",
     "\\02_Works",
-    "\\02_Works\\linktoPage"
+    "\\02_Works\\linktoPage",
+    "\\03_Trip",
+    "\\04_Contact"
   ],
-  "SelectedNode": "\\02_Works\\work.html",
+  "SelectedNode": "\\02_Works\\linktoPage\\aavs",
   "PreviewInSolutionExplorer": false
 }
