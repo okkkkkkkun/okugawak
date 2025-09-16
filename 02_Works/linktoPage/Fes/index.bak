@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 21.0.5.0 for Windows">
+<title>Completement Virtual</title>
+<link rel="stylesheet" href="test.css">
+<style type="text/css">
+<!--
+
+a{
+  text-decoration : none;
+}
+
+-->
+</style>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="test.js"></script>
+<link rel="shortcut icon" href="okugawa_icon.png">
+</head>
+<body text="#ffffff" bgcolor="#454545" link="#ffff00" vlink="#ffff00" alink="#00ffff">
+<center>
+<table border="0">
+  <tbody>
+    <tr>
+      <td width="600" align="left"><font SIZE="5" FACE="Century Gothic" COLOR="#000000"><a href="../../../index.html"><font SIZE="6" COLOR="#ffffff"><b>KOTA OKUGAWA<br>
+      </b></font><font SIZE="6" COLOR="#000000"><b>PORTFOLIO SITE</b></font></a></font></td>
+      <td width="230">
+      <p align="center"><font SIZE="3" FACE="Century Gothic" COLOR="#ffffff"><a href="../../../01_Profile/profile.html">01_PROFILE</a></font></p>
+      <div style="width : 959px; top : 2000px; left : -13px; 
+        position : absolute;
+        text-align : center;
+	height : 19px;
+"></div>
+<p id="pageTop"></p>
+<p align="center"><font SIZE="3" FACE="Century Gothic" COLOR="#ffffff"><a href="../../work.html">02_WORK</a></font></p>
+<p align="center"><font SIZE="3" FACE="Century Gothic" COLOR="#ffffff"><a href="../../../03_Training/training.html">03_TRAINING</a></font></p>
+<p align="center"><font SIZE="3" FACE="Century Gothic" COLOR="#ffffff"><a href="../../../04_Contact/contact.html">04_CONTACT</a></font></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p align="center"><br>
+<br>
+<br>
+</p>
+<center>
+<table border="0">
+  <tbody>
+    <tr>
+      <td width="400" align="left"><font SIZE="6" FACE="Century Gothic"><b>Completement Virtual</b></font></td>
+      <td align="center" width="400">&nbsp;</td>
+      <td width="30">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="left"><font FACE="游明朝">建築情報学会オンラインワークショップ「Fes」<br>
+      Apr, 2022</font></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<div align="center"><embed src="ComplementVirtual_movie_fin.mp4" type="video/mp4" width="830" height="550"></div>
+<p align="center"><br>
+<br>
+</p>
+<center>
+<table border="0" width="700">
+  <tbody>
+    <tr>
+      <td align="left" height="40" valign="top"><u><font SIZE="4" FACE="游明朝">プロジェクト概要</font></u></td>
+    </tr>
+    <tr>
+      <td align="left"><font FACE="游明朝">　2022年4月に建築情報学会の新たな活動として開催された、短期集中型のオンラインワークショップ。様々なバックグラウンドを持つ参加者が建築や情報について考え、一緒になってアウトプットしていく場である。<br>
+　１週間のワークショップで、社会人による「THINKING(3日間)」と、学生を中心とした「CODING+MAKING(5日間)」の２部構成とし、THINKINGで練られたアイデアを、CODING+MAKINGの参加者が選んで実装した。普段から実務で研究やコンピュテーショナルデザインを触れられている社会人の方の思想を直接感じることができる経験となりました。<br>
+　今回の課題は、建築情報学会の会員が集まり、様々な活動を行うリアルとバーチャルが共存するグラウンドを考え、少なくともリアル空間は、当時解体が行われ始めた中銀カプセルタワーの跡地を利用するという課題であった。<br>
+　VRの研究では、人間は実際に壁を沿って曲がっていても、まっすぐ歩く映像を見せられれば錯覚を起こすという研究がある。この研究をもとに、リアル空間とバーチャル空間との間での「歩くことによる体感の差異」に注目し、自分の行為を拡張させることができるバーチャル空間を補完するようなリアル建築を考えた。<br>
+　階段を登る→分岐を選択する→歩くを繰り返し行えるようなリアル建築のユニットを考え、それに対応するようなバーチャル空間を考えた。バーチャル空間とリアル空間には入口や中間スペース、会場などにリアルに戻れるような接続点があり、建築情報学会の学会大会の開催ができるような施設とバーチャル空間の構成を考えた。</font></td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p align="center"><br>
+<br>
+<br>
+</p>
+<p align="center"><font FACE="Century Gothic"><a href="../../work.html">Back to WORK</a></font><font SIZE="3" FACE="游明朝"><br>
+</font></p>
+<p align="center"><br clear="none">
+<br clear="none">
+<br>
+<br>
+<br>
+<font FACE="游明朝">建築設計本部/デジタルデザイン統括グループ 奥川航大 Kota okugawa<br>
+内線：8-232496　外線：03-5561-8000 　携帯：090-7501-0958　mail：okugawak@kajima.com<br>
+<br>
+</font><font size="2" face="メイリオ" COLOR="#ffffff" FACE="游明朝">All rights reserved, Copyright(C) 2023 KAJIMA CORPORATION</font><font COLOR="#666666" FACE="游明朝">
+</font></p>
+</body>
+</html>
