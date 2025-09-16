@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\01_Profile",
+    "\\02_Works",
+    "\\02_Works\\linktoPage"
   ],
-  "SelectedNode": "\\C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak",
+  "SelectedNode": "\\02_Works\\work.html",
   "PreviewInSolutionExplorer": false
 }
