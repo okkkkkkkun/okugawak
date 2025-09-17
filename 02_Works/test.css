@@ -8,17 +8,52 @@
    padding-top: 6px
  }
 
-/* テーブル内セルのベースを揃える */
-.work-cell { width: 400px; height: 400px; }
+/* 画像カードの共通スタイル */
+.work-cell { width:400px; height:400px; }
 
-/* 既に書いた .card / .card > img のCSSはそのままでOK */
-.card { position:relative; display:block; width:400px; height:400px; overflow:hidden; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.2); }
-.card > img { width:100%; height:100%; object-fit:cover; transition:transform .45s ease, filter .45s ease; }
-.card::before{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 100%); opacity:0; transition:opacity .35s ease; }
-.card::after{ content:attr(data-title); position:absolute; left:16px; right:16px; bottom:14px; color:#fff; font:600 18px/1.3 "Century Gothic", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; letter-spacing:.04em; opacity:0; transform:translateY(8px); transition:opacity .35s ease, transform .35s ease; text-shadow:0 2px 8px rgba(0,0,0,.6); }
-.card:hover > img{ transform:scale(1.04); filter:saturate(1.05); }
+.card{
+  position: relative;
+  display: block;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.2);
+}
+
+.card>img{
+  width:100%;
+  height:100%;
+  object-fit:cover;           /* 余白で収めたいなら contain に */
+  display:block;
+  transition: transform .45s ease, filter .45s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 100%);
+  opacity:0;
+  transition:opacity .35s ease;
+}
+
+.card::after{
+  content:attr(data-title);
+  position:absolute;
+  left:16px; right:16px; bottom:14px;
+  color:#fff;
+  font:600 18px/1.3 "Century Gothic", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing:.04em;
+  opacity:0; transform:translateY(8px);
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+  transition:opacity .35s ease, transform .35s ease;
+}
+
+.card:hover>img{ transform:scale(1.04); filter:saturate(1.05); }
 .card:hover::before{ opacity:1; }
-.card:hover::after{ opacity:1; transform:translateY(0); }
+.card:hover::after{  opacity:1; transform:translateY(0); }
+
 
 
  
