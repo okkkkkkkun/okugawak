@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\aavs\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:02_Works\\linktoPage\\aavs\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\work.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:02_Works\\work.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\01_Profile\\profile.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:01_Profile\\profile.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\yamanefukuoka\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:02_Works\\linktoPage\\yamanefukuoka\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\test.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:02_Works\\test.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,40 +43,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "profile.html",
-              "DocumentMoniker": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\01_Profile\\profile.html",
-              "RelativeDocumentMoniker": "01_Profile\\profile.html",
-              "ToolTip": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\01_Profile\\profile.html",
-              "RelativeToolTip": "01_Profile\\profile.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAABrAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-09-16T07:46:48.628Z",
+              "Title": "test.css",
+              "DocumentMoniker": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\test.css",
+              "RelativeDocumentMoniker": "02_Works\\test.css",
+              "ToolTip": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\test.css",
+              "RelativeToolTip": "02_Works\\test.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-09-17T04:11:45.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\aavs\\index.html",
-              "RelativeDocumentMoniker": "02_Works\\linktoPage\\aavs\\index.html",
-              "ToolTip": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\aavs\\index.html",
-              "RelativeToolTip": "02_Works\\linktoPage\\aavs\\index.html",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAEUAAAChAAAAAAAAAA==",
+              "Title": "work.html",
+              "DocumentMoniker": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\work.html",
+              "RelativeDocumentMoniker": "02_Works\\work.html",
+              "ToolTip": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\work.html",
+              "RelativeToolTip": "02_Works\\work.html",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAAwL0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-09-16T07:45:58.957Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\yamanefukuoka\\index.html",
-              "RelativeDocumentMoniker": "02_Works\\linktoPage\\yamanefukuoka\\index.html",
-              "ToolTip": "C:\\Users\\R21959\\source\\repos\\okkkkkkkun\\okugawak\\02_Works\\linktoPage\\yamanefukuoka\\index.html",
-              "RelativeToolTip": "02_Works\\linktoPage\\yamanefukuoka\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-09-16T07:45:15.38Z",
+              "WhenOpened": "2025-09-17T04:08:05.255Z",
               "EditorCaption": ""
             }
           ]
