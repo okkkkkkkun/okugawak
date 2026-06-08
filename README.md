@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio Site - 奥川 航大（Kota Okugawa）
 
 建築・デジタルデザイン分野のポートフォリオサイトです。
@@ -19,3 +20,6 @@ https://kota-okugawa.com
 
 - **サイト**: GitHub Pages（カスタムドメイン `kota-okugawa.com`）
 - **画像**: Cloudflare R2 オブジェクトストレージ
+=======
+https://kota-okugawa.com/
+>>>>>>> 45ddc0025b5c294e490df26fee3d5238aae808e7
