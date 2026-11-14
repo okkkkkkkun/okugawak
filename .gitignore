@@ -1,2 +1,7 @@
-# Visual Studio ‚ÌƒLƒƒƒbƒVƒ…‚ğ–³‹
+# OS / ã‚¨ãƒ‡ã‚£ã‚¿ã®ã”ã¿
+.DS_Store
+Thumbs.db
+Desktop.ini
 .vs/
+*.bak
+WPGthumb*.dat
