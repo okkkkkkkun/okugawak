@@ -28,7 +28,6 @@ NAV = [
     ("work", "Work", "index.html#work"),
     ("thoughts", "Thoughts", "index.html#thoughts"),
     ("personal", "Personal", "index.html#personal"),
-    ("trip", "Trip", "index.html#football-photo"),
     ("contact", "Contact", "04_Contact/contact.html"),
 ]
 
