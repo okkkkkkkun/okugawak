@@ -27,7 +27,7 @@ python3 scripts/build.py
 | `footballPhoto.images` の空の `src` | 追加の写真。URLは Cloudflare R2 |
 | `works[].addresses` | 同業者向けの一行。本文のない作品は印のまま |
 
-経歴、作品本文、連絡先、Trip の写真（Russia / Europe）、ガウルボードの説明は、既存のページと公開リポジトリから入っています。
+経歴、作品本文、連絡先、Trip の写真（Russia / Europe）、ガウルボードの説明は、既存のページと公開リポジトリから入っています。画像の中身は [docs/photo-catalog.md](docs/photo-catalog.md)。
 
 ## ページ
 
