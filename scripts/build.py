@@ -108,6 +108,7 @@ def footer(from_file: str, site: dict) -> str:
         '<footer class="site-foot">'
         f"{lines}"
         f'<p>mail：<a href="mailto:{esc(mail)}">{esc(mail)}</a></p>'
+        f'<p><a href="{esc(href(from_file, "brand/index.html"))}">ブランド案</a></p>'
         f'<p>{esc(site["copyright"])}</p>'
         "</footer>"
         '<dialog class="lightbox"><form method="dialog"><button type="submit">閉じる</button></form>'
