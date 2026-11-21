@@ -90,11 +90,12 @@ def chrome(from_file: str, current: str | None) -> str:
     for key, label, target in NAV:
         attrs = ' aria-current="page"' if key == current else ""
         links.append(f'<a href="{esc(href(from_file, target))}"{attrs}>{up(label)}</a>')
-    mark = href(from_file, "index.html")
+    home = href(from_file, "index.html")
+    mark = href(from_file, "assets/mark.svg")
     return (
         '<a class="skip" href="#content">本文へ</a>'
         '<header class="bar">'
-        f'<a class="mark" href="{esc(mark)}">Kota Okugawa</a>'
+        f'<a class="mark" href="{esc(home)}"><img src="{esc(mark)}" alt="" width="28" height="28"><span>Kota Okugawa</span></a>'
         f'<nav aria-label="サイト">{"".join(links)}</nav>'
         "</header>"
     )
@@ -117,7 +118,7 @@ def footer(from_file: str, site: dict) -> str:
 def head(from_file: str, title: str, description: str, path: str) -> str:
     css = href(from_file, "assets/site.css")
     js = href(from_file, "assets/site.js")
-    icon = href(from_file, "okugawa_icon.png")
+    icon = href(from_file, "assets/favicon.svg")
     canonical = "https://kota-okugawa.com/" + path.lstrip("/")
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -126,12 +127,18 @@ def head(from_file: str, title: str, description: str, path: str) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
-<meta name="theme-color" content="#f3f1ec">
+<meta name="theme-color" content="#161513">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:image" content="https://kota-okugawa.com/assets/og.png">
+<meta property="og:url" content="{esc(canonical)}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{esc(canonical)}">
-<link rel="icon" href="{esc(icon)}">
+<link rel="icon" href="{esc(icon)}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;family=Schibsted+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{esc(css)}">
 </head>
 """
@@ -226,17 +233,16 @@ def work_rows(from_file: str, works: list[dict]) -> str:
             if thumb
             else ""
         )
+        feature = " feature" if index == 1 else ""
         rows.append(
-            f'''<article class="work-row">
+            f'''<article class="work-row{feature}">
   <a class="row" href="{esc(link)}">
-    <time datetime="{esc(date_label(work))}">{esc(date_label(work))}</time>
-    <div>
-      <h3>{esc(work["title"])}</h3>
-      <p class="{line_class}"><span class="tag">取り組み</span>{esc(line)}</p>
-      {note_html}
-      <span class="more">見る</span>
-    </div>
     {image}
+    <div class="meta">
+      <time datetime="{esc(date_label(work))}">{esc(date_label(work))}</time>
+      <h3>{esc(work["title"])}</h3>
+      <p class="{line_class}">{esc(line)}</p>
+    </div>
   </a>
 </article>'''
         )
@@ -284,13 +290,18 @@ def work_block(from_file: str, data: dict) -> str:
 """
 
 
+def pull_quote(text: str) -> str:
+    klass = "pull is-placeholder" if placeholder(text) else "pull"
+    return f'<blockquote class="{klass}"><p>{esc(text)}</p></blockquote>'
+
+
 def thought_stack(thoughts: dict) -> str:
     items = []
     for item in thoughts["items"]:
         title = item.get("title") or ""
         head = f"<h3>{esc(title)}</h3>" if title else ""
-        items.append(f'<article class="block thought">{head}{manuscript(item["body"])}</article>')
-    return f'<div class="stack">{"".join(items)}</div>'
+        items.append(f'<article class="block thought">{head}{pull_quote(item["body"])}</article>')
+    return f'<div class="quotes">{"".join(items)}</div>'
 
 
 def thoughts_block(data: dict) -> str:
@@ -306,7 +317,7 @@ def thoughts_block(data: dict) -> str:
     </div>
   </header>
   {pending_note(texts)}
-  {manuscript(thoughts["lead"])}
+  {pull_quote(thoughts["lead"])}
   {thought_stack(thoughts)}
 </section>
 """
@@ -314,18 +325,23 @@ def thoughts_block(data: dict) -> str:
 
 def photo_grid(from_file: str, images: list[dict]) -> str:
     cells = []
+    n = 0
     for image in images:
         src = image.get("src") or ""
         caption = image.get("caption") or image.get("alt") or ""
+        n += 1
+        wide = " feature" if n == 1 and src else ""
         if src:
             cells.append(
-                "<figure>"
+                f'<figure class="{wide.strip()}">'
                 + shot(from_file, src, image.get("alt") or caption)
                 + (f'<figcaption class="caption">{esc(caption)}</figcaption>' if caption else "")
                 + "</figure>"
             )
         else:
-            cells.append(f'<figure class="slot"><figcaption>{esc(caption)}</figcaption></figure>')
+            cells.append(
+                f'<figure class="slot"><span class="slot-no">{n:02d}</span><figcaption>{esc(caption)}</figcaption></figure>'
+            )
     return f'<div class="mosaic">{"".join(cells)}</div>'
 
 
@@ -384,16 +400,35 @@ def contact_block(data: dict) -> str:
 """
 
 
+FIELD = """
+<svg class="field" viewBox="0 0 800 900" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.2">
+    <path d="M80 40 L260 20 L300 180 L120 220 Z"/>
+    <path d="M260 20 L520 60 L480 240 L300 180 Z"/>
+    <path d="M520 60 L760 30 L740 250 L480 240 Z"/>
+    <path d="M120 220 L300 180 L340 420 L90 390 Z"/>
+    <path d="M300 180 L480 240 L520 460 L340 420 Z"/>
+    <path d="M480 240 L740 250 L700 500 L520 460 Z"/>
+    <path d="M90 390 L340 420 L300 680 L60 640 Z"/>
+    <path d="M340 420 L520 460 L560 720 L300 680 Z"/>
+    <path d="M520 460 L700 500 L760 780 L560 720 Z"/>
+    <path d="M60 640 L300 680 L260 880 L40 860 Z"/>
+    <path d="M300 680 L560 720 L520 890 L260 880 Z"/>
+  </g>
+</svg>
+"""
+
+
 def cover(site: dict) -> str:
     image = esc(site["hero"])
     return f"""
 <div class="cover-pin">
   <img src="{image}" alt="" fetchpriority="high">
   <div class="cover-scrim"></div>
+  {FIELD}
   <div class="cover-copy">
-    <p class="cover-ja">{esc(site["nameJa"])}</p>
-    <h1 class="cover-name"><span>Kota</span><span>Okugawa</span></h1>
-    <p class="cover-line">{esc(site["statement"]["ja"])}</p>
+    <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+    <h1 class="cover-line">{esc(site["statement"]["ja"])}</h1>
     <p class="cover-en"><span class="type">{esc(site["statement"]["en"])}</span><span class="caret" aria-hidden="true"></span></p>
   </div>
   <p class="cover-affil">鹿島建設株式会社<br>{esc(site["affiliationDisplay"].replace("鹿島建設株式会社 ", ""))}</p>
@@ -482,7 +517,7 @@ def thoughts_page(data: dict) -> str:
     file = "05_Thoughts/index.html"
     thoughts = data["thoughts"]
     texts = [thoughts["lead"]] + [item.get("body", "") for item in thoughts["items"]]
-    inner = pending_note(texts) + manuscript(thoughts["lead"]) + thought_stack(thoughts)
+    inner = pending_note(texts) + pull_quote(thoughts["lead"]) + thought_stack(thoughts)
     return section_page(file, "thoughts", "Thoughts", "考え", "03", inner, data)
 
 
@@ -559,7 +594,7 @@ def project_page(work: dict, works: list[dict], data: dict) -> str:
         lead = f'<div class="gallery">{video_html}</div>'
         rest = ""
     elif media:
-        lead = f'<div class="gallery">{media[0]}</div>'
+        lead = f'<div class="gallery lead-frame">{media[0]}</div>'
         rest = video_html + "".join(media[1:])
     body = f"""
 <main class="page" id="content">
