@@ -112,6 +112,10 @@
   var canvas = section && section.querySelector("canvas");
   if (!section || !dataNode || !canvas || reduce) return;
 
+  var hint = document.getElementById("map-hint");
+  var shuffleBtn = document.getElementById("map-shuffle");
+  var resetBtn = document.getElementById("map-reset");
+
   var works = JSON.parse(dataNode.textContent).filter(function (item) {
     return item.thumb;
   });
@@ -135,17 +139,41 @@
   }, { rootMargin: "240px" });
   io.observe(section);
 
-  var pointer = null;
   var hot = -1;
   var touchHot = -1;
-  var positions = [];
-  var looping = false;
+  var dragId = -1;
+  var seeds = [];
+  var view = { w: 1, h: 1 };
   var dpr = 1;
+  var running = false;
+  var gesture = null;
+  var seenDrag = false;
 
-  function size() {
+  function homePoint(index) {
+    var cols = Math.ceil(Math.sqrt(works.length * 1.35));
+    var rows = Math.ceil(works.length / cols);
+    var col = index % cols;
+    var row = Math.floor(index / cols);
+    var nx = 0.1 + ((col + 0.5) / cols) * 0.8;
+    var ny = 0.12 + ((row + 0.5) / rows) * 0.76;
+    nx += ((index * 47) % 17 - 8) * 0.008;
+    ny += ((index * 19) % 13 - 6) * 0.008;
+    return { nx: Math.min(0.92, Math.max(0.08, nx)), ny: Math.min(0.9, Math.max(0.1, ny)) };
+  }
+
+  function ensureSeeds() {
+    if (seeds.length === works.length) return;
+    seeds = works.map(function (_, index) {
+      var home = homePoint(index);
+      return { nx: home.nx, ny: home.ny, hx: home.nx, hy: home.ny, vx: 0, vy: 0, tx: null, ty: null };
+    });
+  }
+
+  function px(seed) { return { x: seed.nx * view.w, y: seed.ny * view.h }; }
+
+  function fitCanvas() {
     var rect = canvas.getBoundingClientRect();
-    var coarse = window.matchMedia("(pointer: coarse)").matches;
-    var next = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 2);
+    var next = Math.min(window.devicePixelRatio || 1, 2);
     var w = Math.max(1, rect.width);
     var h = Math.max(1, rect.height);
     var bw = Math.round(w * next);
@@ -154,37 +182,10 @@
       dpr = next;
       canvas.width = bw;
       canvas.height = bh;
-      positions = [];
     }
-    if (positions.length !== works.length) {
-      positions = works.map(function (_, index) { return rest(index, w, h); });
-    }
-    return { w: w, h: h };
-  }
-
-  function rest(index, w, h) {
-    var cols = Math.ceil(Math.sqrt(works.length * (w / Math.max(h, 1))));
-    var rows = Math.ceil(works.length / cols);
-    var col = index % cols;
-    var row = Math.floor(index / cols);
-    var padX = w * 0.1;
-    var padY = h * 0.12;
-    var x = padX + ((col + 0.5) / cols) * (w - padX * 2);
-    var y = padY + ((row + 0.5) / rows) * (h - padY * 2);
-    x += ((index * 47) % 17 - 8) * w * 0.01;
-    y += ((index * 19) % 13 - 6) * h * 0.01;
-    return { x: x, y: y, rx: x, ry: y };
-  }
-
-  function targetOf(point, w, h) {
-    if (!pointer) return { x: point.rx, y: point.ry };
-    var dx = point.rx - pointer.x;
-    var dy = point.ry - pointer.y;
-    var dist = Math.hypot(dx, dy) || 1;
-    var reach = Math.min(w, h) * 0.55;
-    var t = Math.max(0, 1 - dist / reach);
-    var push = t * t * Math.min(w, h) * 0.2;
-    return { x: point.rx + (dx / dist) * push, y: point.ry + (dy / dist) * push };
+    view.w = w;
+    view.h = h;
+    ensureSeeds();
   }
 
   function clip(poly, inside, hit) {
@@ -205,16 +206,16 @@
   }
 
   function cell(index) {
-    var site = positions[index];
+    var site = px(seeds[index]);
     var poly = [
       { x: 0, y: 0 },
-      { x: canvas.clientWidth, y: 0 },
-      { x: canvas.clientWidth, y: canvas.clientHeight },
-      { x: 0, y: canvas.clientHeight }
+      { x: view.w, y: 0 },
+      { x: view.w, y: view.h },
+      { x: 0, y: view.h }
     ];
-    for (var i = 0; i < positions.length; i++) {
+    for (var i = 0; i < seeds.length; i++) {
       if (i === index) continue;
-      var other = positions[i];
+      var other = px(seeds[i]);
       var mx = (site.x + other.x) * 0.5;
       var my = (site.y + other.y) * 0.5;
       var dx = other.x - site.x;
@@ -235,9 +236,10 @@
   function nearest(x, y) {
     var best = 0;
     var bestD = Infinity;
-    for (var i = 0; i < positions.length; i++) {
-      var dx = positions[i].x - x;
-      var dy = positions[i].y - y;
+    for (var i = 0; i < seeds.length; i++) {
+      var site = px(seeds[i]);
+      var dx = site.x - x;
+      var dy = site.y - y;
       var d = dx * dx + dy * dy;
       if (d < bestD) {
         bestD = d;
@@ -252,23 +254,62 @@
     return { x: event.clientX - rect.left, y: event.clientY - rect.top };
   }
 
+  function areaCentroid(poly) {
+    var area = 0;
+    var cx = 0;
+    var cy = 0;
+    for (var i = 0; i < poly.length; i++) {
+      var p = poly[i];
+      var q = poly[(i + 1) % poly.length];
+      var cross = p.x * q.y - q.x * p.y;
+      area += cross;
+      cx += (p.x + q.x) * cross;
+      cy += (p.y + q.y) * cross;
+    }
+    area *= 0.5;
+    if (Math.abs(area) < 1) return { x: poly[0].x, y: poly[0].y };
+    return { x: cx / (6 * area), y: cy / (6 * area) };
+  }
+
+  function longestEdge(poly) {
+    var best = null;
+    var bestD = -1;
+    for (var i = 0; i < poly.length; i++) {
+      var a = poly[i];
+      var b = poly[(i + 1) % poly.length];
+      var d = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+      if (d > bestD) {
+        bestD = d;
+        best = [a, b];
+      }
+    }
+    return best;
+  }
+
+  function cellsOf() {
+    return seeds.map(function (_, index) { return cell(index); });
+  }
+
   function draw() {
-    var box = size();
+    fitCanvas();
     var ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, box.w, box.h);
+    ctx.clearRect(0, 0, view.w, view.h);
     ctx.fillStyle = "#e7e2d9";
-    ctx.fillRect(0, 0, box.w, box.h);
-    var cells = positions.map(function (_, index) { return cell(index); });
+    ctx.fillRect(0, 0, view.w, view.h);
+    var cells = cellsOf();
+    var active = dragId >= 0 ? dragId : hot;
     cells.forEach(function (poly, index) {
       if (poly.length < 3) return;
       var img = images[index];
+      var focus = index === active;
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(poly[0].x, poly[0].y);
       for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x, poly[i].y);
       ctx.closePath();
       ctx.clip();
+      if (focus) ctx.filter = "brightness(1.12)";
       if (img.complete && img.naturalWidth) {
         var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
         poly.forEach(function (p) {
@@ -279,7 +320,8 @@
         });
         var bw = Math.max(1, maxX - minX);
         var bh = Math.max(1, maxY - minY);
-        var fit = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
+        var boost = focus ? 1.06 : 1;
+        var fit = Math.max(bw / img.naturalWidth, bh / img.naturalHeight) * boost;
         var dw = img.naturalWidth * fit;
         var dh = img.naturalHeight * fit;
         ctx.drawImage(img, (minX + maxX) / 2 - dw / 2, (minY + maxY) / 2 - dh / 2, dw, dh);
@@ -292,114 +334,283 @@
       ctx.moveTo(poly[0].x, poly[0].y);
       for (var j = 1; j < poly.length; j++) ctx.lineTo(poly[j].x, poly[j].y);
       ctx.closePath();
-      ctx.strokeStyle = "rgba(246,243,238,0.85)";
-      ctx.lineWidth = 1.25;
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "rgba(246,243,238,0.9)";
+      ctx.lineWidth = 1.35;
       ctx.stroke();
     });
-    if (pointer && hot >= 0 && cells[hot] && cells[hot].length > 2) {
-      var poly = cells[hot];
-      var edge = null;
-      var edgeD = Infinity;
-      for (var k = 0; k < poly.length; k++) {
-        var a = poly[k];
-        var b = poly[(k + 1) % poly.length];
-        var mx = (a.x + b.x) / 2;
-        var my = (a.y + b.y) / 2;
-        var dist = (mx - pointer.x) * (mx - pointer.x) + (my - pointer.y) * (my - pointer.y);
-        if (dist < edgeD) {
-          edgeD = dist;
-          edge = [a, b];
-        }
-      }
+    if (active >= 0 && cells[active] && cells[active].length > 2) {
+      var poly = cells[active];
+      var edge = longestEdge(poly);
       if (edge) {
         ctx.beginPath();
         ctx.moveTo(edge[0].x, edge[0].y);
         ctx.lineTo(edge[1].x, edge[1].y);
         ctx.strokeStyle = "#e24a1b";
-        ctx.lineWidth = 2.4;
+        ctx.lineWidth = 2.6;
+        ctx.lineCap = "round";
         ctx.stroke();
       }
-      var cx = 0;
-      var cy = 0;
-      poly.forEach(function (p) { cx += p.x; cy += p.y; });
-      cx /= poly.length;
-      cy /= poly.length;
-      var title = works[hot].title;
+      var center = areaCentroid(poly);
+      var title = works[active].title;
       ctx.font = '500 15px "Zen Kaku Gothic New", sans-serif';
       var tw = ctx.measureText(title).width;
-      var lx = Math.max(12 + tw / 2, Math.min(box.w - 12 - tw / 2, cx));
-      var ly = Math.max(28, Math.min(box.h - 16, cy));
+      var lx = Math.max(12 + tw / 2, Math.min(view.w - 12 - tw / 2, center.x));
+      var ly = Math.max(28, Math.min(view.h - 16, center.y));
       ctx.fillStyle = "rgba(22,21,19,0.84)";
       ctx.fillRect(lx - tw / 2 - 10, ly - 18, tw + 20, 30);
       ctx.fillStyle = "#f6f3ee";
       ctx.fillText(title, lx - tw / 2, ly);
     }
+    return cells;
   }
 
-  function kick() {
-    if (looping) return;
-    looping = true;
-    function step() {
-      var box = canvas.getBoundingClientRect();
-      var w = box.width;
-      var h = box.height;
-      if (positions.length !== works.length || Math.abs((positions[0].rx || 0) - rest(0, w, h).x) > 2) {
-        positions = works.map(function (_, index) { return rest(index, w, h); });
+  function clampSeed(seed) {
+    seed.nx = Math.min(0.94, Math.max(0.06, seed.nx));
+    seed.ny = Math.min(0.92, Math.max(0.08, seed.ny));
+  }
+
+  function noteDrag() {
+    if (seenDrag) return;
+    seenDrag = true;
+    if (hint) hint.classList.add("is-gone");
+  }
+
+  function openWork(id) {
+    if (works[id]) window.location.href = works[id].href;
+  }
+
+  function stepPhysics(dt) {
+    fitCanvas();
+    var cells = null;
+    var moving = false;
+    var minSep = Math.min(view.w, view.h) * 0.105;
+    for (var i = 0; i < seeds.length; i++) {
+      for (var j = i + 1; j < seeds.length; j++) {
+        var a = seeds[i];
+        var b = seeds[j];
+        var dx = (b.nx - a.nx) * view.w;
+        var dy = (b.ny - a.ny) * view.h;
+        var dist = Math.hypot(dx, dy);
+        if (dist >= minSep || dist < 0.5) continue;
+        var push = ((minSep - dist) / dist) * 0.045 * dt;
+        if (i !== dragId) {
+          a.nx -= (dx / view.w) * push;
+          a.ny -= (dy / view.h) * push;
+          moving = true;
+        }
+        if (j !== dragId) {
+          b.nx += (dx / view.w) * push;
+          b.ny += (dy / view.h) * push;
+          moving = true;
+        }
       }
-      var moving = false;
-      positions.forEach(function (point) {
-        var goal = targetOf(point, w, h);
-        point.x += (goal.x - point.x) * 0.38;
-        point.y += (goal.y - point.y) * 0.38;
-        if (Math.hypot(goal.x - point.x, goal.y - point.y) > 0.6) moving = true;
-      });
-      draw();
-      if (moving || pointer) requestAnimationFrame(step);
-      else looping = false;
     }
-    requestAnimationFrame(step);
+    var idle = dragId < 0;
+    if (idle) cells = cellsOf();
+    seeds.forEach(function (seed, index) {
+      if (index === dragId) {
+        seed.vx = 0;
+        seed.vy = 0;
+        clampSeed(seed);
+        return;
+      }
+      if (seed.tx != null) {
+        seed.vx += (seed.tx - seed.nx) * 0.12 * dt;
+        seed.vy += (seed.ty - seed.ny) * 0.12 * dt;
+        moving = true;
+      }
+      seed.vx *= Math.pow(0.9, dt);
+      seed.vy *= Math.pow(0.9, dt);
+      seed.nx += seed.vx * dt;
+      seed.ny += seed.vy * dt;
+      if (Math.hypot(seed.vx * view.w, seed.vy * view.h) > 0.25) moving = true;
+      if (seed.tx != null && Math.hypot(seed.tx - seed.nx, seed.ty - seed.ny) < 0.004) {
+        seed.tx = null;
+        seed.ty = null;
+      }
+      if (idle && cells && cells[index] && cells[index].length > 2 && Math.hypot(seed.vx * view.w, seed.vy * view.h) < 1.2) {
+        var c = areaCentroid(cells[index]);
+        var pull = 0.02 * dt;
+        seed.nx += (c.x / view.w - seed.nx) * pull;
+        seed.ny += (c.y / view.h - seed.ny) * pull;
+        if (Math.hypot(c.x - seed.nx * view.w, c.y - seed.ny * view.h) > 1.2) moving = true;
+      }
+      clampSeed(seed);
+    });
+    return moving;
   }
 
-  canvas.addEventListener("pointermove", function (event) {
-    if (event.pointerType !== "mouse") return;
-    pointer = local(event);
-    hot = nearest(pointer.x, pointer.y);
-    kick();
-  });
-  canvas.addEventListener("pointerleave", function (event) {
-    if (event.pointerType !== "mouse") return;
-    pointer = null;
-    hot = -1;
-    kick();
-  });
-  canvas.addEventListener("pointerdown", function (event) {
-    if (event.pointerType === "mouse") return;
-    pointer = local(event);
-    hot = nearest(pointer.x, pointer.y);
-    kick();
-  });
-  canvas.addEventListener("pointerup", function (event) {
+  function wake() {
+    if (running) return;
+    running = true;
+    var last = performance.now();
+    function frame(now) {
+      var dt = Math.min(2.2, (now - last) / 16.67);
+      last = now;
+      var moving = stepPhysics(dt);
+      draw();
+      if (moving || dragId >= 0) requestAnimationFrame(frame);
+      else running = false;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function scatter(randomize) {
+    noteDrag();
+    seeds.forEach(function (seed) {
+      if (randomize) {
+        seed.tx = 0.12 + Math.random() * 0.76;
+        seed.ty = 0.14 + Math.random() * 0.72;
+      } else {
+        seed.tx = seed.hx;
+        seed.ty = seed.hy;
+      }
+      seed.vx = 0;
+      seed.vy = 0;
+    });
+    wake();
+  }
+
+  function beginGesture(event) {
+    if (event.button != null && event.button !== 0) return;
     var point = local(event);
-    var id = nearest(point.x, point.y);
-    if (fine && event.pointerType === "mouse") {
-      window.location.href = works[id].href;
+    fitCanvas();
+    gesture = {
+      id: nearest(point.x, point.y),
+      x: point.x,
+      y: point.y,
+      t: performance.now(),
+      pointerId: event.pointerId,
+      type: event.pointerType,
+      captured: event.pointerType === "mouse",
+      moved: 0,
+      lastX: point.x,
+      lastY: point.y
+    };
+    hot = gesture.id;
+    if (event.pointerType === "mouse") canvas.setPointerCapture(event.pointerId);
+    wake();
+  }
+
+  function moveGesture(event) {
+    if (!gesture || event.pointerId !== gesture.pointerId) {
+      if (event.pointerType === "mouse" && dragId < 0) {
+        var hover = local(event);
+        var next = nearest(hover.x, hover.y);
+        if (next !== hot) {
+          hot = next;
+          if (!running) draw();
+        }
+      }
       return;
     }
-    if (event.pointerType === "mouse") return;
+    var point = local(event);
+    var dx = point.x - gesture.x;
+    var dy = point.y - gesture.y;
+    gesture.moved = Math.hypot(dx, dy);
+    var elapsed = performance.now() - gesture.t;
+    if (!gesture.captured && gesture.type !== "mouse") {
+      if (Math.abs(dy) > Math.abs(dx) && gesture.moved > 12) {
+        gesture = null;
+        return;
+      }
+      var held = elapsed > 170 && gesture.moved < 14;
+      var sideways = Math.abs(dx) > Math.abs(dy) && gesture.moved > 10;
+      if (held || sideways) {
+        gesture.captured = true;
+        canvas.setPointerCapture(event.pointerId);
+      } else {
+        return;
+      }
+    }
+      if (gesture.moved > 8) {
+      dragId = gesture.id;
+      var seed = seeds[dragId];
+      var ddx = (point.x - gesture.lastX) / view.w;
+      var ddy = (point.y - gesture.lastY) / view.h;
+      seed.nx += ddx;
+      seed.ny += ddy;
+      gesture.vx = ddx;
+      gesture.vy = ddy;
+      clampSeed(seed);
+      noteDrag();
+      wake();
+    }
+    gesture.lastX = point.x;
+    gesture.lastY = point.y;
+  }
+
+  function endGesture(event) {
+    if (!gesture || (event && event.pointerId !== gesture.pointerId)) return;
+    var point = local(event);
+    var id = gesture.id;
+    var dragged = gesture.moved > 8;
+    var flingX = gesture.vx || 0;
+    var flingY = gesture.vy || 0;
+    dragId = -1;
+    gesture = null;
+    if (dragged) {
+      hot = id;
+      seeds[id].vx = flingX * 0.85;
+      seeds[id].vy = flingY * 0.85;
+      wake();
+      return;
+    }
+    hot = id;
+    if (fine && (!event || event.pointerType === "mouse")) {
+      openWork(id);
+      return;
+    }
     if (touchHot === id) {
-      window.location.href = works[id].href;
+      openWork(id);
       return;
     }
     touchHot = id;
-    hot = id;
-    pointer = point;
-    kick();
-  });
+    wake();
+  }
 
-  window.addEventListener("resize", function () {
-    positions = [];
-    draw();
+  canvas.addEventListener("pointerdown", beginGesture);
+  canvas.addEventListener("pointermove", moveGesture);
+  canvas.addEventListener("pointerup", endGesture);
+  canvas.addEventListener("pointercancel", function (event) {
+    dragId = -1;
+    gesture = null;
+    wake();
   });
-  if (loaded) draw();
-  else requestAnimationFrame(draw);
+  canvas.addEventListener("pointerleave", function (event) {
+    if (dragId >= 0 || (gesture && gesture.captured)) return;
+    if (event.pointerType === "mouse") {
+      hot = -1;
+      wake();
+    }
+  });
+  canvas.addEventListener("keydown", function (event) {
+    if (!seeds.length) return;
+    if (hot < 0) hot = 0;
+    var step = 0.02;
+    var used = true;
+    if (event.key === "ArrowLeft") seeds[hot].nx -= step;
+    else if (event.key === "ArrowRight") seeds[hot].nx += step;
+    else if (event.key === "ArrowUp") seeds[hot].ny -= step;
+    else if (event.key === "ArrowDown") seeds[hot].ny += step;
+    else if (event.key === "Enter") openWork(hot);
+    else if (event.key === "[") hot = (hot + seeds.length - 1) % seeds.length;
+    else if (event.key === "]") hot = (hot + 1) % seeds.length;
+    else used = false;
+    if (!used) return;
+    if (event.key !== "Enter") {
+      event.preventDefault();
+      clampSeed(seeds[hot]);
+      seeds[hot].vx = 0;
+      seeds[hot].vy = 0;
+      noteDrag();
+      wake();
+    }
+  });
+  if (shuffleBtn) shuffleBtn.addEventListener("click", function () { scatter(true); });
+  if (resetBtn) resetBtn.addEventListener("click", function () { scatter(false); });
+
+  window.addEventListener("resize", function () { wake(); });
+  wake();
 })();

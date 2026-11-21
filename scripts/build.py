@@ -503,9 +503,14 @@ def works_map(data: dict) -> str:
   <header class="map-head">
     <p class="sec-en">Work</p>
     <h2 id="works-map-title">面で見る</h2>
-    <p class="map-note">指の位置で面が割れる。もう一度押すと、その作品へ。</p>
+    <p class="map-note">面をドラッグして組み直す。離すと、ゆっくり整う。もう一度押すと、その作品へ。</p>
   </header>
-  <canvas class="map-canvas" aria-hidden="true"></canvas>
+  <div class="map-tools">
+    <p class="map-hint" id="map-hint">drag to rearrange</p>
+    <button type="button" id="map-shuffle">shuffle</button>
+    <button type="button" id="map-reset">reset</button>
+  </div>
+  <canvas class="map-canvas" tabindex="0" aria-keyshortcuts="ArrowKeys Enter" aria-label="作品の面。ドラッグで動かす。矢印キーで選んだ面を動かし、Enterで開く。"></canvas>
   <ul class="map-links">{links}</ul>
   <script type="application/json" id="works-map-data">{payload}</script>
 </section>

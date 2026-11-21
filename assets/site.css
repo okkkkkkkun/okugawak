@@ -231,15 +231,40 @@ body.is-home .sheet { margin-top: 100svh; }
   line-height: 1.1;
 }
 .map-note { margin: 0; color: var(--muted); }
+.map-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.1rem;
+  margin: 0.35rem 0 0.7rem;
+}
+.map-hint, .map-tools button {
+  margin: 0;
+  padding: 0.35rem 0;
+  min-height: 44px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+.map-hint { cursor: default; transition: opacity 0.7s ease; }
+.map-hint.is-gone { opacity: 0; }
+.map-tools button { color: var(--ink); }
 .map-canvas {
   display: block;
   width: 100%;
   height: min(78vh, 820px);
   min-height: 420px;
   background: var(--paper-2);
-  cursor: crosshair;
+  cursor: grab;
   touch-action: pan-y;
 }
+.map-canvas:active { cursor: grabbing; }
+.map-canvas:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .map-links {
   display: flex;
   flex-wrap: wrap;
@@ -733,6 +758,7 @@ a:hover .frame img,
   .js .reveal { opacity: 1; transform: none; }
   .assemble { pointer-events: none; }
   .assemble-hint { display: none; }
+  .map-tools, .map-hint { display: none; }
   .map-canvas { display: none; }
   .map-links {
     display: grid;
