@@ -401,33 +401,12 @@ def contact_block(data: dict) -> str:
 """
 
 
-FIELD = """
-<svg class="field" viewBox="0 0 800 900" aria-hidden="true">
-  <g fill="none" stroke="currentColor" stroke-width="1.25">
-    <path d="M80 40 L260 20 L300 180 L120 220 Z"/>
-    <path d="M260 20 L520 60 L480 240 L300 180 Z"/>
-    <path d="M520 60 L760 30 L740 250 L480 240 Z"/>
-    <path d="M120 220 L300 180 L340 420 L90 390 Z"/>
-    <path d="M300 180 L480 240 L520 460 L340 420 Z"/>
-    <path d="M480 240 L740 250 L700 500 L520 460 Z"/>
-    <path d="M90 390 L340 420 L300 680 L60 640 Z"/>
-    <path d="M340 420 L520 460 L560 720 L300 680 Z"/>
-    <path d="M520 460 L700 500 L760 780 L560 720 Z"/>
-    <path d="M60 640 L300 680 L260 880 L40 860 Z"/>
-    <path d="M300 680 L560 720 L520 890 L260 880 Z"/>
-  </g>
-  <path d="M300 180 L480 240" fill="none" stroke="#e24a1b" stroke-width="1.8"/>
-</svg>
-"""
-
-
 def cover(site: dict) -> str:
     image = esc(site["hero"])
     return f"""
 <div class="cover-pin">
   <img src="{image}" alt="" fetchpriority="high">
   <div class="cover-scrim"></div>
-  {FIELD}
   <div class="cover-copy">
     <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
     <h1 class="cover-line">{"つくりながら、<br>考える。" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>

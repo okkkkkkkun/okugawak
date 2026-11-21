@@ -137,20 +137,6 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
     linear-gradient(to right, rgba(16, 13, 10, 0.72), rgba(16, 13, 10, 0.28) 55%, rgba(16, 13, 10, 0.45)),
     linear-gradient(to top, rgba(16, 13, 10, 0.55), transparent 32%);
 }
-.field {
-  position: absolute;
-  right: -6vw;
-  top: 6vh;
-  width: min(52vw, 640px);
-  height: auto;
-  color: rgba(255, 255, 255, 0.55);
-  animation: drift 28s linear infinite;
-  pointer-events: none;
-}
-@keyframes drift {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-2%, 2%, 0); }
-}
 .cover-copy {
   position: absolute;
   left: 0;
@@ -541,7 +527,6 @@ a:hover .frame img,
   .cover-copy { right: 0; width: auto; padding-bottom: 6.5rem; }
   .cover-line { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
   .cover-affil { position: static; text-align: left; margin-top: 1.25rem; max-width: none; }
-  .field { width: 80vw; right: -20vw; top: 8vh; opacity: 0.7; }
   .photos { grid-template-columns: 1fr 1fr; }
   .gallery { grid-template-columns: 1fr; }
   .mosaic { grid-template-columns: 1fr; }
@@ -557,6 +542,6 @@ a:hover .frame img,
   .up span, .shot img, .frame img, .js .reveal { transition: none; }
   .shot:hover img, a:hover .frame img { transform: none; }
   .cover-en .type { width: auto; animation: none; }
-  .caret, .field { animation: none; }
+  .caret { animation: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
