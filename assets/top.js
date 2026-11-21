@@ -4,107 +4,219 @@
 
   var mark = document.querySelector(".assemble svg");
   if (mark && !reduce) {
-    var planes = Array.prototype.map.call(mark.querySelectorAll(".plane"), function (el) {
-      return { el: el, x: 0, y: 0, drag: null };
+    var stage = mark.parentElement;
+    var joint = mark.querySelector(".joint");
+    var gapWord = mark.querySelector(".gap-word");
+    var hint = document.querySelector(".assemble-hint");
+    var planes = Array.prototype.map.call(mark.querySelectorAll(".plane"), function (el, index) {
+      return { el: el, x: 0, y: 0, vx: 0, vy: 0, rot: 0, vr: 0, drag: null, side: index === 0 ? -1 : 1, phase: index * 1.7 };
     });
-    var easing = false;
+    var look = { x: 0, y: 0 };
+    var keys = { x: 0, y: 0 };
+    var loop = false;
+    var wasApart = false;
+    var lastTap = 0;
+    var flashUntil = 0;
 
-    function scale() {
+    function unit() {
       var box = mark.getBoundingClientRect();
-      return box.width / 32 || 2;
+      return box.width / 32 || 3;
     }
-    function paintPlane(plane) {
-      plane.el.setAttribute("transform", "translate(" + plane.x.toFixed(2) + " " + plane.y.toFixed(2) + ")");
-    }
-    function clamp(plane) {
-      var limit = 16;
+    function limit(plane) {
+      var cap = 20;
       var d = Math.hypot(plane.x, plane.y);
-      if (d > limit) {
-        plane.x = plane.x / d * limit;
-        plane.y = plane.y / d * limit;
+      if (d > cap) {
+        plane.x = plane.x / d * cap;
+        plane.y = plane.y / d * cap;
       }
     }
-    function ease() {
-      if (easing) return;
-      easing = true;
-      function step() {
-        var live = false;
-        planes.forEach(function (plane) {
-          if (plane.drag) {
-            live = true;
-            return;
-          }
-          plane.x *= 0.84;
-          plane.y *= 0.84;
-          if (Math.hypot(plane.x, plane.y) < 0.35) {
-            plane.x = 0;
-            plane.y = 0;
-          } else {
-            live = true;
-          }
-          paintPlane(plane);
-        });
-        if (live) requestAnimationFrame(step);
-        else easing = false;
+    function paint() {
+      planes.forEach(function (plane) {
+        plane.el.setAttribute(
+          "transform",
+          "translate(" + plane.x.toFixed(2) + " " + plane.y.toFixed(2) + ") rotate(" + plane.rot.toFixed(2) + " 16 16)"
+        );
+      });
+      var ax = 12 + planes[0].x;
+      var ay = 16 + planes[0].y;
+      var bx = 16 + planes[1].x;
+      var by = 16 + planes[1].y;
+      var gap = Math.hypot(planes[0].x - planes[1].x, planes[0].y - planes[1].y);
+      var show = Math.max(0, Math.min(1, (gap - 1.4) / 5));
+      if (joint) {
+        joint.setAttribute("x1", ax.toFixed(2));
+        joint.setAttribute("y1", ay.toFixed(2));
+        joint.setAttribute("x2", bx.toFixed(2));
+        joint.setAttribute("y2", by.toFixed(2));
+        var snapping = performance.now() < flashUntil;
+        joint.style.opacity = String(snapping ? 1 : show);
+        joint.style.strokeWidth = snapping ? "1.6" : "0.7";
       }
-      requestAnimationFrame(step);
+      if (gapWord) {
+        var word = gap > 11 ? "Rethink" : gap > 6 ? "Run" : "Make";
+        gapWord.textContent = word;
+        gapWord.setAttribute("x", ((ax + bx) / 2).toFixed(2));
+        gapWord.setAttribute("y", ((ay + by) / 2 - 1.4).toFixed(2));
+        gapWord.style.opacity = String(Math.max(0, Math.min(1, (gap - 4) / 4)));
+      }
+      if (stage) {
+        stage.style.transform = "rotateY(" + (look.x * 7).toFixed(2) + "deg) rotateX(" + (-look.y * 5).toFixed(2) + "deg)";
+      }
+      mark.style.filter = "drop-shadow(" + (look.x * 4).toFixed(1) + "px " + (3 + look.y * 3).toFixed(1) + "px 0 rgba(22,21,19,.4))";
     }
-
+    function flash() {
+      flashUntil = performance.now() + 220;
+    }
+    function tick(now) {
+      var dt = 1;
+      var live = false;
+      var t = now || performance.now();
+      planes.forEach(function (plane) {
+        if (plane.drag) {
+          live = true;
+          return;
+        }
+        var tx = Math.sin(t / 980 + plane.phase) * 0.42 + look.x * plane.side * 1.15 + keys.x * plane.side * 7;
+        var ty = Math.cos(t / 1140 + plane.phase) * 0.3 + look.y * 0.7 + keys.y * 6;
+        plane.vx += (tx - plane.x) * 0.16 * dt;
+        plane.vy += (ty - plane.y) * 0.16 * dt;
+        plane.vx *= 0.72;
+        plane.vy *= 0.72;
+        plane.x += plane.vx * dt;
+        plane.y += plane.vy * dt;
+        plane.vr += (0 - plane.rot) * 0.14 * dt;
+        plane.vr *= 0.74;
+        plane.rot += plane.vr * dt;
+        limit(plane);
+        if (Math.hypot(plane.vx, plane.vy) > 0.04 || Math.abs(plane.x - tx) > 0.08 || Math.abs(plane.rot) > 0.4) live = true;
+      });
+      var gap = Math.hypot(planes[0].x - planes[1].x, planes[0].y - planes[1].y);
+      var speed = Math.hypot(planes[0].vx, planes[0].vy) + Math.hypot(planes[1].vx, planes[1].vy);
+      if (wasApart && gap < 1.15 && speed > 0.35) flash();
+      wasApart = gap > 5;
+      paint();
+      if (live || Math.abs(look.x) + Math.abs(look.y) > 0.02 || keys.x || keys.y) requestAnimationFrame(tick);
+      else loop = false;
+    }
+    function wake() {
+      if (loop) return;
+      loop = true;
+      requestAnimationFrame(tick);
+    }
+    function forgetHint() {
+      if (hint) hint.classList.add("is-gone");
+    }
+    function explode() {
+      forgetHint();
+      planes[0].vx = -5.2;
+      planes[0].vy = -2.4;
+      planes[0].vr = -7;
+      planes[1].vx = 5.6;
+      planes[1].vy = 2.8;
+      planes[1].vr = 8;
+      wake();
+    }
     planes.forEach(function (plane) {
       plane.el.addEventListener("pointerdown", function (event) {
         if (event.button != null && event.button !== 0) return;
-        plane.drag = { x: event.clientX, y: event.clientY, ox: plane.x, oy: plane.y };
-        plane.el.setPointerCapture(event.pointerId);
-        event.preventDefault();
+        plane.drag = {
+          x: event.clientX,
+          y: event.clientY,
+          ox: plane.x,
+          oy: plane.y,
+          id: event.pointerId,
+          type: event.pointerType,
+          held: false,
+          lx: event.clientX,
+          ly: event.clientY
+        };
+        if (event.pointerType === "mouse") plane.el.setPointerCapture(event.pointerId);
+        else {
+          setTimeout(function () {
+            if (!plane.drag || plane.drag.held) return;
+            if (Math.hypot(plane.drag.lx - plane.drag.x, plane.drag.ly - plane.drag.y) < 10) {
+              plane.drag.held = true;
+              try { plane.el.setPointerCapture(plane.drag.id); } catch (err) { /* already gone */ }
+            }
+          }, 160);
+        }
       });
       plane.el.addEventListener("pointermove", function (event) {
-        if (!plane.drag) return;
-        var unit = scale();
-        plane.x = plane.drag.ox + (event.clientX - plane.drag.x) / unit;
-        plane.y = plane.drag.oy + (event.clientY - plane.drag.y) / unit;
-        clamp(plane);
-        paintPlane(plane);
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        var dx = event.clientX - plane.drag.x;
+        var dy = event.clientY - plane.drag.y;
+        plane.drag.lx = event.clientX;
+        plane.drag.ly = event.clientY;
+        if (plane.drag.type !== "mouse" && !plane.drag.held && !plane.el.hasPointerCapture(event.pointerId)) {
+          if (Math.abs(dy) > Math.abs(dx) && Math.hypot(dx, dy) > 10) {
+            plane.drag = null;
+            return;
+          }
+          if (Math.hypot(dx, dy) < 8) return;
+          plane.drag.held = true;
+          plane.el.setPointerCapture(event.pointerId);
+        }
+        var u = unit();
+        var nx = plane.drag.ox + (event.clientX - plane.drag.x) / u;
+        var ny = plane.drag.oy + (event.clientY - plane.drag.y) / u;
+        plane.vx = nx - plane.x;
+        plane.vy = ny - plane.y;
+        plane.x = nx;
+        plane.y = ny;
+        limit(plane);
+        forgetHint();
+        wake();
       });
       function release(event) {
-        if (!plane.drag) return;
+        if (!plane.drag || (event && event.pointerId !== plane.drag.id)) return;
+        var moved = Math.hypot(event.clientX - plane.drag.x, event.clientY - plane.drag.y);
         plane.drag = null;
         if (event && plane.el.hasPointerCapture && plane.el.hasPointerCapture(event.pointerId)) {
           plane.el.releasePointerCapture(event.pointerId);
         }
-        ease();
+        if (moved < 8 && event.pointerType !== "mouse") {
+          var now = performance.now();
+          if (now - lastTap < 320) explode();
+          lastTap = now;
+        }
+        wake();
       }
       plane.el.addEventListener("pointerup", release);
       plane.el.addEventListener("pointercancel", release);
     });
-
+    mark.addEventListener("dblclick", function (event) {
+      event.preventDefault();
+      explode();
+    });
+    if (fine) {
+      window.addEventListener("pointermove", function (event) {
+        var box = mark.getBoundingClientRect();
+        var cx = box.left + box.width / 2;
+        var cy = box.top + box.height / 2;
+        look.x = Math.max(-1, Math.min(1, (event.clientX - cx) / 280));
+        look.y = Math.max(-1, Math.min(1, (event.clientY - cy) / 280));
+        wake();
+      });
+    }
     mark.addEventListener("keydown", function (event) {
-      var step = 1.6;
       var used = true;
-      if (event.key === "ArrowLeft") {
-        planes[0].x -= step;
-        if (planes[1]) planes[1].x += step;
-      } else if (event.key === "ArrowRight") {
-        planes[0].x += step;
-        if (planes[1]) planes[1].x -= step;
-      } else if (event.key === "ArrowUp") {
-        planes[0].y -= step;
-        if (planes[1]) planes[1].y += step;
-      } else if (event.key === "ArrowDown") {
-        planes[0].y += step;
-        if (planes[1]) planes[1].y -= step;
-      } else {
-        used = false;
-      }
+      if (event.key === "ArrowLeft") keys.x = -1;
+      else if (event.key === "ArrowRight") keys.x = 1;
+      else if (event.key === "ArrowUp") keys.y = -1;
+      else if (event.key === "ArrowDown") keys.y = 1;
+      else if (event.key === "Enter") explode();
+      else used = false;
       if (!used) return;
       event.preventDefault();
-      planes.forEach(function (plane) {
-        clamp(plane);
-        paintPlane(plane);
-      });
+      forgetHint();
+      wake();
     });
     mark.addEventListener("keyup", function (event) {
-      if (event.key.indexOf("Arrow") === 0) ease();
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") keys.x = 0;
+      if (event.key === "ArrowUp" || event.key === "ArrowDown") keys.y = 0;
+      wake();
     });
+    wake();
   }
 
   var section = document.getElementById("works-map");
@@ -140,6 +252,8 @@
   io.observe(section);
 
   var hot = -1;
+  var labelFor = -2;
+  var labelT = 1;
   var touchHot = -1;
   var dragId = -1;
   var seeds = [];
@@ -309,7 +423,7 @@
       for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x, poly[i].y);
       ctx.closePath();
       ctx.clip();
-      if (focus) ctx.filter = "brightness(1.12)";
+      if (focus) ctx.filter = "brightness(1.14)";
       if (img.complete && img.naturalWidth) {
         var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
         poly.forEach(function (p) {
@@ -328,6 +442,11 @@
       } else {
         ctx.fillStyle = "#e7e2d9";
         ctx.fill();
+      }
+      if (active >= 0 && !focus) {
+        ctx.filter = "none";
+        ctx.fillStyle = "rgba(22,21,19,0.38)";
+        ctx.fillRect(0, 0, view.w, view.h);
       }
       ctx.restore();
       ctx.beginPath();
@@ -351,18 +470,112 @@
         ctx.lineCap = "round";
         ctx.stroke();
       }
+      if (active !== labelFor) {
+        labelFor = active;
+        labelT = 0;
+      }
+      if (labelT < 1) {
+        labelT = Math.min(1, labelT + 0.16);
+        if (labelT < 1 && dragId < 0) requestAnimationFrame(function () { if (!running) draw(); });
+      }
       var center = areaCentroid(poly);
-      var title = works[active].title;
-      ctx.font = '500 15px "Zen Kaku Gothic New", sans-serif';
-      var tw = ctx.measureText(title).width;
-      var lx = Math.max(12 + tw / 2, Math.min(view.w - 12 - tw / 2, center.x));
-      var ly = Math.max(28, Math.min(view.h - 16, center.y));
-      ctx.fillStyle = "rgba(22,21,19,0.84)";
-      ctx.fillRect(lx - tw / 2 - 10, ly - 18, tw + 20, 30);
+      var seed = px(seeds[active]);
+      var work = works[active];
+      var titleSize = view.w < 700 ? 22 : 30;
+      var maxText = Math.min(view.w - 36, 420);
+      ctx.font = "700 " + titleSize + "px \"Zen Kaku Gothic New\", sans-serif";
+      var shown = scramble(work.title, labelT);
+      var lines = wrapLines(ctx, shown, maxText);
+      var titleW = 0;
+      lines.forEach(function (line) { titleW = Math.max(titleW, ctx.measureText(line).width); });
+      var meta = metaLine(work, active);
+      ctx.font = "400 12px \"IBM Plex Mono\", ui-monospace, monospace";
+      var metaW = ctx.measureText(meta).width;
+      var cue = fine ? "open →" : "tap again to open →";
+      var cueW = ctx.measureText(cue).width;
+      var blockW = Math.max(titleW, metaW, cueW);
+      var blockH = 18 + lines.length * (titleSize + 6) + 42;
+      var lx = Math.max(16, Math.min(view.w - blockW - 16, center.x - blockW * 0.15));
+      var ly = Math.max(blockH + 8, Math.min(view.h - 20, center.y + blockH * 0.35));
+      ctx.beginPath();
+      ctx.moveTo(seed.x, seed.y);
+      ctx.lineTo(lx, ly - blockH + 10);
+      ctx.strokeStyle = "rgba(246,243,238,0.75)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(seed.x, seed.y);
+      ctx.lineTo(seed.x + (lx - seed.x) * 0.18, seed.y + (ly - blockH + 10 - seed.y) * 0.18);
+      ctx.strokeStyle = "#e24a1b";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.save();
+      var reveal = ly - blockH + (1 - labelT) * 22;
+      ctx.beginPath();
+      ctx.rect(lx - 4, reveal, blockW + 12, blockH + 24);
+      ctx.clip();
+      ctx.shadowColor = "rgba(22,21,19,0.72)";
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 1;
+      ctx.fillStyle = "#e24a1b";
+      ctx.fillRect(lx, ly - blockH + 12, 22, 1.5);
+      ctx.shadowBlur = 0;
+      ctx.font = "700 " + titleSize + "px \"Zen Kaku Gothic New\", sans-serif";
       ctx.fillStyle = "#f6f3ee";
-      ctx.fillText(title, lx - tw / 2, ly);
+      ctx.shadowColor = "rgba(22,21,19,0.85)";
+      ctx.shadowBlur = 12;
+      lines.forEach(function (line, i) {
+        ctx.fillText(line, lx, ly - blockH + 20 + titleSize + i * (titleSize + 6));
+      });
+      var metaY = ly - blockH + 28 + titleSize + lines.length * (titleSize + 6);
+      ctx.font = "400 13px \"IBM Plex Mono\", ui-monospace, monospace";
+      ctx.fillStyle = "#f6f3ee";
+      ctx.fillText(meta, lx, metaY);
+      ctx.fillText(cue, lx, metaY + 18);
+      ctx.restore();
     }
     return cells;
+  }
+
+  function scramble(text, t) {
+    if (t >= 1) return text;
+    var glyphs = "アイウエオカキクケコ01";
+    var out = "";
+    for (var i = 0; i < text.length; i++) {
+      if ((i + 1) / text.length < t) out += text.charAt(i);
+      else out += glyphs.charAt((i * 7 + Math.floor(t * 20)) % glyphs.length);
+    }
+    return out;
+  }
+
+  function wrapLines(ctx, text, maxW) {
+    var lines = [];
+    var line = "";
+    for (var i = 0; i < text.length; i++) {
+      var trial = line + text.charAt(i);
+      if (line && ctx.measureText(trial).width > maxW) {
+        lines.push(line);
+        line = text.charAt(i);
+      } else line = trial;
+    }
+    if (line) lines.push(line);
+    if (lines.length > 2) {
+      lines = lines.slice(0, 2);
+      lines[1] = lines[1].replace(/.$/, "…");
+    }
+    return lines;
+  }
+
+  function metaLine(work, index) {
+    var bits = [];
+    var n = String(index + 1);
+    if (n.length < 2) n = "0" + n;
+    var total = String(works.length);
+    if (total.length < 2) total = "0" + total;
+    bits.push(n + " / " + total);
+    if (work.year) bits.push(work.year);
+    if (work.kind) bits.push(work.kind);
+    return bits.join("  ·  ");
   }
 
   function clampSeed(seed) {
