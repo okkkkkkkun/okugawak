@@ -472,15 +472,6 @@ def document(from_file: str, title: str, description: str, body: str, home: bool
     )
 
 
-def teaser(from_file: str, number: str, en: str, ja: str, line: str, target: str) -> str:
-    return (
-        f'<a href="{esc(href(from_file, target))}">'
-        f'<span class="k">{esc(number)}</span>'
-        f"<span><span class=\"en\">{esc(en)}</span>"
-        f"<strong>{esc(ja)}</strong><p>{esc(line)}</p></span></a>"
-    )
-
-
 def works_map(data: dict) -> str:
     items = []
     for work in log_works(data["works"]):
@@ -499,18 +490,13 @@ def works_map(data: dict) -> str:
         )
     links = "".join(links)
     return f"""
-<section class="works-map" id="works-map" aria-labelledby="works-map-title">
-  <header class="map-head">
-    <p class="sec-en">Work</p>
-    <h2 id="works-map-title">面で見る</h2>
-    <p class="map-note">面をドラッグして組み直す。離すと、ゆっくり整う。もう一度押すと、その作品へ。</p>
-  </header>
+<section class="works-map" id="works-map" aria-label="作品">
+  <canvas class="map-canvas" tabindex="0" aria-keyshortcuts="ArrowKeys Enter" aria-label="作品の面。ドラッグで動かす。矢印キーで選んだ面を動かし、Enterで開く。"></canvas>
   <div class="map-tools">
     <p class="map-hint" id="map-hint">drag to rearrange</p>
     <button type="button" id="map-shuffle">shuffle</button>
     <button type="button" id="map-reset">reset</button>
   </div>
-  <canvas class="map-canvas" tabindex="0" aria-keyshortcuts="ArrowKeys Enter" aria-label="作品の面。ドラッグで動かす。矢印キーで選んだ面を動かし、Enterで開く。"></canvas>
   <ul class="map-links">{links}</ul>
   <script type="application/json" id="works-map-data">{payload}</script>
 </section>
@@ -520,24 +506,10 @@ def works_map(data: dict) -> str:
 
 def home_page(data: dict) -> str:
     site = data["site"]
-    profile = data["profile"]
-    newest = log_works(data["works"])[0]
-    profile_line = profile["intro"] if profile["intro"] and not placeholder(profile["intro"]) else f'{site["nameJa"]} / {site["nameEn"]}'
-    thoughts = data["thoughts"]
-    thought_line = thoughts["items"][0]["body"] if thoughts.get("items") else thoughts["lead"]
-    rows = [
-        ("01", "Profile", "プロフィール", profile_line, "01_Profile/profile.html"),
-        ("02", "Work", "作品", f'{date_label(newest)} · {newest["title"]}', "02_Works/index.html"),
-        ("03", "Thoughts", "考え", thought_line, "05_Thoughts/index.html"),
-        ("04", "Personal", "仕事の外", data["personal"]["lead"], "04_Personal/index.html"),
-        ("05", "Contact", "連絡", site["email"], "04_Contact/contact.html"),
-    ]
-    links = "".join(teaser("index.html", *row) for row in rows)
     body = (
         cover(site)
         + '<main class="sheet" id="content">'
         + works_map(data)
-        + f'<nav class="teasers" aria-label="ページ">{links}</nav>'
         + footer("index.html", site)
         + "</main>"
     )
