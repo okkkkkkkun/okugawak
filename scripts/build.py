@@ -139,7 +139,7 @@ def head(from_file: str, title: str, description: str, path: str) -> str:
 <link rel="icon" href="{esc(icon)}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Sans:wght@500;600;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{esc(css)}">
 </head>
 """
@@ -403,7 +403,7 @@ def contact_block(data: dict) -> str:
 
 FIELD = """
 <svg class="field" viewBox="0 0 800 900" aria-hidden="true">
-  <g fill="none" stroke="currentColor" stroke-width="1.2">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
     <path d="M80 40 L260 20 L300 180 L120 220 Z"/>
     <path d="M260 20 L520 60 L480 240 L300 180 Z"/>
     <path d="M520 60 L760 30 L740 250 L480 240 Z"/>
@@ -416,6 +416,7 @@ FIELD = """
     <path d="M60 640 L300 680 L260 880 L40 860 Z"/>
     <path d="M300 680 L560 720 L520 890 L260 880 Z"/>
   </g>
+  <path d="M300 180 L480 240" fill="none" stroke="#e24a1b" stroke-width="1.8"/>
 </svg>
 """
 
@@ -429,10 +430,10 @@ def cover(site: dict) -> str:
   {FIELD}
   <div class="cover-copy">
     <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
-    <h1 class="cover-line">{esc(site["statement"]["ja"])}</h1>
+    <h1 class="cover-line">{"つくりながら、<br>考える。" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>
     <p class="cover-en"><span class="type">{esc(site["statement"]["en"])}</span><span class="caret" aria-hidden="true"></span></p>
   </div>
-  <p class="cover-affil">鹿島建設株式会社<br>{esc(site["affiliationDisplay"].replace("鹿島建設株式会社 ", ""))}</p>
+  <p class="cover-affil">{"<br>".join(esc(part) for part in site["affiliationDisplay"].split())}</p>
 </div>
 """
 
