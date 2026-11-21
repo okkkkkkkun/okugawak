@@ -139,6 +139,7 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
 }
 .cover-copy {
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 38vw;
   bottom: 0;
@@ -171,26 +172,37 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
   transform-style: preserve-3d;
   will-change: transform;
 }
-.assemble svg {
+.assemble svg,
+.mark-svg {
   display: block;
   width: 112px;
   height: 112px;
   overflow: visible;
-  touch-action: pan-y;
+  color: #f6f3ee;
+  touch-action: none;
   cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
-.assemble svg:active { cursor: grabbing; }
-.assemble svg:focus { outline: none; }
+.assemble svg:active,
+.mark-svg:active { cursor: grabbing; }
+.assemble svg:focus,
+.mark-svg:focus { outline: none; }
 .assemble:has(svg:focus-visible) .assemble-stage { outline: 1px solid rgba(246, 243, 238, 0.85); outline-offset: 10px; }
-.assemble .plane { cursor: grab; }
-.assemble .joint {
+.assemble .plane,
+.mark-svg .plane { cursor: grab; touch-action: none; }
+.assemble .joint,
+.mark-svg .joint {
   stroke: #e24a1b;
   stroke-width: 0.7;
   stroke-linecap: round;
   opacity: 0;
   pointer-events: none;
 }
-.assemble .gap-word {
+.assemble .gap-word,
+.mark-svg .gap-word {
   fill: #f6f3ee;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 2.15px;
@@ -198,6 +210,15 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
   opacity: 0;
   pointer-events: none;
 }
+.assemble-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: visible;
+  pointer-events: none;
+}
+.assemble-overlay .mark-svg { pointer-events: none; }
+.assemble-overlay .plane { pointer-events: auto; }
 .assemble.is-snap .joint { stroke-width: 1.5; opacity: 1; }
 .assemble-hint {
   margin: 0.15rem 0 0;
@@ -243,6 +264,7 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
 @keyframes caret { 50% { opacity: 0; } }
 .cover-affil {
   position: absolute;
+  z-index: 1;
   right: var(--pad);
   bottom: 1.35rem;
   margin: 0;
@@ -286,10 +308,14 @@ body.is-home .sheet { margin-top: 100svh; }
   display: block;
   width: 100%;
   height: 100svh;
+  height: 100dvh;
   min-height: 100svh;
   background: var(--paper-2);
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 .map-canvas:active { cursor: grabbing; }
 .map-canvas:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
@@ -697,9 +723,13 @@ a:hover .frame img,
   .cover-copy { right: 0; width: auto; padding-bottom: calc(6.5rem + 56px + env(safe-area-inset-bottom)); }
   .cover-line { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
   .assemble { width: 104px; }
-  .assemble svg { width: 104px; height: 104px; }
+  .assemble svg,
+  .mark-svg { width: 104px; height: 104px; }
   .works-map,
-  .map-canvas { height: calc(100svh - 56px - env(safe-area-inset-bottom)); min-height: 0; }
+  .map-canvas {
+    height: calc(var(--vvh, 100dvh) - 56px - env(safe-area-inset-bottom));
+    min-height: calc(100svh - 56px - env(safe-area-inset-bottom));
+  }
   .map-tools { bottom: 0.45rem; }
   .cover-affil { position: static; text-align: left; margin-top: 1.25rem; max-width: none; }
   .photos { grid-template-columns: 1fr 1fr; }

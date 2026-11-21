@@ -18,23 +18,73 @@
     var lastTap = 0;
     var flashUntil = 0;
 
+    mark.classList.add("mark-svg");
+    var overlay = null;
     function unit() {
+      if (mark.dataset.unit) return Number(mark.dataset.unit) || 3;
       var box = mark.getBoundingClientRect();
       return box.width / 32 || 3;
     }
-    function limit(plane) {
-      var cap = 20;
-      var d = Math.hypot(plane.x, plane.y);
-      if (d > cap) {
-        plane.x = plane.x / d * cap;
-        plane.y = plane.y / d * cap;
+    function soften(x, y) {
+      var d = Math.hypot(x, y);
+      var knee = 18;
+      if (d <= knee) return { x: x, y: y };
+      var extra = d - knee;
+      var eased = knee + extra / (1 + extra / 460);
+      var scale = eased / d;
+      return { x: x * scale, y: y * scale };
+    }
+    function lift() {
+      if (!stage || mark.dataset.lifted) return;
+      var box = mark.getBoundingClientRect();
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.className = "assemble-overlay";
       }
+      if (!overlay.parentElement) document.body.appendChild(overlay);
+      overlay.appendChild(mark);
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var scale = box.width / 32 || 3;
+      mark.dataset.lifted = "1";
+      mark.dataset.unit = String(scale);
+      mark.setAttribute("viewBox", "0 0 " + vw + " " + vh);
+      mark.style.position = "fixed";
+      mark.style.left = "0";
+      mark.style.top = "0";
+      mark.style.width = vw + "px";
+      mark.style.height = vh + "px";
+      mark.style.margin = "0";
+      var wrap = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      wrap.setAttribute("class", "lift-wrap");
+      wrap.setAttribute("transform", "translate(" + box.left + " " + box.top + ") scale(" + scale + ")");
+      while (mark.firstChild) wrap.appendChild(mark.firstChild);
+      mark.appendChild(wrap);
+    }
+    function unlift() {
+      if (!overlay || mark.parentElement !== overlay) return;
+      var wrap = mark.querySelector(".lift-wrap");
+      if (wrap) {
+        while (wrap.firstChild) mark.appendChild(wrap.firstChild);
+        wrap.remove();
+      }
+      delete mark.dataset.lifted;
+      delete mark.dataset.unit;
+      mark.setAttribute("viewBox", "0 0 32 32");
+      mark.style.position = "";
+      mark.style.left = "";
+      mark.style.top = "";
+      mark.style.width = "";
+      mark.style.height = "";
+      mark.style.margin = "";
+      stage.appendChild(mark);
     }
     function paint() {
       planes.forEach(function (plane) {
+        var skew = Math.max(-14, Math.min(14, plane.vx * 1.6));
         plane.el.setAttribute(
           "transform",
-          "translate(" + plane.x.toFixed(2) + " " + plane.y.toFixed(2) + ") rotate(" + plane.rot.toFixed(2) + " 16 16)"
+          "translate(" + plane.x.toFixed(2) + " " + plane.y.toFixed(2) + ") rotate(" + plane.rot.toFixed(2) + " 16 16) skewX(" + skew.toFixed(2) + ")"
         );
       });
       var ax = 12 + planes[0].x;
@@ -53,10 +103,17 @@
         joint.style.strokeWidth = snapping ? "1.6" : "0.7";
       }
       if (gapWord) {
-        var word = gap > 11 ? "Rethink" : gap > 6 ? "Run" : "Make";
+        var word = gap > 46 ? "Rethink" : gap > 18 ? "Run" : "Make";
+        var mx = (ax + bx) / 2;
+        var my = (ay + by) / 2 - 1.4;
+        var scale = Math.max(1, Math.min(2.6, 0.8 + gap / 26));
         gapWord.textContent = word;
-        gapWord.setAttribute("x", ((ax + bx) / 2).toFixed(2));
-        gapWord.setAttribute("y", ((ay + by) / 2 - 1.4).toFixed(2));
+        gapWord.setAttribute("x", mx.toFixed(2));
+        gapWord.setAttribute("y", my.toFixed(2));
+        gapWord.setAttribute(
+          "transform",
+          "translate(" + mx.toFixed(2) + " " + my.toFixed(2) + ") scale(" + scale.toFixed(3) + ") translate(" + (-mx).toFixed(2) + " " + (-my).toFixed(2) + ")"
+        );
         gapWord.style.opacity = String(Math.max(0, Math.min(1, (gap - 4) / 4)));
       }
       if (stage) {
@@ -76,20 +133,26 @@
           live = true;
           return;
         }
+        var dist = Math.hypot(plane.x, plane.y);
         var tx = Math.sin(t / 980 + plane.phase) * 0.42 + look.x * plane.side * 1.15 + keys.x * plane.side * 7;
         var ty = Math.cos(t / 1140 + plane.phase) * 0.3 + look.y * 0.7 + keys.y * 6;
-        plane.vx += (tx - plane.x) * 0.16 * dt;
-        plane.vy += (ty - plane.y) * 0.16 * dt;
-        plane.vx *= 0.72;
-        plane.vy *= 0.72;
+        var spring = dist > 28 ? 0.1 : 0.16;
+        var damp = dist > 28 ? 0.86 : 0.74;
+        plane.vx += (tx - plane.x) * spring * dt;
+        plane.vy += (ty - plane.y) * spring * dt;
+        plane.vx *= damp;
+        plane.vy *= damp;
         plane.x += plane.vx * dt;
         plane.y += plane.vy * dt;
-        plane.vr += (0 - plane.rot) * 0.14 * dt;
-        plane.vr *= 0.74;
+        plane.vr += (0 - plane.rot) * 0.12 * dt;
+        plane.vr *= damp;
         plane.rot += plane.vr * dt;
-        limit(plane);
-        if (Math.hypot(plane.vx, plane.vy) > 0.04 || Math.abs(plane.x - tx) > 0.08 || Math.abs(plane.rot) > 0.4) live = true;
+        if (Math.hypot(plane.vx, plane.vy) > 0.04 || Math.abs(plane.x - tx) > 0.08 || Math.abs(plane.rot) > 0.4 || dist > 0.6) live = true;
       });
+      var settled = planes.every(function (plane) {
+        return !plane.drag && Math.hypot(plane.x, plane.y) < 1.15 && Math.hypot(plane.vx, plane.vy) < 0.25;
+      });
+      if (settled) unlift();
       var gap = Math.hypot(planes[0].x - planes[1].x, planes[0].y - planes[1].y);
       var speed = Math.hypot(planes[0].vx, planes[0].vy) + Math.hypot(planes[1].vx, planes[1].vy);
       if (wasApart && gap < 1.15 && speed > 0.35) flash();
@@ -108,81 +171,123 @@
     }
     function explode() {
       forgetHint();
-      planes[0].vx = -5.2;
-      planes[0].vy = -2.4;
-      planes[0].vr = -7;
-      planes[1].vx = 5.6;
-      planes[1].vy = 2.8;
-      planes[1].vr = 8;
+      lift();
+      planes[0].vx = -14;
+      planes[0].vy = -6;
+      planes[0].vr = -10;
+      planes[1].vx = 15;
+      planes[1].vy = 7;
+      planes[1].vr = 11;
+      wake();
+    }
+    function startDrag(plane, x, y, id, type) {
+      lift();
+      plane.drag = { x: x, y: y, ox: plane.x, oy: plane.y, id: id, type: type };
+      plane.vx = 0;
+      plane.vy = 0;
+      forgetHint();
+      wake();
+    }
+    function moveDrag(plane, x, y) {
+      if (!plane.drag) return;
+      var u = unit();
+      var rawX = plane.drag.ox + (x - plane.drag.x) / u;
+      var rawY = plane.drag.oy + (y - plane.drag.y) / u;
+      var soft = soften(rawX, rawY);
+      plane.vx = soft.x - plane.x;
+      plane.vy = soft.y - plane.y;
+      plane.x = soft.x;
+      plane.y = soft.y;
+      plane.rot = Math.max(-12, Math.min(12, plane.vx * 0.35 * plane.side));
+      paint();
+      wake();
+    }
+    function endDrag(plane, x, y, id) {
+      if (!plane.drag || (id != null && id !== plane.drag.id)) return;
+      var moved = Math.hypot((x == null ? plane.drag.x : x) - plane.drag.x, (y == null ? plane.drag.y : y) - plane.drag.y);
+      var type = plane.drag.type;
+      var travel = Math.hypot(plane.x, plane.y);
+      plane.drag = null;
+      if (travel > 10) {
+        var ang = Math.atan2(plane.y, plane.x);
+        var kick = Math.min(22, 4 + travel * 0.18);
+        plane.vx = -Math.cos(ang) * kick;
+        plane.vy = -Math.sin(ang) * kick;
+        plane.vr = plane.side * Math.min(16, travel * 0.12);
+        if (travel > 26) flash();
+      }
+      if (moved < 8 && type === "touch") {
+        var now = performance.now();
+        if (now - lastTap < 340) explode();
+        lastTap = now;
+      }
       wake();
     }
     planes.forEach(function (plane) {
       plane.el.addEventListener("pointerdown", function (event) {
         if (event.button != null && event.button !== 0) return;
-        plane.drag = {
-          x: event.clientX,
-          y: event.clientY,
-          ox: plane.x,
-          oy: plane.y,
-          id: event.pointerId,
-          type: event.pointerType,
-          held: false,
-          lx: event.clientX,
-          ly: event.clientY
-        };
-        if (event.pointerType === "mouse") plane.el.setPointerCapture(event.pointerId);
-        else {
-          setTimeout(function () {
-            if (!plane.drag || plane.drag.held) return;
-            if (Math.hypot(plane.drag.lx - plane.drag.x, plane.drag.ly - plane.drag.y) < 10) {
-              plane.drag.held = true;
-              try { plane.el.setPointerCapture(plane.drag.id); } catch (err) { /* already gone */ }
-            }
-          }, 160);
-        }
+        startDrag(plane, event.clientX, event.clientY, event.pointerId, event.pointerType || "mouse");
+        try { plane.el.setPointerCapture(event.pointerId); } catch (err) { /* synthetic or already gone */ }
       });
       plane.el.addEventListener("pointermove", function (event) {
         if (!plane.drag || event.pointerId !== plane.drag.id) return;
-        var dx = event.clientX - plane.drag.x;
-        var dy = event.clientY - plane.drag.y;
-        plane.drag.lx = event.clientX;
-        plane.drag.ly = event.clientY;
-        if (plane.drag.type !== "mouse" && !plane.drag.held && !plane.el.hasPointerCapture(event.pointerId)) {
-          if (Math.abs(dy) > Math.abs(dx) && Math.hypot(dx, dy) > 10) {
-            plane.drag = null;
-            return;
-          }
-          if (Math.hypot(dx, dy) < 8) return;
-          plane.drag.held = true;
-          plane.el.setPointerCapture(event.pointerId);
-        }
-        var u = unit();
-        var nx = plane.drag.ox + (event.clientX - plane.drag.x) / u;
-        var ny = plane.drag.oy + (event.clientY - plane.drag.y) / u;
-        plane.vx = nx - plane.x;
-        plane.vy = ny - plane.y;
-        plane.x = nx;
-        plane.y = ny;
-        limit(plane);
-        forgetHint();
-        wake();
+        plane.drag.saw = performance.now();
+        moveDrag(plane, event.clientX, event.clientY);
       });
-      function release(event) {
-        if (!plane.drag || (event && event.pointerId !== plane.drag.id)) return;
-        var moved = Math.hypot(event.clientX - plane.drag.x, event.clientY - plane.drag.y);
-        plane.drag = null;
-        if (event && plane.el.hasPointerCapture && plane.el.hasPointerCapture(event.pointerId)) {
-          plane.el.releasePointerCapture(event.pointerId);
+      function pointerRelease(event) {
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        endDrag(plane, event.clientX, event.clientY, event.pointerId);
+        if (plane.el.hasPointerCapture && plane.el.hasPointerCapture(event.pointerId)) {
+          try { plane.el.releasePointerCapture(event.pointerId); } catch (err) { /* already released */ }
         }
-        if (moved < 8 && event.pointerType !== "mouse") {
-          var now = performance.now();
-          if (now - lastTap < 320) explode();
-          lastTap = now;
-        }
-        wake();
       }
-      plane.el.addEventListener("pointerup", release);
-      plane.el.addEventListener("pointercancel", release);
+      plane.el.addEventListener("pointerup", pointerRelease);
+      plane.el.addEventListener("pointercancel", function (event) {
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        if ((plane.drag.type === "touch" || plane.drag.type === "pen") && event.pointerType !== "mouse") {
+          plane.drag.pointerLost = true;
+          return;
+        }
+        pointerRelease(event);
+      });
+      plane.el.addEventListener("touchstart", function (event) {
+        if (event.cancelable) event.preventDefault();
+        if (plane.drag && event.touches[0]) plane.drag.touchId = event.touches[0].identifier;
+      }, { passive: false });
+      plane.el.addEventListener("touchmove", function (event) {
+        if (!plane.drag) return;
+        if (event.cancelable) event.preventDefault();
+        var live = plane.drag.saw && performance.now() - plane.drag.saw < 70;
+        if (!plane.drag.pointerLost && live) return;
+        var t = event.touches[0];
+        if (!t) return;
+        moveDrag(plane, t.clientX, t.clientY);
+      }, { passive: false });
+      plane.el.addEventListener("touchend", function (event) {
+        if (!plane.drag) return;
+        var t = event.changedTouches[0];
+        endDrag(plane, t ? t.clientX : null, t ? t.clientY : null, plane.drag.id);
+      });
+      plane.el.addEventListener("touchcancel", function (event) {
+        if (!plane.drag) return;
+        endDrag(plane, null, null, plane.drag.id);
+      });
+      window.addEventListener("pointermove", function (event) {
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        if (event.target === plane.el || plane.el.contains(event.target)) return;
+        plane.drag.saw = performance.now();
+        moveDrag(plane, event.clientX, event.clientY);
+      });
+      window.addEventListener("pointerup", function (event) {
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        if (event.target === plane.el || plane.el.contains(event.target)) return;
+        pointerRelease(event);
+      });
+      window.addEventListener("pointercancel", function (event) {
+        if (!plane.drag || event.pointerId !== plane.drag.id) return;
+        if (event.target === plane.el || plane.el.contains(event.target)) return;
+        pointerRelease(event);
+      });
     });
     mark.addEventListener("dblclick", function (event) {
       event.preventDefault();
@@ -287,9 +392,10 @@
 
   function fitCanvas() {
     var rect = canvas.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return;
     var next = Math.min(window.devicePixelRatio || 1, 2);
-    var w = Math.max(1, rect.width);
-    var h = Math.max(1, rect.height);
+    var w = rect.width;
+    var h = rect.height;
     var bw = Math.round(w * next);
     var bh = Math.round(h * next);
     if (canvas.width !== bw || canvas.height !== bh) {
@@ -300,6 +406,17 @@
     view.w = w;
     view.h = h;
     ensureSeeds();
+  }
+
+  function syncViewport() {
+    if (gesture) return;
+    var vv = window.visualViewport;
+    var h = vv && vv.height ? vv.height : window.innerHeight;
+    if (!h || h < 80) return;
+    var next = Math.round(h) + "px";
+    if (document.documentElement.style.getPropertyValue("--vvh") !== next) {
+      document.documentElement.style.setProperty("--vvh", next);
+    }
   }
 
   function clip(poly, inside, hit) {
@@ -661,10 +778,14 @@
     function frame(now) {
       var dt = Math.min(2.2, (now - last) / 16.67);
       last = now;
-      var moving = stepPhysics(dt);
-      draw();
-      if (moving || dragId >= 0) requestAnimationFrame(frame);
-      else running = false;
+      try {
+        var moving = stepPhysics(dt);
+        draw();
+        if (moving || dragId >= 0 || gesture) requestAnimationFrame(frame);
+        else running = false;
+      } catch (err) {
+        running = false;
+      }
     }
     requestAnimationFrame(frame);
   }
@@ -685,10 +806,32 @@
     wake();
   }
 
+  var scrollToken = 0;
+  function scrollByFinger(delta) {
+    if (!delta) return;
+    var root = document.scrollingElement || document.documentElement;
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    root.scrollTop += delta;
+    root.style.scrollBehavior = prev;
+  }
+  function flingScroll(v) {
+    var token = scrollToken;
+    var vel = v;
+    function step() {
+      if (token !== scrollToken || Math.abs(vel) < 0.35) return;
+      scrollByFinger(vel);
+      vel *= 0.92;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   function beginGesture(event) {
     if (event.button != null && event.button !== 0) return;
     var point = local(event);
     fitCanvas();
+    scrollToken += 1;
     gesture = {
       id: nearest(point.x, point.y),
       x: point.x,
@@ -696,19 +839,25 @@
       t: performance.now(),
       pointerId: event.pointerId,
       type: event.pointerType,
-      captured: event.pointerType === "mouse",
+      mode: event.pointerType === "mouse" ? "drag" : "pending",
       moved: 0,
       lastX: point.x,
-      lastY: point.y
+      lastY: point.y,
+      lastClientY: event.clientY,
+      viewW: view.w,
+      viewH: view.h,
+      vx: 0,
+      vy: 0,
+      scrollV: 0,
+      travel: 0
     };
     hot = gesture.id;
-    if (event.pointerType === "mouse") canvas.setPointerCapture(event.pointerId);
     wake();
   }
 
   function moveGesture(event) {
     if (!gesture || event.pointerId !== gesture.pointerId) {
-      if (event.pointerType === "mouse" && dragId < 0) {
+      if (event.pointerType === "mouse" && dragId < 0 && !gesture) {
         var hover = local(event);
         var next = nearest(hover.x, hover.y);
         if (next !== hot) {
@@ -718,60 +867,100 @@
       }
       return;
     }
+    if (!event.fromTouch) gesture.sawPointer = performance.now();
     var point = local(event);
-    var dx = point.x - gesture.x;
-    var dy = point.y - gesture.y;
-    gesture.moved = Math.hypot(dx, dy);
-    var elapsed = performance.now() - gesture.t;
-    if (!gesture.captured && gesture.type !== "mouse") {
-      if (Math.abs(dy) > Math.abs(dx) && gesture.moved > 12) {
-        gesture = null;
+    gesture.travel += Math.hypot(point.x - gesture.lastX, point.y - gesture.lastY);
+    var adx = Math.abs(point.x - gesture.x);
+    var ady = Math.abs(point.y - gesture.y);
+    var dist = Math.hypot(adx, ady);
+    gesture.moved = gesture.travel;
+    if (gesture.mode === "pending") {
+      var elapsed = performance.now() - gesture.t;
+      if (dist < 8 && elapsed < 260) {
+        gesture.lastX = point.x;
+        gesture.lastY = point.y;
+        gesture.lastClientY = event.clientY;
         return;
       }
-      var held = elapsed > 170 && gesture.moved < 14;
-      var sideways = Math.abs(dx) > Math.abs(dy) && gesture.moved > 10;
-      if (held || sideways) {
-        gesture.captured = true;
-        canvas.setPointerCapture(event.pointerId);
-      } else {
-        return;
-      }
+      if (elapsed > 240 && dist < 16) gesture.mode = "drag";
+      else if (ady > adx * 1.2 && dist >= 8) gesture.mode = "scroll";
+      else if (dist >= 8) gesture.mode = "drag";
+      else return;
+      gesture.lastX = point.x;
+      gesture.lastY = point.y;
+      gesture.lastClientY = event.clientY;
+      gesture.viewW = view.w;
+      gesture.viewH = view.h;
+      if (gesture.mode === "scroll") return;
     }
-      if (gesture.moved > 8) {
-      dragId = gesture.id;
-      var seed = seeds[dragId];
-      var ddx = (point.x - gesture.lastX) / view.w;
-      var ddy = (point.y - gesture.lastY) / view.h;
-      seed.nx += ddx;
-      seed.ny += ddy;
-      gesture.vx = ddx;
-      gesture.vy = ddy;
-      clampSeed(seed);
-      noteDrag();
-      wake();
+    if (gesture.mode === "scroll") {
+      var delta = gesture.lastClientY - event.clientY;
+      scrollByFinger(delta);
+      gesture.scrollV = delta;
+      gesture.lastClientY = event.clientY;
+      gesture.lastX = point.x;
+      gesture.lastY = point.y;
+      return;
     }
+    if (gesture.type === "mouse" && gesture.moved < 8) {
+      gesture.lastX = point.x;
+      gesture.lastY = point.y;
+      return;
+    }
+    if (Math.abs(view.w - gesture.viewW) > 3 || Math.abs(view.h - gesture.viewH) > 3) {
+      gesture.lastX = point.x;
+      gesture.lastY = point.y;
+      gesture.viewW = view.w;
+      gesture.viewH = view.h;
+      return;
+    }
+    dragId = gesture.id;
+    var seed = seeds[dragId];
+    var ddx = (point.x - gesture.lastX) / view.w;
+    var ddy = (point.y - gesture.lastY) / view.h;
+    seed.nx += ddx;
+    seed.ny += ddy;
+    gesture.vx = ddx;
+    gesture.vy = ddy;
+    clampSeed(seed);
+    noteDrag();
     gesture.lastX = point.x;
     gesture.lastY = point.y;
+    draw();
+    wake();
   }
 
-  function endGesture(event) {
-    if (!gesture || (event && event.pointerId !== gesture.pointerId)) return;
-    var point = local(event);
+  function endGesture(event, cancelled) {
+    if (!gesture || (event && event.pointerId != null && event.pointerId !== gesture.pointerId)) return;
     var id = gesture.id;
-    var dragged = gesture.moved > 8;
+    var mode = gesture.mode;
+    var moved = gesture.moved;
     var flingX = gesture.vx || 0;
     var flingY = gesture.vy || 0;
+    var scrollV = gesture.scrollV || 0;
+    var type = gesture.type;
     dragId = -1;
     gesture = null;
-    if (dragged) {
+    syncViewport();
+    if (mode === "scroll") {
+      if (!cancelled && Math.abs(scrollV) > 1.5) flingScroll(scrollV);
+      return;
+    }
+    if (mode === "drag" && moved > 8) {
       hot = id;
-      seeds[id].vx = flingX * 0.85;
-      seeds[id].vy = flingY * 0.85;
+      if (!cancelled) {
+        seeds[id].vx = flingX * 0.85;
+        seeds[id].vy = flingY * 0.85;
+      }
+      wake();
+      return;
+    }
+    if (cancelled) {
       wake();
       return;
     }
     hot = id;
-    if (fine && (!event || event.pointerType === "mouse")) {
+    if (fine && type === "mouse") {
       openWork(id);
       return;
     }
@@ -783,20 +972,66 @@
     wake();
   }
 
-  canvas.addEventListener("pointerdown", beginGesture);
+  canvas.addEventListener("pointerdown", function (event) {
+    if (event.button != null && event.button !== 0) return;
+    beginGesture(event);
+    try { canvas.setPointerCapture(event.pointerId); } catch (err) { /* synthetic or already gone */ }
+  });
   canvas.addEventListener("pointermove", moveGesture);
-  canvas.addEventListener("pointerup", endGesture);
+  canvas.addEventListener("pointerup", function (event) { endGesture(event, false); });
   canvas.addEventListener("pointercancel", function (event) {
-    dragId = -1;
-    gesture = null;
-    wake();
+    if (!gesture || event.pointerId !== gesture.pointerId) return;
+    if (gesture.type === "touch" || gesture.type === "pen") {
+      gesture.pointerLost = true;
+      return;
+    }
+    endGesture(event, true);
   });
   canvas.addEventListener("pointerleave", function (event) {
-    if (dragId >= 0 || (gesture && gesture.captured)) return;
-    if (event.pointerType === "mouse") {
-      hot = -1;
-      wake();
-    }
+    if (event.pointerType !== "mouse" || dragId >= 0 || gesture) return;
+    hot = -1;
+    if (!running) draw();
+  });
+  function outsideCanvas(event) {
+    return event.target !== canvas && !canvas.contains(event.target);
+  }
+  window.addEventListener("pointermove", function (event) {
+    if (!gesture || event.pointerId !== gesture.pointerId || !outsideCanvas(event)) return;
+    moveGesture(event);
+  });
+  window.addEventListener("pointerup", function (event) {
+    if (!gesture || event.pointerId !== gesture.pointerId || !outsideCanvas(event)) return;
+    endGesture(event, false);
+  });
+  window.addEventListener("pointercancel", function (event) {
+    if (!gesture || event.pointerId !== gesture.pointerId || !outsideCanvas(event)) return;
+    endGesture(event, true);
+  });
+  canvas.addEventListener("touchstart", function (event) {
+    if (event.cancelable) event.preventDefault();
+  }, { passive: false });
+  canvas.addEventListener("touchmove", function (event) {
+    if (!gesture) return;
+    if (event.cancelable) event.preventDefault();
+    var live = gesture.sawPointer && performance.now() - gesture.sawPointer < 70;
+    if (!gesture.pointerLost && live) return;
+    var t = event.touches[0];
+    if (!t) return;
+    moveGesture({
+      clientX: t.clientX,
+      clientY: t.clientY,
+      pointerId: gesture.pointerId,
+      pointerType: "touch",
+      fromTouch: true
+    });
+  }, { passive: false });
+  canvas.addEventListener("touchend", function () {
+    if (!gesture || (gesture.type !== "touch" && gesture.type !== "pen")) return;
+    endGesture({ pointerId: gesture.pointerId, pointerType: gesture.type, clientX: 0, clientY: gesture.lastClientY }, false);
+  });
+  canvas.addEventListener("touchcancel", function () {
+    if (!gesture || (gesture.type !== "touch" && gesture.type !== "pen")) return;
+    endGesture({ pointerId: gesture.pointerId, pointerType: gesture.type }, true);
   });
   canvas.addEventListener("keydown", function (event) {
     if (!seeds.length) return;
@@ -824,6 +1059,16 @@
   if (shuffleBtn) shuffleBtn.addEventListener("click", function () { scatter(true); });
   if (resetBtn) resetBtn.addEventListener("click", function () { scatter(false); });
 
-  window.addEventListener("resize", function () { wake(); });
+  syncViewport();
+  window.addEventListener("resize", function () {
+    syncViewport();
+    wake();
+  });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", function () {
+      syncViewport();
+      wake();
+    });
+  }
   wake();
 })();
