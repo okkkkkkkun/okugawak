@@ -408,7 +408,22 @@ def cover(site: dict) -> str:
   <img src="{image}" alt="" fetchpriority="high">
   <div class="cover-scrim"></div>
   <div class="cover-copy">
-    <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+    <div class="cover-kicker-row">
+      <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+      <div class="assemble">
+        <svg viewBox="0 0 32 32" width="64" height="64" role="group" tabindex="0" aria-label="印。ドラッグでほどく">
+          <g class="plane" data-plane="a">
+            <rect x="2" y="1" width="12" height="30" fill="transparent"></rect>
+            <path fill="currentColor" d="M4 3h8v26H4z"></path>
+          </g>
+          <g class="plane" data-plane="b">
+            <rect x="12" y="1" width="18" height="30" fill="transparent"></rect>
+            <path fill="currentColor" d="M16 3h11L20.2 16 27 29H16l-4.4-13z"></path>
+          </g>
+        </svg>
+        <p class="assemble-hint">drag</p>
+      </div>
+    </div>
     <h1 class="cover-line">{"つくりながら、<br>考える。" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>
     <p class="cover-en"><span class="type">{esc(site["statement"]["en"])}</span><span class="caret" aria-hidden="true"></span></p>
   </div>
@@ -439,6 +454,38 @@ def teaser(from_file: str, number: str, en: str, ja: str, line: str, target: str
     )
 
 
+def works_map(data: dict) -> str:
+    items = []
+    for work in log_works(data["works"]):
+        thumb = work.get("thumb") or ""
+        items.append({"title": work["title"], "href": work["file"], "thumb": thumb})
+    payload = json.dumps(items, ensure_ascii=False).replace("<", "\\u003c")
+    links = []
+    for item in items:
+        image = (
+            f'<img src="{esc(item["thumb"])}" alt="" loading="lazy" decoding="async">'
+            if item["thumb"]
+            else ""
+        )
+        links.append(
+            f'<li><a href="{esc(item["href"])}">{image}<span>{esc(item["title"])}</span></a></li>'
+        )
+    links = "".join(links)
+    return f"""
+<section class="works-map" id="works-map" aria-labelledby="works-map-title">
+  <header class="map-head">
+    <p class="sec-en">Work</p>
+    <h2 id="works-map-title">面で見る</h2>
+    <p class="map-note">指の位置で面が割れる。もう一度押すと、その作品へ。</p>
+  </header>
+  <canvas class="map-canvas" aria-hidden="true"></canvas>
+  <ul class="map-links">{links}</ul>
+  <script type="application/json" id="works-map-data">{payload}</script>
+</section>
+<script src="assets/top.js" defer></script>
+"""
+
+
 def home_page(data: dict) -> str:
     site = data["site"]
     profile = data["profile"]
@@ -457,6 +504,7 @@ def home_page(data: dict) -> str:
     body = (
         cover(site)
         + '<main class="sheet" id="content">'
+        + works_map(data)
         + f'<nav class="teasers" aria-label="ページ">{links}</nav>'
         + footer("index.html", site)
         + "</main>"
