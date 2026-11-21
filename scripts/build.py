@@ -611,9 +611,6 @@ def main() -> int:
     failed = False
     required = [
         "okugawak@kajima.com",
-        "090-7501-0958",
-        "03-5561-8000",
-        "8-232496",
         "gaulboard",
         "All rights reserved, Copyright(C) 2023 KAJIMA CORPORATION",
         "つくりながら、考える。",
