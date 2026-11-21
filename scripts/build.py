@@ -92,12 +92,39 @@ def chrome(from_file: str, current: str | None) -> str:
         links.append(f'<a href="{esc(href(from_file, target))}"{attrs}>{up(label)}</a>')
     home = href(from_file, "index.html")
     mark = href(from_file, "assets/mark.svg")
+    sheet = [("top", "Top", "index.html"), *NAV]
+    sheet_links = []
+    for key, label, target in sheet:
+        attrs = ' aria-current="page"' if key == current else ""
+        sheet_links.append(
+            f'<li><a href="{esc(href(from_file, target))}"{attrs}><span>{esc(label)}</span></a></li>'
+        )
+    contact = href(from_file, "04_Contact/contact.html")
+    contact_current = ' aria-current="page"' if current == "contact" else ""
+    place = {
+        "top": "Top",
+        "profile": "Profile",
+        "work": "Work",
+        "thoughts": "Thoughts",
+        "personal": "Personal",
+    }.get(current or "", "Menu")
+    here = ' data-here="true"' if place != "Menu" else ""
     return (
         '<a class="skip" href="#content">本文へ</a>'
         '<header class="bar">'
         f'<a class="mark" href="{esc(home)}"><img src="{esc(mark)}" alt="" width="28" height="28"><span>Kota Okugawa</span></a>'
-        f'<nav aria-label="サイト">{"".join(links)}</nav>'
+        f'<nav class="bar-nav" aria-label="サイト">{"".join(links)}</nav>'
         "</header>"
+        '<nav class="dock" aria-label="ページ">'
+        f'<button type="button" class="dock-menu" data-place="{esc(place)}"{here} aria-expanded="false" aria-controls="dock-sheet">{esc(place)}</button>'
+        f'<a class="dock-contact" href="{esc(contact)}"{contact_current}>Contact</a>'
+        "</nav>"
+        '<div class="dock-sheet" id="dock-sheet" hidden>'
+        '<div class="dock-panel" role="dialog" aria-modal="true" aria-labelledby="dock-sheet-title">'
+        '<p class="dock-kicker" id="dock-sheet-title">Pages</p>'
+        f'<ul>{"".join(sheet_links)}</ul>'
+        '<button type="button" class="dock-close">Close</button>'
+        "</div></div>"
     )
 
 
@@ -510,7 +537,7 @@ def home_page(data: dict) -> str:
         + "</main>"
     )
     description = f'{site["nameJa"]} / {site["nameEn"]}。建築とコンピュテーショナルデザイン。'
-    return document("index.html", "Kota Okugawa", description, body, True, None)
+    return document("index.html", "Kota Okugawa", description, body, True, "top")
 
 
 def section_page(from_file: str, current: str, en: str, ja: str, number: str, inner: str, data: dict) -> str:

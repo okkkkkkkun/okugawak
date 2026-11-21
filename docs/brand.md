@@ -99,7 +99,7 @@ ink / paper は 16.5:1。muted / paper は 6.5:1。accent / paper は 3.6:1 な�
 
 - ヒーロー: 写真、ロゴタイプ、一文と英語の一行。文のそばに小さな印があり、ドラッグでほどけ、離すと K に戻る。開いた面の図は最初の画面には置かない
 - 作品マップ: ヒーローの下。指の位置で面が割れ、写真が見える。共有辺の一本だけ accent。動きを減らす設定では、写真とリンクの一覧
-- ヘッダー: ロゴタイプ左、ナビ右。ナビはページへ。Profile / Work / Thoughts / Personal / Contact
+- ヘッダー: ロゴタイプ左、ナビ右。ナビはページへ。Profile / Work / Thoughts / Personal / Contact。幅が狭いときは上の並びを隠し、下に Menu と Contact のバーを固定する。Menu でページ一覧が開く。今いるページは下線
 - ファビコン: `assets/favicon.svg`
 - 共有画像: `assets/og.png`。地は ink。印、一文、英語の一行、名前。右に開いた面
 - 作品一覧: 写真、日付、名前、短い一行。2列

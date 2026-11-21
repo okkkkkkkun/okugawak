@@ -42,4 +42,34 @@
   dialog.addEventListener("close", function () {
     view.removeAttribute("src");
   });
+
+  var menu = document.querySelector(".dock-menu");
+  var sheet = document.getElementById("dock-sheet");
+  var closeBtn = document.querySelector(".dock-close");
+  if (menu && sheet && closeBtn) {
+    var place = menu.getAttribute("data-place") || "Menu";
+    function setDock(open) {
+      sheet.hidden = !open;
+      menu.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.textContent = open ? "Close" : place;
+      document.body.classList.toggle("dock-open", open);
+      if (open) closeBtn.focus();
+    }
+    menu.addEventListener("click", function () {
+      setDock(sheet.hidden);
+    });
+    closeBtn.addEventListener("click", function () {
+      setDock(false);
+      menu.focus();
+    });
+    sheet.addEventListener("click", function (event) {
+      if (event.target === sheet) setDock(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !sheet.hidden) {
+        setDock(false);
+        menu.focus();
+      }
+    });
+  }
 })();
