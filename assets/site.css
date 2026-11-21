@@ -202,6 +202,45 @@ body:not(.is-solid) .mark img { filter: brightness(0) invert(1); }
 
 .sheet { position: relative; z-index: 1; background: var(--paper); }
 body.is-home .sheet { margin-top: 100svh; }
+.teasers a {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  gap: 0.2rem 1rem;
+  align-items: baseline;
+  padding: 1.35rem var(--pad);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.teasers a:first-child { border-top: 1px solid var(--line); }
+.teasers .k {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+.teasers .en {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.teasers strong {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+.teasers p {
+  margin: 0.35rem 0 0;
+  max-width: 36rem;
+  color: var(--muted);
+}
+.teasers a:hover strong,
+.teasers a:focus-visible strong { text-decoration: underline; text-underline-offset: 0.14em; }
 
 .section {
   padding: clamp(3rem, 7vw, 6rem) var(--pad);
@@ -274,10 +313,11 @@ body.is-home .sheet { margin-top: 100svh; }
 
 .pull {
   margin: 0 0 0.5rem;
-  max-width: 16em;
+  max-width: none;
 }
 .pull p {
   margin: 0;
+  max-width: 12em;
   font-family: var(--sans);
   font-weight: 700;
   font-size: clamp(1.8rem, 4.6vw, 3.6rem);

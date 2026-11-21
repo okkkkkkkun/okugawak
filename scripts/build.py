@@ -24,10 +24,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "site.json"
 
 NAV = [
-    ("profile", "Profile", "index.html#profile"),
-    ("work", "Work", "index.html#work"),
-    ("thoughts", "Thoughts", "index.html#thoughts"),
-    ("personal", "Personal", "index.html#personal"),
+    ("profile", "Profile", "01_Profile/profile.html"),
+    ("work", "Work", "02_Works/index.html"),
+    ("thoughts", "Thoughts", "05_Thoughts/index.html"),
+    ("personal", "Personal", "04_Personal/index.html"),
     ("contact", "Contact", "04_Contact/contact.html"),
 ]
 
@@ -430,16 +430,34 @@ def document(from_file: str, title: str, description: str, body: str, home: bool
     )
 
 
+def teaser(from_file: str, number: str, en: str, ja: str, line: str, target: str) -> str:
+    return (
+        f'<a href="{esc(href(from_file, target))}">'
+        f'<span class="k">{esc(number)}</span>'
+        f"<span><span class=\"en\">{esc(en)}</span>"
+        f"<strong>{esc(ja)}</strong><p>{esc(line)}</p></span></a>"
+    )
+
+
 def home_page(data: dict) -> str:
     site = data["site"]
+    profile = data["profile"]
+    newest = log_works(data["works"])[0]
+    profile_line = profile["intro"] if profile["intro"] and not placeholder(profile["intro"]) else f'{site["nameJa"]} / {site["nameEn"]}'
+    thoughts = data["thoughts"]
+    thought_line = thoughts["items"][0]["body"] if thoughts.get("items") else thoughts["lead"]
+    rows = [
+        ("01", "Profile", "プロフィール", profile_line, "01_Profile/profile.html"),
+        ("02", "Work", "作品", f'{date_label(newest)} · {newest["title"]}', "02_Works/index.html"),
+        ("03", "Thoughts", "考え", thought_line, "05_Thoughts/index.html"),
+        ("04", "Personal", "仕事の外", data["personal"]["lead"], "04_Personal/index.html"),
+        ("05", "Contact", "連絡", site["email"], "04_Contact/contact.html"),
+    ]
+    links = "".join(teaser("index.html", *row) for row in rows)
     body = (
         cover(site)
         + '<main class="sheet" id="content">'
-        + profile_block("index.html", data)
-        + work_block("index.html", data)
-        + thoughts_block(data)
-        + personal_block("index.html", data)
-        + contact_block(data)
+        + f'<nav class="teasers" aria-label="ページ">{links}</nav>'
         + footer("index.html", site)
         + "</main>"
     )
@@ -490,8 +508,25 @@ def profile_page(data: dict) -> str:
 
 
 def work_page(data: dict) -> str:
-    file = "02_Works/work.html"
+    file = "02_Works/index.html"
     return section_page(file, "work", "Work", "作品", "02", work_listing(file, data), data)
+
+
+def redirect_page(target: str, title: str, canonical: str) -> str:
+    return f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(title)} | Kota Okugawa</title>
+<meta http-equiv="refresh" content="0; url={esc(target)}">
+<link rel="canonical" href="{esc(canonical)}">
+</head>
+<body>
+<p><a href="{esc(target)}">{esc(title)}</a></p>
+</body>
+</html>
+"""
 
 
 def thoughts_page(data: dict) -> str:
@@ -508,21 +543,11 @@ def personal_page(data: dict) -> str:
 
 
 def trip_page(data: dict) -> str:
-    target = "../index.html#football-photo"
-    return f"""<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Football &amp; Photo | Kota Okugawa</title>
-<meta http-equiv="refresh" content="0; url={target}">
-<link rel="canonical" href="https://kota-okugawa.com/#football-photo">
-</head>
-<body>
-<p><a href="{target}">Football &amp; Photo</a></p>
-</body>
-</html>
-"""
+    return redirect_page(
+        "../04_Personal/index.html#football-photo",
+        "Football & Photo",
+        "https://kota-okugawa.com/04_Personal/#football-photo",
+    )
 
 
 def contact_page(data: dict) -> str:
@@ -550,7 +575,7 @@ def project_page(work: dict, works: list[dict], data: dict) -> str:
         for item in videos
     )
     listed = log_works([item for item in works if item.get("listed", True)])
-    back = href(file, "02_Works/work.html")
+    back = href(file, "02_Works/index.html")
     neighbors = ""
     if work in listed:
         index = listed.index(work)
@@ -602,7 +627,8 @@ def render(data: dict) -> dict[str, str]:
     files = {
         "index.html": home_page(data),
         "01_Profile/profile.html": profile_page(data),
-        "02_Works/work.html": work_page(data),
+        "02_Works/index.html": work_page(data),
+        "02_Works/work.html": redirect_page("index.html", "作品", "https://kota-okugawa.com/02_Works/"),
         "03_Trip/trip.html": trip_page(data),
         "04_Contact/contact.html": contact_page(data),
         "04_Personal/index.html": personal_page(data),
@@ -643,8 +669,9 @@ def main() -> int:
         if token not in blob:
             print("missing", token)
             failed = True
+    works_index = files["02_Works/index.html"]
     for work in data["works"]:
-        if work["title"] not in files["index.html"]:
+        if work["title"] not in works_index:
             print("missing work", work["title"])
             failed = True
     if check:

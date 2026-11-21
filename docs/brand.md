@@ -97,8 +97,8 @@ ink / paper は 16.5:1。muted / paper は 6.5:1。accent / paper は 3.6:1 な�
 
 ## 置き方
 
-- ヒーロー: 写真、ロゴタイプ、一文と英語の一行。開いた面は置かない
-- ヘッダー: ロゴタイプ左、ナビ右。ナビは Profile / Work / Thoughts / Personal / Contact
+- ヒーロー: 写真、ロゴタイプ、一文と英語の一行。開いた面は置かない。その下は各ページへの短い入口
+- ヘッダー: ロゴタイプ左、ナビ右。ナビはページへ。Profile / Work / Thoughts / Personal / Contact
 - ファビコン: `assets/favicon.svg`
 - 共有画像: `assets/og.png`。地は ink。印、一文、英語の一行、名前。右に開いた面
 - 作品一覧: 写真、日付、名前、短い一行。2列
