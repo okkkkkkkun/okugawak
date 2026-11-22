@@ -569,6 +569,34 @@
     return seeds.map(function (_, index) { return cell(index); });
   }
 
+  var roundedMode = new URLSearchParams(location.search).get("design") === "rounded";
+  function roundedCellPath(ctx, poly) {
+    if (!roundedMode) {
+      ctx.moveTo(poly[0].x, poly[0].y);
+      for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x, poly[i].y);
+      ctx.closePath();
+      return;
+    }
+    var cx = 0, cy = 0;
+    poly.forEach(function(p) { cx += p.x; cy += p.y; });
+    cx /= poly.length; cy /= poly.length;
+    var gap = Math.min(4, Math.max(2.5, view.w * 0.009));
+    var pts = poly.map(function(p) {
+      var dx = cx-p.x, dy = cy-p.y, d = Math.hypot(dx,dy)||1;
+      return {x:p.x+dx/d*gap, y:p.y+dy/d*gap};
+    });
+    var radius = Math.min(9, Math.max(4, view.w * 0.014));
+    pts.forEach(function(p,i) {
+      var a=pts[(i+pts.length-1)%pts.length], b=pts[(i+1)%pts.length];
+      var da=Math.hypot(a.x-p.x,a.y-p.y), db=Math.hypot(b.x-p.x,b.y-p.y);
+      var ra=Math.min(radius,da*0.28), rb=Math.min(radius,db*0.28);
+      var start={x:p.x+(a.x-p.x)*ra/(da||1),y:p.y+(a.y-p.y)*ra/(da||1)};
+      var end={x:p.x+(b.x-p.x)*rb/(db||1),y:p.y+(b.y-p.y)*rb/(db||1)};
+      if(i===0)ctx.moveTo(start.x,start.y); else ctx.lineTo(start.x,start.y);
+      ctx.quadraticCurveTo(p.x,p.y,end.x,end.y);
+    });
+    ctx.closePath();
+  }
   function draw() {
     fitCanvas();
     var ctx = canvas.getContext("2d");
@@ -584,9 +612,7 @@
       var focus = index === active;
       ctx.save();
       ctx.beginPath();
-      ctx.moveTo(poly[0].x, poly[0].y);
-      for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x, poly[i].y);
-      ctx.closePath();
+      roundedCellPath(ctx, poly);
       ctx.clip();
       if (focus) ctx.filter = "brightness(1.14)";
       if (img.complete && img.naturalWidth) {
@@ -615,9 +641,7 @@
       }
       ctx.restore();
       ctx.beginPath();
-      ctx.moveTo(poly[0].x, poly[0].y);
-      for (var j = 1; j < poly.length; j++) ctx.lineTo(poly[j].x, poly[j].y);
-      ctx.closePath();
+      roundedCellPath(ctx, poly);
       ctx.lineJoin = "round";
       ctx.strokeStyle = "rgba(246,243,238,0.9)";
       ctx.lineWidth = 1.35;
