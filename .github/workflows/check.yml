@@ -1,8 +1,11 @@
 name: check
 
 on:
-  push:
   pull_request:
+
+concurrency:
+  group: check-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   build:
