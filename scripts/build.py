@@ -85,6 +85,24 @@ def shot(from_file: str, src: str, alt: str, wide: bool = False) -> str:
     )
 
 
+MENU = [
+    ("top", "00", "Top", "index.html"),
+    ("profile", "01", "Profile", "01_Profile/profile.html"),
+    ("work", "02", "Work", "02_Works/index.html"),
+    ("thoughts", "03", "Thoughts", "05_Thoughts/index.html"),
+    ("personal", "04", "Personal", "04_Personal/index.html"),
+    ("contact", "05", "Contact", "04_Contact/contact.html"),
+]
+
+
+def icon_menu() -> str:
+    return """<svg viewBox="0 0 24 24" aria-hidden="true">
+<path class="nav-line" d="M4 7h16"/>
+<path class="nav-line" d="M4 12h16"/>
+<path class="nav-line" d="M4 17h16"/>
+</svg>"""
+
+
 def chrome(from_file: str, current: str | None) -> str:
     links = []
     for key, label, target in NAV:
@@ -92,39 +110,27 @@ def chrome(from_file: str, current: str | None) -> str:
         links.append(f'<a href="{esc(href(from_file, target))}"{attrs}>{up(label)}</a>')
     home = href(from_file, "index.html")
     mark = href(from_file, "assets/mark.svg")
-    sheet = [("top", "Top", "index.html"), *NAV]
     sheet_links = []
-    for key, label, target in sheet:
+    for key, number, label, target in MENU:
         attrs = ' aria-current="page"' if key == current else ""
         sheet_links.append(
-            f'<li><a href="{esc(href(from_file, target))}"{attrs}><span>{esc(label)}</span></a></li>'
+            f'<li><a href="{esc(href(from_file, target))}"{attrs}><span class="no">{number}</span><span>{esc(label)}</span></a></li>'
         )
-    contact = href(from_file, "04_Contact/contact.html")
-    contact_current = ' aria-current="page"' if current == "contact" else ""
-    place = {
-        "top": "Top",
-        "profile": "Profile",
-        "work": "Work",
-        "thoughts": "Thoughts",
-        "personal": "Personal",
-    }.get(current or "", "Menu")
-    here = ' data-here="true"' if place != "Menu" else ""
+    mail = "mailto:okugawak@kajima.com"
     return (
         '<a class="skip" href="#content">本文へ</a>'
         '<header class="bar">'
         f'<a class="mark" href="{esc(home)}"><img src="{esc(mark)}" alt="" width="28" height="28"><span>Kota Okugawa</span></a>'
         f'<nav class="bar-nav" aria-label="サイト">{"".join(links)}</nav>'
+        f'<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-sheet" aria-label="メニュー">{icon_menu()}</button>'
         "</header>"
-        '<nav class="dock" aria-label="ページ">'
-        f'<button type="button" class="dock-menu" data-place="{esc(place)}"{here} aria-expanded="false" aria-controls="dock-sheet">{esc(place)}</button>'
-        f'<a class="dock-contact" href="{esc(contact)}"{contact_current}>Contact</a>'
-        "</nav>"
-        '<div class="dock-sheet" id="dock-sheet" hidden>'
-        '<div class="dock-panel" role="dialog" aria-modal="true" aria-labelledby="dock-sheet-title">'
-        '<p class="dock-kicker" id="dock-sheet-title">Pages</p>'
-        f'<ul>{"".join(sheet_links)}</ul>'
-        '<button type="button" class="dock-close">Close</button>'
-        "</div></div>"
+        '<div class="nav-sheet" id="nav-sheet" hidden role="dialog" aria-modal="true" aria-labelledby="nav-sheet-title">'
+        '<p class="nav-title" id="nav-sheet-title">Menu</p>'
+        f'<nav aria-label="ページ"><ol>{"".join(sheet_links)}</ol>'
+        '<div class="nav-foot">'
+        f'<a href="{esc(mail)}">Mail</a>'
+        '<a href="https://github.com/okkkkkkkun" target="_blank" rel="noopener noreferrer">GitHub</a>'
+        "</div></nav></div>"
     )
 
 
@@ -563,18 +569,20 @@ def home_page(data: dict) -> str:
     return document("index.html", "Kota Okugawa", description, body, True, "top")
 
 
-def section_page(from_file: str, current: str, en: str, ja: str, number: str, inner: str, data: dict) -> str:
+def section_page(from_file: str, current: str, en: str, ja: str, number: str, inner: str, data: dict, lead: str = "") -> str:
     site = data["site"]
+    lead_html = f'<p class="page-lead">{esc(lead)}</p>' if lead else ""
     body = f"""
 <main class="page" id="content">
-  <header class="sec-head">
-    <p class="sec-no">{number}</p>
-    <div>
-      <p class="sec-en">{esc(en)}</p>
-      <h1>{esc(ja)}</h1>
-    </div>
+  <header class="page-hero">
+    <p class="page-no">{number}</p>
+    <p class="page-en">{esc(en)}</p>
+    <h1>{esc(ja)}</h1>
+    {lead_html}
   </header>
-  {inner}
+  <div class="page-body">
+    {inner}
+  </div>
 </main>
 {footer(from_file, site)}
 """
@@ -602,12 +610,13 @@ def profile_page(data: dict) -> str:
 </div>
 <div class="photos">{photos}</div>
 """
-    return section_page(file, "profile", "Profile", "プロフィール", "01", inner, data)
+    site = data["site"]
+    return section_page(file, "profile", "Profile", "プロフィール", "01", inner, data, f'{site["nameJa"]} / {site["nameEn"]}')
 
 
 def work_page(data: dict) -> str:
     file = "02_Works/index.html"
-    return section_page(file, "work", "Work", "作品", "02", work_listing(file, data), data)
+    return section_page(file, "work", "Work", "作品", "02", work_listing(file, data), data, "新しい順")
 
 
 def redirect_page(target: str, title: str, canonical: str) -> str:
@@ -632,12 +641,16 @@ def thoughts_page(data: dict) -> str:
     thoughts = data["thoughts"]
     texts = [thoughts["lead"]] + [item.get("body", "") for item in thoughts["items"]]
     inner = pending_note(texts) + pull_quote(thoughts["lead"]) + thought_stack(thoughts)
-    return section_page(file, "thoughts", "Thoughts", "考え", "03", inner, data)
+    lead = "" if placeholder(thoughts["lead"]) else thoughts["lead"]
+    return section_page(file, "thoughts", "Thoughts", "考え", "03", inner, data, lead)
 
 
 def personal_page(data: dict) -> str:
     file = "04_Personal/index.html"
-    return section_page(file, "personal", "Personal", "仕事の外", "04", personal_inner(file, data), data)
+    lead = data["personal"]["lead"]
+    if placeholder(lead):
+        lead = ""
+    return section_page(file, "personal", "Personal", "仕事の外", "04", personal_inner(file, data), data, lead)
 
 
 def trip_page(data: dict) -> str:
@@ -654,7 +667,7 @@ def contact_page(data: dict) -> str:
     start = block.find("</header>")
     inner = block[start + len("</header>") :]
     inner = inner.rsplit("</section>", 1)[0]
-    return section_page(file, "contact", "Contact", "連絡", "05", inner, data)
+    return section_page(file, "contact", "Contact", "連絡", "05", inner, data, data["contact"]["intro"])
 
 
 def project_page(work: dict, works: list[dict], data: dict) -> str:
@@ -700,21 +713,24 @@ def project_page(work: dict, works: list[dict], data: dict) -> str:
     elif media:
         lead = f'<div class="gallery lead-frame">{media[0]}</div>'
         rest = video_html + "".join(media[1:])
+    when = date_label(work)
+    hero_lead = " · ".join(part for part in (when, work.get("kind") or "") if part)
     body = f"""
 <main class="page" id="content">
-  <header class="sec-head">
-    <p class="sec-no">02</p>
-    <div>
-      <p class="sec-en">Work</p>
-      <h1>{esc(work["title"])}</h1>
-      {note_html}
-    </div>
+  <header class="page-hero">
+    <p class="page-no">02</p>
+    <p class="page-en">Work</p>
+    <h1>{esc(work["title"])}</h1>
+    <p class="page-lead">{esc(hero_lead)}</p>
+    {note_html}
   </header>
-  {line_html}
-  {lead}
-  <div class="prose">{kind}{paragraphs}</div>
-  <div class="gallery" style="margin-top:1.5rem">{rest}</div>
-  {neighbors}
+  <div class="page-body">
+    {line_html}
+    {lead}
+    <div class="prose">{kind}{paragraphs}</div>
+    <div class="gallery">{rest}</div>
+    {neighbors}
+  </div>
 </main>
 {footer(file, site)}
 """

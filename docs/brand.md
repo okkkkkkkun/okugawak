@@ -59,11 +59,20 @@ ink / paper は 16.5:1。muted / paper は 6.5:1。accent / paper は 3.6:1 な�
 
 ## 書体
 
-無料のウェブフォント。
+無料のウェブフォント。役割ごとに一つの大きさ。`assets/site.css` のカスタムプロパティ。
 
-- ラテンの名前、ナビ、英語の小見出し: Instrument Sans。ナビは 600、字間 0.08em、大文字
-- 日本語の見出しと本文: Zen Kaku Gothic New。見出し 700、本文 400、行間 1.9、行長 40rem まで
-- デジタル: IBM Plex Mono。`Make / Run / Rethink.`、日付、番号
+| 役割 | 変数 | 大きさ | 行間 | 字間 | 書体 |
+| --- | --- | --- | --- | --- | --- |
+| display | `--type-display` | `clamp(2.35rem, 6.6vw, 4.6rem)` | 1.16 | -0.04em | Zen Kaku Gothic New 700。ページの題とヒーローの一文 |
+| h1 | `--type-h1` | `clamp(1.7rem, 3.4vw, 2.6rem)` | 1.22 | -0.03em | 同。引用、メール |
+| h2 | `--type-h2` | `clamp(1.25rem, 2vw, 1.6rem)` | 1.32 | -0.03em | 同。節の小見出し |
+| h3 | `--type-h3` | `clamp(1.05rem, 1.3vw, 1.2rem)` | 1.35 | -0.02em | Instrument Sans 600 も可。作品名、ヘッダーの名前 |
+| body | `--type-body` | `clamp(1rem, 0.2vw + 0.96rem, 1.0625rem)` | 1.85 | 0 | Zen Kaku Gothic New 400。行長 40rem |
+| small | `--type-small` | 0.875rem | 1.6 | 0 | 注、フッター |
+| mono-meta | `--type-meta` | 0.75rem | 1.45 | 0.14em | IBM Plex Mono。番号、日付、英語の小見出し、ナビ |
+| caption | `--type-caption` | 0.8125rem | 1.55 | 0 | 写真の説明。muted |
+
+同じ役割はどのページでも同じ変数。ページごとに `font-size` を足さない。
 
 ヒーローの日本語は、「つくりながら、」と「考える。」の二行。
 
@@ -99,7 +108,7 @@ ink / paper は 16.5:1。muted / paper は 6.5:1。accent / paper は 3.6:1 な�
 
 - ヒーロー: 写真、下左に名前と一文と英語。印はヘッダーの下、右に余白のある領域。左の面は錨で動かさない。右の面だけ引っ張り、窯の線と、英語と同じ語がすき間に出る。ヘッダーの 28px の印はナビ用に残す。開いた面の図は最初の画面には置かない
 - トップの続きは作品の面だけ。画面いっぱい。ドラッグで組み直す。動きを減らす設定では、写真とリンクの一覧。その下はフッター
-- ヘッダー: ロゴタイプ左、ナビ右。ナビはページへ。Profile / Work / Thoughts / Personal / Contact。幅が狭いときは上の並びを隠し、下に Menu と Contact のバーを固定する。Menu でページ一覧が開く。今いるページは下線
+- ヘッダー: ロゴタイプ左。デスクトップは右に Profile / Work / Thoughts / Personal / Contact。五つの短い英語が並ぶので、広い画面ではハンバーガーにしない。幅が狭いときはその並びを隠し、右上の線のアイコンが × になる。全画面の墨地に、章番号つきの大きなリンク。今いるページの番号だけ accent。Mail と GitHub を下に置く。下のバーは置かない
 - ファビコン: `assets/favicon.svg`
 - 共有画像: `assets/og.png`。地は ink。印、一文、英語の一行、名前。右に開いた面
 - 作品一覧: 写真、日付、名前、短い一行。2列

@@ -43,32 +43,42 @@
     view.removeAttribute("src");
   });
 
-  var menu = document.querySelector(".dock-menu");
-  var sheet = document.getElementById("dock-sheet");
-  var closeBtn = document.querySelector(".dock-close");
-  if (menu && sheet && closeBtn) {
-    var place = menu.getAttribute("data-place") || "Menu";
-    function setDock(open) {
-      sheet.hidden = !open;
-      menu.setAttribute("aria-expanded", open ? "true" : "false");
-      menu.textContent = open ? "Close" : place;
-      document.body.classList.toggle("dock-open", open);
-      if (open) closeBtn.focus();
+  var toggle = document.querySelector(".nav-toggle");
+  var sheet = document.getElementById("nav-sheet");
+  if (toggle && sheet) {
+    function items() {
+      return [toggle].concat(Array.prototype.slice.call(sheet.querySelectorAll("a")));
     }
-    menu.addEventListener("click", function () {
-      setDock(sheet.hidden);
-    });
-    closeBtn.addEventListener("click", function () {
-      setDock(false);
-      menu.focus();
-    });
-    sheet.addEventListener("click", function (event) {
-      if (event.target === sheet) setDock(false);
+    function setOpen(open) {
+      sheet.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("nav-open", open);
+      if (open) {
+        var first = sheet.querySelector("a");
+        if (first) first.focus();
+      } else {
+        toggle.focus();
+      }
+    }
+    toggle.addEventListener("click", function () {
+      setOpen(sheet.hidden);
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !sheet.hidden) {
-        setDock(false);
-        menu.focus();
+      if (sheet.hidden) return;
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      var list = items();
+      var first = list[0];
+      var last = list[list.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     });
   }
