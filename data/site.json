@@ -6,7 +6,7 @@
     "affiliationDisplay": "鹿島建設株式会社 建築設計本部 デジタルデザイン統括グループ",
     "email": "okugawak@kajima.com",
     "copyright": "All rights reserved, Copyright(C) 2023 KAJIMA CORPORATION",
-    "hero": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-P1004005.jpg",
+    "hero": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/profile/1-P1004005.jpg",
     "statement": {
       "ja": "つくりながら、考える。",
       "en": "Make / Run / Rethink."
@@ -14,7 +14,7 @@
   },
   "profile": {
     "intro": "【ここに自己紹介を記入】",
-    "portrait": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/pic01.jpg",
+    "portrait": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/profile/pic01.jpg",
     "timeline": [
       {
         "year": "1998",
@@ -87,12 +87,12 @@
       ],
       "images": [
         {
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Russia.jpg",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Russia.jpg",
           "alt": "晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ歩いていく",
           "caption": "Russia — 晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ向かう"
         },
         {
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Europe.jpg",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Europe.jpg",
           "alt": "夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗",
           "caption": "Europe — 夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗"
         },
@@ -130,7 +130,7 @@
     {
       "title": "山根木材 福岡支店",
       "file": "02_Works/linktoPage/yamanefukuoka/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/yamanefukuoka.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/yamanefukuoka.png",
       "note": [
         "Jan,2020"
       ],
@@ -145,59 +145,59 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-P1014680.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/1-P1014680.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-P1014707.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/3-P1014707.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/back.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/back.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/8-IMG_9370.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/8-IMG_9370.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/10-IMG_9373.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/10-IMG_9373.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/9-P1004000.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/9-P1004000.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/11-P1004009.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/11-P1004009.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_3835.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/2-IMG_3835.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_4136.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/1-IMG_4136.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-IMG_3582.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/4-IMG_3582.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/7-IMG_3630.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/7-IMG_3630.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-IMG_3629.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/6-IMG_3629.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-IMG_3611.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/5-IMG_3611.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-IMG_3606.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/3-IMG_3606.jpg"
         }
       ],
       "listed": true,
@@ -206,7 +206,7 @@
     {
       "title": "山根木材 福山支店",
       "file": "02_Works/linktoPage/yamanefukuyama/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/yamanefukuyama.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/yamanefukuyama.png",
       "note": [
         "May,2021"
       ],
@@ -221,75 +221,75 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/13-P1015822.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/13-P1015822.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/14-P1015828.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/14-P1015828.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-iso_view.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/3-iso_view.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-ViewCapture20210730_154815.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/5-ViewCapture20210730_154815.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-%E8%A7%A3%E6%9E%90.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/4-%E8%A7%A3%E6%9E%90.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-Fukuyama_Stair_02.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/2-Fukuyama_Stair_02.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_7752.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/2-IMG_7752.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-P1015396.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/1-P1015396.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-P1015537.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/3-P1015537.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-P1015549.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/5-P1015549.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-P1015544.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/4-P1015544.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-P1015560.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/6-P1015560.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/7-P1015587.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/7-P1015587.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/8-P1015597.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/8-P1015597.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/10-P1015611.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/10-P1015611.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/9-P1015603.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/9-P1015603.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/12-P1015626.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/12-P1015626.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/P1015807.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/P1015807.jpg"
         }
       ],
       "listed": true,
@@ -298,7 +298,7 @@
     {
       "title": "Transition Teahouse",
       "file": "02_Works/linktoPage/teahouse/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/teahouse.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/teahouse.png",
       "note": [
         "September,2022"
       ],
@@ -312,47 +312,47 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/IMG_2175.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/IMG_2175.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/ELEVATION%201.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/ELEVATION%201.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/ELEVATION%202.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/ELEVATION%202.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/elevation%203.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/elevation%203.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/elevation%204.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/elevation%204.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%204.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%204.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%205.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%205.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_2162.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/2-IMG_2162.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-IMG_2187.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/4-IMG_2187.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-IMG_2189.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/5-IMG_2189.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_2097.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/1-IMG_2097.jpg"
         }
       ],
       "listed": true,
@@ -361,7 +361,7 @@
     {
       "title": "Origami Teahouse",
       "file": "02_Works/linktoPage/teahouse_Summit/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/OrigamiTeahouse.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/OrigamiTeahouse.png",
       "note": [
         "May,2023　G7 Summit Hiroshima Openning Reception"
       ],
@@ -374,19 +374,19 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/DSC07039%20%281%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/DSC07039%20%281%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-DSC07063.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/5-DSC07063.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-DSC07046.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/3-DSC07046.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-DSC07057.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/4-DSC07057.jpg"
         },
         {
           "type": "video",
@@ -399,7 +399,7 @@
     {
       "title": "バーチャル広工大",
       "file": "02_Works/linktoPage/VirtualHIT/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/virtual.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/virtual.png",
       "note": [
         "May-Aug,2020"
       ],
@@ -414,11 +414,11 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_6495.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/1-IMG_6495.jpg"
         },
         {
           "type": "video",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/%E3%83%90%E3%83%BC%E3%83%81%E3%83%A3%E3%83%AB%E5%BA%83%E5%B7%A5%E5%A4%A7_shortmovie.mp4"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/%E3%83%90%E3%83%BC%E3%83%81%E3%83%A3%E3%83%AB%E5%BA%83%E5%B7%A5%E5%A4%A7_shortmovie.mp4"
         }
       ],
       "listed": true,
@@ -427,7 +427,7 @@
     {
       "title": "大和ハウス広島支店設計部　エントランス",
       "file": "02_Works/linktoPage/Daiwa/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/daiwa.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/daiwa.png",
       "note": [
         "May,2021"
       ],
@@ -441,23 +441,23 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-P1016073.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/3-P1016073.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-P1016079.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/4-P1016079.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-P1016114.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/5-P1016114.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-P1015697.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/1-P1015697.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-P1015703.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/2-P1015703.jpg"
         }
       ],
       "listed": true,
@@ -466,7 +466,7 @@
     {
       "title": "AAVS Osaka 2019",
       "file": "02_Works/linktoPage/aavs/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/handibot.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/handibot.png",
       "note": [
         "Mar, 2019"
       ],
@@ -479,23 +479,23 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-So%20Sugita%20-%20P1002043.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/1-So%20Sugita%20-%20P1002043.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-So%20Sugita%20-%20P1002138.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/2-So%20Sugita%20-%20P1002138.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-So%20Sugita%20-%20P1002157.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/3-So%20Sugita%20-%20P1002157.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-So%20Sugita%20-%20P1002199.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/4-So%20Sugita%20-%20P1002199.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-Svenja%20F%20-%20P3251008.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/5-Svenja%20F%20-%20P3251008.jpg"
         }
       ],
       "listed": true,
@@ -504,7 +504,7 @@
     {
       "title": "Apple peal",
       "file": "02_Works/linktoPage/apple/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/apple.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/apple.png",
       "note": [
         "LU-ARC Summer Workshop 2th",
         "Sep,2019"
@@ -519,23 +519,23 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/09_2.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/09_2.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-P1003442.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/1-P1003442.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-P1003532.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/2-P1003532.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-P1003629.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/3-P1003629.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-P1003771.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/4-P1003771.jpg"
         }
       ],
       "listed": true,
@@ -544,7 +544,7 @@
     {
       "title": "Completement Virtual",
       "file": "02_Works/linktoPage/Fes/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Fes.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/complement-virtual/Fes.png",
       "note": [
         "建築情報学会オンラインワークショップ「Fes」",
         "Apr, 2022"
@@ -560,7 +560,7 @@
       "media": [
         {
           "type": "video",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/ComplementVirtual_movie_fin.mp4"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/complement-virtual/ComplementVirtual_movie_fin.mp4"
         }
       ],
       "listed": true,
@@ -569,7 +569,7 @@
     {
       "title": "建築学生WS 宮島 2022",
       "file": "02_Works/linktoPage/kenchikugakuseiWS/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/kenchikugakusei.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/kenchikugakusei.png",
       "note": [
         "Aug,2022"
       ],
@@ -583,43 +583,43 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4788396659002199975%20%281%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/4788396659002199975%20%281%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_1463.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/1-IMG_1463.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_1503.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/2-IMG_1503.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/IMG_1571.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/IMG_1571.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-IMG_1599.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/3-IMG_1599.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-IMG_1648.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/4-IMG_1648.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-IMG_1658.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/5-IMG_1658.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-IMG_2582.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/6-IMG_2582.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/7-%E5%85%AC%E9%96%8B%E3%83%97%E3%83%AC%E3%82%BC%E3%81%AE%E6%A7%98%E5%AD%90.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/7-%E5%85%AC%E9%96%8B%E3%83%97%E3%83%AC%E3%82%BC%E3%81%AE%E6%A7%98%E5%AD%90.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Pesentation.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/Pesentation.jpg"
         }
       ],
       "listed": true,
@@ -628,7 +628,7 @@
     {
       "title": "Boxes House",
       "file": "02_Works/linktoPage/Boxes/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/boxes.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/boxes.png",
       "note": [
         "Jan,2017"
       ],
@@ -642,15 +642,15 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-myhouse01.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/2-myhouse01.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-Diagram.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/1-Diagram.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-myhouse_danmen.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/3-myhouse_danmen.jpg"
         }
       ],
       "listed": true,
@@ -659,7 +659,7 @@
     {
       "title": "Polygon Space",
       "file": "02_Works/linktoPage/Hexagon/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/hexagon.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/hexagon.png",
       "note": [
         "Jul,2018"
       ],
@@ -670,27 +670,27 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-ss%20v3.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/1-ss%20v3.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%892.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/5-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%892.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%894.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/4-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%894.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%896.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/3-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%896.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%8910.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/6-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%8910.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%899.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/2-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%899.jpg"
         }
       ],
       "listed": true,
@@ -699,7 +699,7 @@
     {
       "title": "Net Shopping for 2045",
       "file": "02_Works/linktoPage/Drone/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/drone.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/drone.png",
       "note": [
         "HIT Design Studio 2018-2019",
         "Jan,2019"
@@ -713,15 +713,15 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-01.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/2-01.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-%E9%A2%A8%E5%91%82%E6%95%B7%20%E5%8C%85%E3%81%BF%E6%96%B9.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/1-%E9%A2%A8%E5%91%82%E6%95%B7%20%E5%8C%85%E3%81%BF%E6%96%B9.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-01-20%20012600.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/3-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-01-20%20012600.jpg"
         }
       ],
       "listed": true,
@@ -730,7 +730,7 @@
     {
       "title": "Simple A",
       "file": "02_Works/linktoPage/Aframe/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Aframe.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/Aframe.png",
       "note": [
         "June,2019"
       ],
@@ -743,11 +743,11 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-01.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/1-01.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-07.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/2-07.jpg"
         }
       ],
       "listed": true,
@@ -756,7 +756,7 @@
     {
       "title": "FUN LINE",
       "file": "02_Works/linktoPage/Funline/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/FunLine.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/FunLine.png",
       "note": [
         "March,2021"
       ],
@@ -769,51 +769,51 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/7-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%288%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/7-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%288%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%283%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/2-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%283%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%284%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/3-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%284%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%285%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/4-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%285%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%286%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/5-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%286%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%287%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/6-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%287%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/8-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%289%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/8-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%289%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/9-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2810%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/9-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2810%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/10-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2811%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/10-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2811%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/11-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2812%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/11-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2812%29.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/12-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-08-28%2014.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/12-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-08-28%2014.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-%E4%BF%AE%E4%BA%86%E8%A8%BC-temp-Center.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/1-%E4%BF%AE%E4%BA%86%E8%A8%BC-temp-Center.jpg"
         }
       ],
       "listed": true,
@@ -822,7 +822,7 @@
     {
       "title": "EMARF学生アンバサダー",
       "file": "02_Works/linktoPage/EMARF/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/Emarf.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/Emarf.png",
       "note": [
         "June,2020"
       ],
@@ -835,23 +835,23 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_7040.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/1-IMG_7040.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/IMG_7047.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/IMG_7047.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_7049.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/2-IMG_7049.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-IMG_7162.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/5-IMG_7162.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-IMG_7059.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/3-IMG_7059.jpg"
         }
       ],
       "listed": true,
@@ -860,7 +860,7 @@
     {
       "title": "Laminate Stool",
       "file": "02_Works/linktoPage/Stool/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/stool.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/laminate-stool/stool.png",
       "note": [
         "July,2017"
       ],
@@ -872,7 +872,7 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/EkBFiLoVgAAbtYs.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/laminate-stool/EkBFiLoVgAAbtYs.jpg"
         }
       ],
       "listed": true,
@@ -881,7 +881,7 @@
     {
       "title": "Side Table",
       "file": "02_Works/linktoPage/Sidetable/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/sidetable.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/sidetable.png",
       "note": [
         "July,2020"
       ],
@@ -894,35 +894,35 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/1-IMG_1581.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/1-IMG_1581.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/8-03.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/8-03.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/7-%E6%9D%90%E6%96%99%E3%83%8A%E3%83%B3%E3%83%90%E3%83%AA%E3%83%B3%E3%82%B0.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/7-%E6%9D%90%E6%96%99%E3%83%8A%E3%83%B3%E3%83%90%E3%83%AA%E3%83%B3%E3%82%B0.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/2-IMG_1641.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/2-IMG_1641.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/3-Rotatetable02.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/3-Rotatetable02.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/4-Rotatetable01.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/4-Rotatetable01.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/6-CurveSurface02.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/6-CurveSurface02.jpg"
         },
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/5-CurveSurface04.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/5-CurveSurface04.jpg"
         }
       ],
       "listed": true,
@@ -931,7 +931,7 @@
     {
       "title": "Voronoi Clock 01",
       "file": "02_Works/linktoPage/Voronoiclock01/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/voronoi01.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-01/voronoi01.png",
       "note": [
         "February,2019"
       ],
@@ -943,7 +943,7 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/IMG_1375%20%281%29.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-01/IMG_1375%20%281%29.jpg"
         }
       ],
       "listed": true,
@@ -952,7 +952,7 @@
     {
       "title": "Voronoi Clock 02",
       "file": "02_Works/linktoPage/Voronoiclock02/index.html",
-      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/voronoi02.png",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-02/voronoi02.png",
       "note": [
         "March,2020"
       ],
@@ -964,7 +964,7 @@
       "media": [
         {
           "type": "image",
-          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/IMG_5881.jpg"
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-02/IMG_5881.jpg"
         }
       ],
       "listed": true,
