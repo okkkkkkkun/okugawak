@@ -1,6 +1,7 @@
 (function(){
  var rounded=new URLSearchParams(location.search).get("design")==="rounded";
  document.documentElement.classList.toggle("design-rounded",rounded);
+ if(rounded){document.querySelectorAll("a[href]").forEach(function(a){var raw=a.getAttribute("href");if(!raw||raw[0]==="#"||/^(mailto:|tel:|https?:|javascript:)/i.test(raw))return;var u=new URL(raw,location.href);if(u.origin!==location.origin)return;u.searchParams.set("design","rounded");a.href=u.href;});}
  var home=document.body.classList.contains("is-home");
  if(home){
   var link=document.createElement("a");
