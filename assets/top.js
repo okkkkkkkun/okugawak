@@ -7,12 +7,16 @@
     var stage = mark.parentElement;
     var joint = mark.querySelector(".joint");
     var gapWord = mark.querySelector(".gap-word");
-    var hint = document.querySelector(".assemble-hint");
+    var pullHint = document.querySelector(".assemble-hint");
     var planes = Array.prototype.map.call(mark.querySelectorAll(".plane"), function (el, index) {
       return { el: el, x: 0, y: 0, vx: 0, vy: 0, rot: 0, vr: 0, drag: null, side: index === 0 ? -1 : 1, phase: index * 1.7 };
     });
-    var look = { x: 0, y: 0 };
     var keys = { x: 0, y: 0 };
+    var anchor = { left: 0, top: 0 };
+    var words = ["Make", "Run", "Rethink"];
+    var cycle = 0;
+    var shownCycle = 0;
+    var cycles = document.querySelectorAll(".cover-en .cycle");
     var loop = false;
     var wasApart = false;
     var lastTap = 0;
@@ -27,12 +31,50 @@
     }
     function soften(x, y) {
       var d = Math.hypot(x, y);
-      var knee = 18;
+      var knee = 14;
       if (d <= knee) return { x: x, y: y };
       var extra = d - knee;
-      var eased = knee + extra / (1 + extra / 460);
+      var eased = knee + extra / (1 + extra / 360);
       var scale = eased / d;
       return { x: x * scale, y: y * scale };
+    }
+    function readAnchor() {
+      if (mark.dataset.lifted) return;
+      var box = mark.getBoundingClientRect();
+      if (box.width < 2) return;
+      anchor.left = box.left;
+      anchor.top = box.top;
+    }
+    function contain(x, y) {
+      var field = document.querySelector(".hero-k");
+      if (!field || anchor.left === 0 && anchor.top === 0) return { x: Math.max(-0.2, x), y: y };
+      var u = unit();
+      var pad = 10;
+      var rect = field.getBoundingClientRect();
+      var minX = Math.max(-0.2, (rect.left + pad - anchor.left) / u - 11.6);
+      var maxX = (rect.right - pad - anchor.left) / u - 27;
+      var minY = (rect.top + pad - anchor.top) / u - 3;
+      var maxY = (rect.bottom - pad - anchor.top) / u - 29;
+      var bar = document.querySelector(".bar");
+      if (bar) minY = Math.max(minY, (bar.getBoundingClientRect().bottom + 6 - anchor.top) / u - 3);
+      var left = anchor.left + (11.6 + x) * u;
+      var right = anchor.left + (27 + x) * u;
+      [".cover-copy", ".cover-affil"].forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        if (right > r.left + 2 && left < r.right - 2) {
+          maxY = Math.min(maxY, (r.top - 12 - anchor.top) / u - 29);
+        }
+      });
+      if (minX > maxX) maxX = minX;
+      if (minY > maxY) maxY = minY;
+      return { x: Math.min(maxX, Math.max(minX, x)), y: Math.min(maxY, Math.max(minY, y)) };
+    }
+    function applyCycle(index) {
+      if (index === shownCycle) return;
+      shownCycle = index;
+      cycles.forEach(function (el, i) { el.classList.toggle("is-on", i === index); });
     }
     function lift() {
       if (!stage || mark.dataset.lifted) return;
@@ -41,8 +83,13 @@
         overlay = document.createElement("div");
         overlay.className = "assemble-overlay";
       }
-      if (!overlay.parentElement) document.body.appendChild(overlay);
+      var pin = document.querySelector(".cover-pin");
+      if (!overlay.parentElement && pin) pin.appendChild(overlay);
       overlay.appendChild(mark);
+      if (stage) {
+        stage.style.minWidth = box.width + "px";
+        stage.style.minHeight = box.height + "px";
+      }
       var vw = window.innerWidth;
       var vh = window.innerHeight;
       var scale = box.width / 32 || 3;
@@ -77,22 +124,27 @@
       mark.style.width = "";
       mark.style.height = "";
       mark.style.margin = "";
+      if (stage) {
+        stage.style.minWidth = "";
+        stage.style.minHeight = "";
+      }
       stage.appendChild(mark);
     }
     function paint() {
-      planes.forEach(function (plane) {
-        var skew = Math.max(-14, Math.min(14, plane.vx * 1.6));
-        plane.el.setAttribute(
-          "transform",
-          "translate(" + plane.x.toFixed(2) + " " + plane.y.toFixed(2) + ") rotate(" + plane.rot.toFixed(2) + " 16 16) skewX(" + skew.toFixed(2) + ")"
-        );
-      });
-      var ax = 12 + planes[0].x;
-      var ay = 16 + planes[0].y;
-      var bx = 16 + planes[1].x;
+      planes[0].el.setAttribute("transform", "translate(0 0)");
+      planes[1].el.setAttribute(
+        "transform",
+        "translate(" + planes[1].x.toFixed(2) + " " + planes[1].y.toFixed(2) + ")"
+      );
+      var ax = 12;
+      var ay = 16;
+      var bx = 12 + planes[1].x;
       var by = 16 + planes[1].y;
-      var gap = Math.hypot(planes[0].x - planes[1].x, planes[0].y - planes[1].y);
-      var show = Math.max(0, Math.min(1, (gap - 1.4) / 5));
+      var gap = Math.hypot(planes[1].x, planes[1].y);
+      var show = Math.max(0, Math.min(1, (gap - 1.2) / 4));
+      var distI = gap > 22 ? 2 : gap > 9 ? 1 : 0;
+      var wordI = gap > 3 ? Math.max(cycle, distI) : cycle;
+      applyCycle(wordI);
       if (joint) {
         joint.setAttribute("x1", ax.toFixed(2));
         joint.setAttribute("y1", ay.toFixed(2));
@@ -103,23 +155,24 @@
         joint.style.strokeWidth = snapping ? "1.6" : "0.7";
       }
       if (gapWord) {
-        var word = gap > 46 ? "Rethink" : gap > 18 ? "Run" : "Make";
-        var mx = (ax + bx) / 2;
-        var my = (ay + by) / 2 - 1.4;
-        var scale = Math.max(1, Math.min(2.6, 0.8 + gap / 26));
-        gapWord.textContent = word;
-        gapWord.setAttribute("x", mx.toFixed(2));
-        gapWord.setAttribute("y", my.toFixed(2));
+        var dx = bx - ax;
+        var dy = by - ay;
+        var len = Math.hypot(dx, dy) || 1;
+        var nx = -dy / len;
+        var ny = dx / len;
+        if (ny > 0) { nx = -nx; ny = -ny; }
+        var mx = (ax + bx) / 2 + nx * 2.8;
+        var my = (ay + by) / 2 + ny * 2.8;
+        var scale = Math.max(1, Math.min(1.7, 0.9 + gap / 28));
+        gapWord.textContent = words[wordI];
+        gapWord.setAttribute("x", "0");
+        gapWord.setAttribute("y", "0");
         gapWord.setAttribute(
           "transform",
-          "translate(" + mx.toFixed(2) + " " + my.toFixed(2) + ") scale(" + scale.toFixed(3) + ") translate(" + (-mx).toFixed(2) + " " + (-my).toFixed(2) + ")"
+          "translate(" + mx.toFixed(2) + " " + my.toFixed(2) + ") scale(" + scale.toFixed(3) + ")"
         );
-        gapWord.style.opacity = String(Math.max(0, Math.min(1, (gap - 4) / 4)));
+        gapWord.style.opacity = String(Math.max(0, Math.min(1, (gap - 3.5) / 3.5)));
       }
-      if (stage) {
-        stage.style.transform = "rotateY(" + (look.x * 7).toFixed(2) + "deg) rotateX(" + (-look.y * 5).toFixed(2) + "deg)";
-      }
-      mark.style.filter = "drop-shadow(" + (look.x * 4).toFixed(1) + "px " + (3 + look.y * 3).toFixed(1) + "px 0 rgba(22,21,19,.4))";
     }
     function flash() {
       flashUntil = performance.now() + 220;
@@ -128,37 +181,36 @@
       var dt = 1;
       var live = false;
       var t = now || performance.now();
-      planes.forEach(function (plane) {
-        if (plane.drag) {
-          live = true;
-          return;
-        }
+      if (!mark.dataset.lifted) readAnchor();
+      planes[0].x = 0;
+      planes[0].y = 0;
+      var plane = planes[1];
+      if (plane.drag) live = true;
+      else {
         var dist = Math.hypot(plane.x, plane.y);
-        var tx = Math.sin(t / 980 + plane.phase) * 0.42 + look.x * plane.side * 1.15 + keys.x * plane.side * 7;
-        var ty = Math.cos(t / 1140 + plane.phase) * 0.3 + look.y * 0.7 + keys.y * 6;
-        var spring = dist > 28 ? 0.1 : 0.16;
-        var damp = dist > 28 ? 0.86 : 0.74;
+        var tx = keys.x * 8;
+        var ty = keys.y * 6;
+        var spring = dist > 24 ? 0.1 : 0.16;
+        var damp = dist > 24 ? 0.86 : 0.74;
         plane.vx += (tx - plane.x) * spring * dt;
         plane.vy += (ty - plane.y) * spring * dt;
         plane.vx *= damp;
         plane.vy *= damp;
         plane.x += plane.vx * dt;
         plane.y += plane.vy * dt;
-        plane.vr += (0 - plane.rot) * 0.12 * dt;
-        plane.vr *= damp;
-        plane.rot += plane.vr * dt;
-        if (Math.hypot(plane.vx, plane.vy) > 0.04 || Math.abs(plane.x - tx) > 0.08 || Math.abs(plane.rot) > 0.4 || dist > 0.6) live = true;
-      });
-      var settled = planes.every(function (plane) {
-        return !plane.drag && Math.hypot(plane.x, plane.y) < 1.15 && Math.hypot(plane.vx, plane.vy) < 0.25;
-      });
+        var held = contain(plane.x, plane.y);
+        plane.x = held.x;
+        plane.y = held.y;
+        if (Math.hypot(plane.vx, plane.vy) > 0.04 || Math.abs(plane.x - tx) > 0.08 || dist > 0.6) live = true;
+      }
+      var settled = !plane.drag && Math.hypot(plane.x, plane.y) < 1.15 && Math.hypot(plane.vx, plane.vy) < 0.25;
       if (settled) unlift();
-      var gap = Math.hypot(planes[0].x - planes[1].x, planes[0].y - planes[1].y);
-      var speed = Math.hypot(planes[0].vx, planes[0].vy) + Math.hypot(planes[1].vx, planes[1].vy);
+      var gap = Math.hypot(planes[1].x, planes[1].y);
+      var speed = Math.hypot(planes[1].vx, planes[1].vy);
       if (wasApart && gap < 1.15 && speed > 0.35) flash();
       wasApart = gap > 5;
       paint();
-      if (live || Math.abs(look.x) + Math.abs(look.y) > 0.02 || keys.x || keys.y) requestAnimationFrame(tick);
+      if (live || keys.x || keys.y) requestAnimationFrame(tick);
       else loop = false;
     }
     function wake() {
@@ -167,20 +219,19 @@
       requestAnimationFrame(tick);
     }
     function forgetHint() {
-      if (hint) hint.classList.add("is-gone");
+      if (pullHint) pullHint.classList.add("is-gone");
     }
     function explode() {
       forgetHint();
+      readAnchor();
       lift();
-      planes[0].vx = -14;
-      planes[0].vy = -6;
-      planes[0].vr = -10;
-      planes[1].vx = 15;
-      planes[1].vy = 7;
-      planes[1].vr = 11;
+      planes[1].vx = 16;
+      planes[1].vy = -3;
       wake();
     }
     function startDrag(plane, x, y, id, type) {
+      if (plane.side < 0) return;
+      readAnchor();
       lift();
       plane.drag = { x: x, y: y, ox: plane.x, oy: plane.y, id: id, type: type };
       plane.vx = 0;
@@ -189,16 +240,16 @@
       wake();
     }
     function moveDrag(plane, x, y) {
-      if (!plane.drag) return;
+      if (!plane.drag || plane.side < 0) return;
       var u = unit();
       var rawX = plane.drag.ox + (x - plane.drag.x) / u;
       var rawY = plane.drag.oy + (y - plane.drag.y) / u;
       var soft = soften(rawX, rawY);
-      plane.vx = soft.x - plane.x;
-      plane.vy = soft.y - plane.y;
-      plane.x = soft.x;
-      plane.y = soft.y;
-      plane.rot = Math.max(-12, Math.min(12, plane.vx * 0.35 * plane.side));
+      var box = contain(soft.x, soft.y);
+      plane.vx = box.x - plane.x;
+      plane.vy = box.y - plane.y;
+      plane.x = box.x;
+      plane.y = box.y;
       paint();
       wake();
     }
@@ -224,6 +275,7 @@
       wake();
     }
     planes.forEach(function (plane) {
+      if (plane.side < 0) return;
       plane.el.addEventListener("pointerdown", function (event) {
         if (event.button != null && event.button !== 0) return;
         startDrag(plane, event.clientX, event.clientY, event.pointerId, event.pointerType || "mouse");
@@ -293,16 +345,6 @@
       event.preventDefault();
       explode();
     });
-    if (fine) {
-      window.addEventListener("pointermove", function (event) {
-        var box = mark.getBoundingClientRect();
-        var cx = box.left + box.width / 2;
-        var cy = box.top + box.height / 2;
-        look.x = Math.max(-1, Math.min(1, (event.clientX - cx) / 280));
-        look.y = Math.max(-1, Math.min(1, (event.clientY - cy) / 280));
-        wake();
-      });
-    }
     mark.addEventListener("keydown", function (event) {
       var used = true;
       if (event.key === "ArrowLeft") keys.x = -1;
@@ -321,6 +363,12 @@
       if (event.key === "ArrowUp" || event.key === "ArrowDown") keys.y = 0;
       wake();
     });
+    readAnchor();
+    setInterval(function () {
+      if (planes[1].drag || Math.hypot(planes[1].x, planes[1].y) > 6) return;
+      cycle = (cycle + 1) % words.length;
+      paint();
+    }, 2200);
     wake();
   }
 
@@ -608,10 +656,8 @@
       var meta = metaLine(work, active);
       ctx.font = "400 12px \"IBM Plex Mono\", ui-monospace, monospace";
       var metaW = ctx.measureText(meta).width;
-      var cue = fine ? "open →" : "tap again to open →";
-      var cueW = ctx.measureText(cue).width;
-      var blockW = Math.max(titleW, metaW, cueW);
-      var blockH = 18 + lines.length * (titleSize + 6) + 42;
+      var blockW = Math.max(titleW, metaW, 36);
+      var blockH = 16 + lines.length * (titleSize + 6) + 36;
       var lx = Math.max(16, Math.min(view.w - blockW - 16, center.x - blockW * 0.15));
       var ly = Math.max(blockH + 8, Math.min(view.h - 20, center.y + blockH * 0.35));
       ctx.beginPath();
@@ -648,8 +694,26 @@
       ctx.font = "400 13px \"IBM Plex Mono\", ui-monospace, monospace";
       ctx.fillStyle = "#f6f3ee";
       ctx.fillText(meta, lx, metaY);
-      ctx.fillText(cue, lx, metaY + 18);
+      var pulse = !fine ? (Math.sin(performance.now() / 260) + 1) / 2 : 0.35;
+      ctx.save();
+      ctx.translate(lx + pulse * 5, metaY + 16);
+      ctx.strokeStyle = "#e24a1b";
+      ctx.globalAlpha = 0.55 + pulse * 0.45;
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(22, 0);
+      ctx.moveTo(15, -6);
+      ctx.lineTo(22, 0);
+      ctx.lineTo(15, 6);
+      ctx.stroke();
       ctx.restore();
+      ctx.restore();
+      if (!fine && dragId < 0 && hot === active) {
+        requestAnimationFrame(function () { if (hot === active && !running) draw(); });
+      }
     }
     return cells;
   }

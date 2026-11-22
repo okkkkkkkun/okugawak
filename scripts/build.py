@@ -428,33 +428,67 @@ def contact_block(data: dict) -> str:
 """
 
 
+def icon_pull() -> str:
+    return """<svg class="icon" viewBox="0 0 24 24" role="img" aria-label="右へ引っ張る">
+<title>右へ引っ張る</title>
+<g class="nudge" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M4 7l5 5-5 5"/><path d="M12 7l5 5-5 5"/>
+</g></svg>"""
+
+
+def icon_drag() -> str:
+    return """<svg class="icon" viewBox="0 0 24 24" role="img" aria-label="ドラッグで組み直す">
+<title>ドラッグで組み直す</title>
+<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3.5" y="7.5" width="7" height="9"/>
+<path d="M13 12h7"/><path d="M17 8.5 20.5 12 17 15.5"/>
+</g></svg>"""
+
+
+def icon_shuffle() -> str:
+    return """<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M4 7c5 0 6 10 12 10"/><path d="M13 14.5 16.5 18 20 14.5"/>
+<path d="M4 17c5 0 6-10 12-10"/><path d="M13 9.5 16.5 6 20 9.5"/>
+</g></svg>"""
+
+
+def icon_reset() -> str:
+    return """<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/>
+<path d="M19.5 4.5V9H15"/>
+</g></svg>"""
+
+
 def cover(site: dict) -> str:
     image = esc(site["hero"])
     return f"""
 <div class="cover-pin">
   <img src="{image}" alt="" fetchpriority="high">
   <div class="cover-scrim"></div>
-  <div class="cover-copy">
-    <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+  <div class="hero-k">
     <div class="assemble">
       <div class="assemble-stage">
-        <svg viewBox="0 0 32 32" role="group" tabindex="0" aria-label="印。面を引っ張るとほどける。ダブルクリックで一度ほどいて、戻る。">
-          <line class="joint" x1="12" y1="16" x2="16" y2="16"></line>
+        <svg viewBox="0 0 32 32" role="group" tabindex="0" aria-label="印。右の面を引っ張るとほどける。左の面は動かない。">
+          <line class="joint" x1="12" y1="16" x2="12" y2="16"></line>
           <text class="gap-word" x="14" y="13" text-anchor="middle"></text>
-          <g class="plane" data-plane="a">
-            <rect x="1" y="0" width="13" height="32" fill="transparent"></rect>
+          <g class="plane plane-stem" data-plane="a">
             <path fill="currentColor" d="M4 3h8v26H4z"></path>
           </g>
-          <g class="plane" data-plane="b">
-            <rect x="14" y="0" width="17" height="32" fill="transparent"></rect>
+          <g class="plane plane-chevron" data-plane="b">
+            <rect x="12" y="0" width="18" height="32" fill="transparent"></rect>
             <path fill="currentColor" d="M16 3h11L20.2 16 27 29H16l-4.4-13z"></path>
           </g>
         </svg>
       </div>
-      <p class="assemble-hint">pull apart</p>
+      <p class="assemble-hint">{icon_pull()}</p>
     </div>
-    <h1 class="cover-line">{"つくりながら、<br>考える。" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>
-    <p class="cover-en"><span class="type">{esc(site["statement"]["en"])}</span><span class="caret" aria-hidden="true"></span></p>
+  </div>
+  <div class="cover-copy">
+    <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+    <h1 class="cover-line">{"<span>つくりながら、</span><span>考える。</span>" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>
+    <p class="cover-en" aria-label="{esc(site["statement"]["en"])}"><span class="cycle is-on">Make</span><span class="slash"> / </span><span class="cycle">Run</span><span class="slash"> / </span><span class="cycle">Rethink.</span></p>
   </div>
   <p class="cover-affil">{"<br>".join(esc(part) for part in site["affiliationDisplay"].split())}</p>
 </div>
@@ -502,9 +536,9 @@ def works_map(data: dict) -> str:
 <section class="works-map" id="works-map" aria-label="作品">
   <canvas class="map-canvas" tabindex="0" aria-keyshortcuts="ArrowKeys Enter" aria-label="作品の面。ドラッグで動かす。矢印キーで選んだ面を動かし、Enterで開く。"></canvas>
   <div class="map-tools">
-    <p class="map-hint" id="map-hint">drag to rearrange</p>
-    <button type="button" id="map-shuffle">shuffle</button>
-    <button type="button" id="map-reset">reset</button>
+    <p class="map-hint" id="map-hint">{icon_drag()}</p>
+    <button type="button" id="map-shuffle" aria-label="シャッフル" title="シャッフル">{icon_shuffle()}</button>
+    <button type="button" id="map-reset" aria-label="元の位置に戻す" title="元の位置に戻す">{icon_reset()}</button>
   </div>
   <ul class="map-links">{links}</ul>
   <script type="application/json" id="works-map-data">{payload}</script>
