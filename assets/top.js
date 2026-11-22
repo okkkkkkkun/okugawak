@@ -213,7 +213,7 @@
       if (live || keys.x || keys.y) requestAnimationFrame(tick);
       else loop = false;
     }
-    function wake() {
+    function wakeMark() {
       if (loop) return;
       loop = true;
       requestAnimationFrame(tick);
@@ -227,7 +227,7 @@
       lift();
       planes[1].vx = 16;
       planes[1].vy = -3;
-      wake();
+      wakeMark();
     }
     function startDrag(plane, x, y, id, type) {
       if (plane.side < 0) return;
@@ -237,7 +237,7 @@
       plane.vx = 0;
       plane.vy = 0;
       forgetHint();
-      wake();
+      wakeMark();
     }
     function moveDrag(plane, x, y) {
       if (!plane.drag || plane.side < 0) return;
@@ -251,7 +251,7 @@
       plane.x = box.x;
       plane.y = box.y;
       paint();
-      wake();
+      wakeMark();
     }
     function endDrag(plane, x, y, id) {
       if (!plane.drag || (id != null && id !== plane.drag.id)) return;
@@ -272,7 +272,7 @@
         if (now - lastTap < 340) explode();
         lastTap = now;
       }
-      wake();
+      wakeMark();
     }
     planes.forEach(function (plane) {
       if (plane.side < 0) return;
@@ -356,12 +356,12 @@
       if (!used) return;
       event.preventDefault();
       forgetHint();
-      wake();
+      wakeMark();
     });
     mark.addEventListener("keyup", function (event) {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") keys.x = 0;
       if (event.key === "ArrowUp" || event.key === "ArrowDown") keys.y = 0;
-      wake();
+      wakeMark();
     });
     readAnchor();
     setInterval(function () {
@@ -369,7 +369,7 @@
       cycle = (cycle + 1) % words.length;
       paint();
     }, 2200);
-    wake();
+    wakeMark();
   }
 
   var section = document.getElementById("works-map");
@@ -819,7 +819,11 @@
       seed.nx += seed.vx * dt;
       seed.ny += seed.vy * dt;
       if (Math.hypot(seed.vx * view.w, seed.vy * view.h) > 0.25) moving = true;
-      if (seed.tx != null && Math.hypot(seed.tx - seed.nx, seed.ty - seed.ny) < 0.004) {
+      if (seed.tx != null && Math.hypot(seed.tx - seed.nx, seed.ty - seed.ny) < 0.008) {
+        seed.nx = seed.tx;
+        seed.ny = seed.ty;
+        seed.vx = 0;
+        seed.vy = 0;
         seed.tx = null;
         seed.ty = null;
       }
@@ -1036,8 +1040,12 @@
     wake();
   }
 
+  function inTools(event) {
+    var node = event.target;
+    return node && node.closest && node.closest(".map-tools");
+  }
   canvas.addEventListener("pointerdown", function (event) {
-    if (event.button != null && event.button !== 0) return;
+    if (inTools(event) || (event.button != null && event.button !== 0)) return;
     beginGesture(event);
     try { canvas.setPointerCapture(event.pointerId); } catch (err) { /* synthetic or already gone */ }
   });
@@ -1120,8 +1128,37 @@
       wake();
     }
   });
-  if (shuffleBtn) shuffleBtn.addEventListener("click", function () { scatter(true); });
-  if (resetBtn) resetBtn.addEventListener("click", function () { scatter(false); });
+  function bindTool(btn, randomize) {
+    if (!btn) return;
+    var last = 0;
+    function run(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var now = performance.now();
+      if (now - last < 80) return;
+      last = now;
+      scatter(randomize);
+    }
+    btn.addEventListener("pointerdown", function (event) {
+      event.stopPropagation();
+    });
+    btn.addEventListener("touchstart", function (event) {
+      event.stopPropagation();
+    }, { passive: true });
+    btn.addEventListener("pointerup", function (event) {
+      if (event.button != null && event.button !== 0) return;
+      run(event);
+    });
+    btn.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+    btn.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      run(event);
+    });
+  }
+  bindTool(shuffleBtn, true);
+  bindTool(resetBtn, false);
 
   syncViewport();
   window.addEventListener("resize", function () {
@@ -1130,9 +1167,9 @@
   });
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", function () {
-      syncViewport();
-      wake();
-    });
+    syncViewport();
+    wake();
+  });
   }
   wake();
 })();

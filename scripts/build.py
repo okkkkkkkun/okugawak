@@ -448,16 +448,19 @@ def icon_drag() -> str:
 def icon_shuffle() -> str:
     return """<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
 <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-<path d="M4 7c5 0 6 10 12 10"/><path d="M13 14.5 16.5 18 20 14.5"/>
-<path d="M4 17c5 0 6-10 12-10"/><path d="M13 9.5 16.5 6 20 9.5"/>
+<path d="M16 3h5v5"/>
+<path d="M4 20 21 3"/>
+<path d="M21 16v5h-5"/>
+<path d="M15 15 21 21"/>
+<path d="M4 4 9 9"/>
 </g></svg>"""
 
 
 def icon_reset() -> str:
     return """<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
 <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-<path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/>
-<path d="M19.5 4.5V9H15"/>
+<path d="M4.2 9.2A7.6 7.6 0 1 0 12 4.6"/>
+<path d="M12 1.8 8.2 5.2 12 8.8"/>
 </g></svg>"""
 
 
@@ -486,7 +489,7 @@ def cover(site: dict) -> str:
     </div>
   </div>
   <div class="cover-copy">
-    <p class="cover-kicker">01 — {esc(site["nameJa"])}</p>
+    <p class="cover-kicker">{esc(site["nameJa"])}</p>
     <h1 class="cover-line">{"<span>つくりながら、</span><span>考える。</span>" if site["statement"]["ja"] == "つくりながら、考える。" else esc(site["statement"]["ja"])}</h1>
     <p class="cover-en" aria-label="{esc(site["statement"]["en"])}"><span class="cycle is-on">Make</span><span class="slash"> / </span><span class="cycle">Run</span><span class="slash"> / </span><span class="cycle">Rethink.</span></p>
   </div>
