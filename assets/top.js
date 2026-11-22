@@ -570,6 +570,8 @@
   }
 
   var roundedMode = new URLSearchParams(location.search).get("design") === "rounded";
+  // Offset each polygon edge in parallel, then fillet the resulting corners.
+  // This preserves the straight Voronoi edges instead of shrinking vertices toward a centroid.
   function roundedCellPath(ctx, poly) {
     if (!roundedMode) {
       ctx.moveTo(poly[0].x, poly[0].y);
@@ -577,23 +579,50 @@
       ctx.closePath();
       return;
     }
-    var cx = 0, cy = 0;
-    poly.forEach(function(p) { cx += p.x; cy += p.y; });
-    cx /= poly.length; cy /= poly.length;
-    var gap = Math.min(4, Math.max(2.5, view.w * 0.009));
-    var pts = poly.map(function(p) {
-      var dx = cx-p.x, dy = cy-p.y, d = Math.hypot(dx,dy)||1;
-      return {x:p.x+dx/d*gap, y:p.y+dy/d*gap};
+    var n = poly.length, signedArea = 0;
+    for (var a = 0; a < n; a++) {
+      var b = (a + 1) % n;
+      signedArea += poly[a].x * poly[b].y - poly[b].x * poly[a].y;
+    }
+    var sign = signedArea >= 0 ? 1 : -1;
+    var gap = Math.min(5.5, Math.max(3, view.w * 0.011));
+    var lines = [];
+    for (var i = 0; i < n; i++) {
+      var p = poly[i], q = poly[(i + 1) % n];
+      var dx = q.x - p.x, dy = q.y - p.y, len = Math.hypot(dx, dy) || 1;
+      var nx = sign * -dy / len, ny = sign * dx / len;
+      lines.push({x:p.x+nx*gap, y:p.y+ny*gap, dx:dx, dy:dy});
+    }
+    var pts = [];
+    for (var j = 0; j < n; j++) {
+      var prev = lines[(j+n-1)%n], next = lines[j];
+      var cross = prev.dx*next.dy-prev.dy*next.dx;
+      if (Math.abs(cross) < 0.000001) {
+        pts.push({x:next.x,y:next.y});
+        continue;
+      }
+      var t = ((next.x-prev.x)*next.dy-(next.y-prev.y)*next.dx)/cross;
+      var x = prev.x+t*prev.dx, y = prev.y+t*prev.dy;
+      if (!Number.isFinite(x) || !Number.isFinite(y) || Math.hypot(x-poly[j].x,y-poly[j].y)>Math.max(view.w,view.h)) {
+        x=next.x;y=next.y;
+      }
+      pts.push({x:x,y:y});
+    }
+    var radius = Math.min(17, Math.max(8, view.w * 0.035));
+    var corners = pts.map(function(p,k) {
+      var a=pts[(k+n-1)%n],b=pts[(k+1)%n];
+      var da=Math.hypot(a.x-p.x,a.y-p.y),db=Math.hypot(b.x-p.x,b.y-p.y);
+      var ux=(a.x-p.x)/(da||1),uy=(a.y-p.y)/(da||1);
+      var vx=(b.x-p.x)/(db||1),vy=(b.y-p.y)/(db||1);
+      var angle=Math.acos(Math.max(-1,Math.min(1,ux*vx+uy*vy)));
+      var tangent=Math.min(da*.32,db*.32,radius/Math.max(.2,Math.tan(angle/2)));
+      return {p:p, start:{x:p.x+ux*tangent,y:p.y+uy*tangent},
+        end:{x:p.x+vx*tangent,y:p.y+vy*tangent}};
     });
-    var radius = Math.min(9, Math.max(4, view.w * 0.014));
-    pts.forEach(function(p,i) {
-      var a=pts[(i+pts.length-1)%pts.length], b=pts[(i+1)%pts.length];
-      var da=Math.hypot(a.x-p.x,a.y-p.y), db=Math.hypot(b.x-p.x,b.y-p.y);
-      var ra=Math.min(radius,da*0.28), rb=Math.min(radius,db*0.28);
-      var start={x:p.x+(a.x-p.x)*ra/(da||1),y:p.y+(a.y-p.y)*ra/(da||1)};
-      var end={x:p.x+(b.x-p.x)*rb/(db||1),y:p.y+(b.y-p.y)*rb/(db||1)};
-      if(i===0)ctx.moveTo(start.x,start.y); else ctx.lineTo(start.x,start.y);
-      ctx.quadraticCurveTo(p.x,p.y,end.x,end.y);
+    ctx.moveTo(corners[0].start.x,corners[0].start.y);
+    corners.forEach(function(c) {
+      ctx.lineTo(c.start.x,c.start.y);
+      ctx.quadraticCurveTo(c.p.x,c.p.y,c.end.x,c.end.y);
     });
     ctx.closePath();
   }
