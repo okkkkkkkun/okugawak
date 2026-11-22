@@ -608,15 +608,21 @@
       }
       pts.push({x:x,y:y});
     }
-    var radius = Math.min(17, Math.max(8, view.w * 0.035));
-    var corners = pts.map(function(p,k) {
+    // The reference uses generous, flowing shoulders, not tiny corner radii.
+    // Keep the original seed layout; only soften each inset cell contour.
+    var minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+    pts.forEach(function(p){minX=Math.min(minX,p.x);minY=Math.min(minY,p.y);maxX=Math.max(maxX,p.x);maxY=Math.max(maxY,p.y);});
+    var cellScale=Math.min(maxX-minX,maxY-minY);
+    var radius=Math.min(36,Math.max(14,cellScale*0.23));
+    var corners=pts.map(function(p,k){
       var a=pts[(k+n-1)%n],b=pts[(k+1)%n];
       var da=Math.hypot(a.x-p.x,a.y-p.y),db=Math.hypot(b.x-p.x,b.y-p.y);
       var ux=(a.x-p.x)/(da||1),uy=(a.y-p.y)/(da||1);
       var vx=(b.x-p.x)/(db||1),vy=(b.y-p.y)/(db||1);
       var angle=Math.acos(Math.max(-1,Math.min(1,ux*vx+uy*vy)));
-      var tangent=Math.min(da*.32,db*.32,radius/Math.max(.2,Math.tan(angle/2)));
-      return {p:p, start:{x:p.x+ux*tangent,y:p.y+uy*tangent},
+      // Short edges are protected from over-rounding; acute corners remain recognizable.
+      var tangent=Math.min(da*.44,db*.44,radius/Math.max(.3,Math.tan(angle/2)));
+      return {p:p,start:{x:p.x+ux*tangent,y:p.y+uy*tangent},
         end:{x:p.x+vx*tangent,y:p.y+vy*tangent}};
     });
     ctx.moveTo(corners[0].start.x,corners[0].start.y);
