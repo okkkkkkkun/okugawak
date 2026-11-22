@@ -151,6 +151,8 @@ def footer(from_file: str, site: dict) -> str:
 
 def head(from_file: str, title: str, description: str, path: str) -> str:
     css = href(from_file, "assets/site.css")
+    rounded_css = href(from_file, "assets/rounded.css")
+    rounded_js = href(from_file, "assets/rounded.js")
     js = href(from_file, "assets/site.js")
     icon = href(from_file, "assets/favicon.svg")
     canonical = "https://kota-okugawa.com/" + path.lstrip("/")
