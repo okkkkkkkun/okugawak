@@ -15,7 +15,7 @@ html.design-rounded { --rounded-gap: 4px; --rounded-radius: 7px; }
 
 /* One geometry: the hero overlay is copied from the real works canvas. */
 .design-rounded .rounded-map-bridge {position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:2;opacity:0;}
-.design-rounded .cover-copy,.design-rounded .cover-affil,.design-rounded .hero-k {z-index:3;position:relative;}
+.design-rounded .cover-copy,.design-rounded .cover-affil,.design-rounded .hero-k {z-index:3;}
 /* Softened Geometry on secondary pages: restrained frames and UI surfaces. */
 .design-rounded .page .shot,
 .design-rounded .page .shot img,
