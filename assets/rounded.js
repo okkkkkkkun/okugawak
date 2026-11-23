@@ -82,7 +82,7 @@
       function renderVoronoi(){
         mapLayer.innerHTML='<section class="works-map explorer-map" id="works-map" aria-label="ドラッグして作品を探索">'+
           '<canvas class="map-canvas" tabindex="0" aria-label="作品マップ。ドラッグして移動、タップで選択し、もう一度タップして開く"></canvas>'+
-          '<div class="map-tools"><p class="map-hint" id="map-hint">DRAG TO EXPLORE</p>'+
+          '<div class="map-tools">'+
           '<button type="button" id="map-shuffle" aria-label="シャッフル">↝</button>'+
           '<button type="button" id="map-reset" aria-label="元の配置に戻す">↺</button></div></section>';
         var node=document.createElement("script");
