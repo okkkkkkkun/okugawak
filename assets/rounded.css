@@ -229,3 +229,8 @@ html.design-rounded body.is-home .hero-k .assemble {
 @media(max-width:700px){
   .design-rounded .explorer-map {height:65svh;min-height:410px;}
 }
+
+/* Work Explorer: header is sticky and already occupies layout space; avoid double top offset. */
+html.design-rounded body .page:has(.work-explorer) {
+  padding-top: clamp(12px, 2.5vw, 24px);
+}
