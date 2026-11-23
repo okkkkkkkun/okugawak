@@ -64,7 +64,7 @@
       function esc(s){return String(s||"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
       function imageHtml(item){return item.img?'<span class="explorer-image"><img loading="lazy" alt="" src="'+esc(item.img)+'"></span>':'<span class="explorer-image explorer-placeholder" aria-hidden="true">↗</span>';}
       function card(item,index){return '<a class="explorer-card" href="'+esc(item.url)+'">'+imageHtml(item)+
-        '<span class="explorer-info"><span class="explorer-index">'+String(index+1).padStart(2,"0")+' / '+esc(item.date||item.kind||"Tool")+'</span>'+
+        '<span class="explorer-info"><span class="explorer-date">'+esc(item.date||"時期未設定")+'</span>'+
         '<strong>'+esc(item.title)+'</strong></span></a>';}
       function renderGrid(){subviewInner.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
       function renderTimeline(){
@@ -74,8 +74,8 @@
         subviewInner.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){
           return '<section class="explorer-year"><h2>'+esc(year==="Other"?"OTHER":year)+'</h2><div>'+
           groups[year].map(function(item){return '<a href="'+esc(item.url)+'" class="explorer-timeline-row">'+
-            imageHtml(item)+'<span class="explorer-timeline-info"><strong>'+esc(item.title)+'</strong>'+
-            '<span class="explorer-date-badge">'+esc(item.date||item.kind||"時期未設定")+'</span></span>'+
+            imageHtml(item)+'<span class="explorer-timeline-info"><span class="explorer-date">'+esc(item.date||"時期未設定")+'</span>'+
+            '<strong>'+esc(item.title)+'</strong></span>'+
             '<span class="explorer-timeline-arrow" aria-hidden="true">↗</span></a>';}).join("")+'</div></section>';
         }).join("")+'</div>';
       }
