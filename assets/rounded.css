@@ -341,3 +341,12 @@ html.design-rounded body:has(.work-explorer) .explorer-map .map-tools {
   width:auto;margin:0;padding:0 12px;
 }
 html.design-rounded body:has(.work-explorer) .explorer-map .map-tools button {margin:0;}
+
+/* Two-mode icon switcher: Voronoi is primary, Grid is the only secondary view. */
+html.design-rounded body:has(.work-explorer) .explorer-toolbar {gap:3px;border-radius:12px;}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar button,
+html.design-rounded body:has(.work-explorer) .explorer-toolbar .explorer-primary {
+  display:grid;place-items:center;min-width:44px;min-height:44px;
+  width:44px;height:44px;padding:0;border-radius:9px;
+}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar svg {display:block;width:21px;height:21px;}
