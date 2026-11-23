@@ -350,3 +350,81 @@ html.design-rounded body:has(.work-explorer) .explorer-toolbar .explorer-primary
   width:44px;height:44px;padding:0;border-radius:9px;
 }
 html.design-rounded body:has(.work-explorer) .explorer-toolbar svg {display:block;width:21px;height:21px;}
+
+/* Editorial footer: restrained typography, responsive composition. */
+html.design-rounded .site-foot {
+  padding:clamp(30px,4.5vw,68px) var(--pad) clamp(22px,3vw,40px);
+  background:var(--paper);color:var(--ink);
+  border-top:1px solid var(--line);
+  border-radius:0;
+}
+html.design-rounded .foot-layout {
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(200px,.65fr);
+  column-gap:clamp(28px,7vw,120px);
+  row-gap:clamp(34px,5vw,60px);
+  max-width:1500px;margin:0 auto;
+}
+html.design-rounded .foot-identity,
+html.design-rounded .foot-contact {display:flex;flex-direction:column;align-items:flex-start;}
+html.design-rounded .foot-kicker {
+  font:500 10px/1.5 "IBM Plex Mono",monospace;
+  letter-spacing:.12em;color:var(--muted);
+}
+html.design-rounded .foot-signature {
+  display:block;margin-top:clamp(12px,2vw,22px);
+  font:600 clamp(18px,2.4vw,32px)/1.2 "Instrument Sans","Zen Kaku Gothic New",sans-serif;
+  letter-spacing:-.045em;
+}
+html.design-rounded .foot-affiliation {
+  margin:clamp(16px,2.5vw,28px) 0 0;
+  font-size:clamp(11px,.9vw,13px);line-height:1.8;color:var(--muted);
+}
+html.design-rounded .foot-contact {gap:14px;}
+html.design-rounded .foot-mail {
+  font:500 clamp(13px,1.2vw,16px)/1.5 "Instrument Sans",sans-serif;
+  letter-spacing:-.025em;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:4px;
+}
+html.design-rounded .foot-brand {
+  margin-top:6px;font:400 11px/1.6 "Zen Kaku Gothic New",sans-serif;
+  color:var(--muted);text-decoration:none;
+}
+html.design-rounded .foot-mail:hover,
+html.design-rounded .foot-brand:hover,
+html.design-rounded .foot-top:hover {color:var(--accent);}
+html.design-rounded .foot-base {
+  grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;border-top:1px solid var(--line);padding-top:18px;
+}
+html.design-rounded .foot-base small {
+  font:400 10px/1.6 "IBM Plex Mono",monospace;color:var(--muted);
+}
+html.design-rounded .foot-top {
+  font:500 11px/1.5 "IBM Plex Mono",monospace;
+  text-decoration:none;white-space:nowrap;
+}
+@media(max-width:700px){
+  html.design-rounded .site-foot {
+    padding:30px var(--pad) calc(24px + env(safe-area-inset-bottom));
+  }
+  html.design-rounded .foot-layout {
+    grid-template-columns:minmax(0,1fr);row-gap:26px;
+  }
+  html.design-rounded .foot-kicker {font-size:9px;letter-spacing:.1em;}
+  html.design-rounded .foot-signature {
+    font-size:19px;letter-spacing:-.035em;margin-top:10px;
+  }
+  html.design-rounded .foot-affiliation {
+    margin-top:14px;font-size:10px;line-height:1.65;
+  }
+  html.design-rounded .foot-contact {gap:9px;}
+  html.design-rounded .foot-mail {font-size:13px;padding-bottom:2px;}
+  html.design-rounded .foot-brand {font-size:10px;margin-top:3px;}
+  html.design-rounded .foot-base {
+    align-items:flex-start;gap:12px;padding-top:14px;
+  }
+  html.design-rounded .foot-base small {
+    max-width:70%;font-size:9px;line-height:1.55;
+  }
+  html.design-rounded .foot-top {font-size:10px;}
+}
