@@ -627,3 +627,13 @@ html.design-rounded .thoughts-story-progress-fill{position:absolute;top:0;left:0
 html.design-rounded .thoughts-story-progress-number{font:500 9px var(--mono);color:var(--muted);writing-mode:vertical-rl;letter-spacing:.1em}
 @media(max-width:700px){html.design-rounded .thoughts-story-progress{right:12px}.thoughts-story-progress-track{height:55px}html.design-rounded .thoughts-story-section .thoughts-story-copy h3{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*10px),0)}}
 @media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)}html.design-rounded .thoughts-story-section .thoughts-story-copy h3,html.design-rounded .thoughts-story-section .thoughts-story-copy p,html.design-rounded .thoughts-story-opening h2,html.design-rounded .thoughts-story-ending h3{transform:none}html.design-rounded .thoughts-story-progress{display:none}}
+
+
+/* Thoughts: perceptible, restrained motion across Chrome / Safari */
+html.design-rounded .thoughts-story-section .thoughts-story-copy h3{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*52px),0);opacity:calc(.62 + var(--thought-reveal,0)*.38)}
+html.design-rounded .thoughts-story-section .thoughts-story-copy p{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*26px),0);opacity:calc(.65 + var(--thought-reveal,0)*.35)}
+html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(var(--thought-reveal,0));height:2px}
+html.design-rounded .thoughts-story-section .thoughts-story-index{opacity:calc(.35 + var(--thought-reveal,0)*.65)}
+html.design-rounded .thoughts-story-ending h3{transform:translate3d(0,calc((1 - var(--thought-ending-progress,0))*44px),0)}
+@media(max-width:700px){html.design-rounded .thoughts-story-section .thoughts-story-copy h3{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*32px),0)}}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-story-section .thoughts-story-copy h3,html.design-rounded .thoughts-story-section .thoughts-story-copy p,html.design-rounded .thoughts-story-ending h3{opacity:1;transform:none}html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)}}
