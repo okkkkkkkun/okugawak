@@ -501,3 +501,32 @@ html.design-rounded .profile-history-empty {
   }
   html.design-rounded .profile-history .timeline li b {font-size:10px;}
 }
+
+/* Source-backed selected activities, compact year / category / title rows. */
+html.design-rounded .profile-activity-list {
+  list-style:none;margin:0;padding:0;
+}
+html.design-rounded .profile-activity-list li {
+  display:grid;grid-template-columns:48px minmax(0,1fr);
+  gap:12px;padding:10px 0;border-bottom:1px solid var(--line);
+  font-size:clamp(11px,.95vw,13px);line-height:1.55;
+}
+html.design-rounded .profile-activity-list time {
+  font:500 10px/1.6 "IBM Plex Mono",monospace;
+  color:var(--muted);white-space:nowrap;
+}
+html.design-rounded .profile-activity-content {
+  display:flex;flex-direction:column;gap:2px;min-width:0;
+}
+html.design-rounded .profile-activity-type {
+  font:400 9px/1.4 "IBM Plex Mono",monospace;
+  letter-spacing:.055em;color:var(--muted);
+}
+@media(max-width:700px){
+  html.design-rounded .profile-activity-list li {
+    grid-template-columns:42px minmax(0,1fr);gap:10px;
+    padding:9px 0;font-size:11px;
+  }
+  html.design-rounded .profile-activity-list time {font-size:9px;}
+  html.design-rounded .profile-activity-type {font-size:9px;}
+}
