@@ -289,4 +289,57 @@
     updateScrollStory();
   }
 
+
+  // Sticky chapters with per-line scroll-driven typography.
+  var stickyStory=document.querySelector(".thoughts-story");
+  if(stickyStory){
+    var chapterItems=Array.from(stickyStory.querySelectorAll(".thoughts-story-section"));
+    chapterItems.forEach(function(chapter,i){
+      if(!chapter.querySelector(".thoughts-chapter-frame")){
+        var frame=document.createElement("div");
+        frame.className="thoughts-chapter-frame";
+        while(chapter.firstChild)frame.appendChild(chapter.firstChild);
+        var counter=document.createElement("div");
+        counter.className="thoughts-chapter-counter";
+        counter.innerHTML="<strong>0"+(i+1)+"</strong> / 0"+chapterItems.length;
+        frame.appendChild(counter);
+        chapter.appendChild(frame);
+      }
+      var heading=chapter.querySelector(".thoughts-story-copy h3");
+      if(heading&&!heading.querySelector(".thoughts-type-line")){
+        var lines=heading.innerHTML.split(/<br\s*\/?\s*>/i);
+        heading.innerHTML="";
+        lines.forEach(function(line){
+          var outer=document.createElement("span");
+          outer.className="thoughts-type-line";
+          var inner=document.createElement("span");
+          inner.innerHTML=line;
+          outer.appendChild(inner);
+          heading.appendChild(outer);
+        });
+      }
+    });
+    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      var pending=false;
+      function chapterClamp(x){return Math.max(0,Math.min(1,x));}
+      function paintChapters(){
+        pending=false;
+        var vh=window.innerHeight||800;
+        chapterItems.forEach(function(chapter){
+          var r=chapter.getBoundingClientRect();
+          var p=chapterClamp((vh*.82-r.top)/(vh*.62));
+          chapter.style.setProperty("--chapter-progress",p.toFixed(4));
+          chapter.querySelectorAll(".thoughts-type-line").forEach(function(line,i){
+            var lp=chapterClamp((p-(i*.24))/.52);
+            line.style.setProperty("--line-reveal",lp.toFixed(4));
+          });
+        });
+      }
+      function requestChapters(){if(!pending){pending=true;requestAnimationFrame(paintChapters);}}
+      window.addEventListener("scroll",requestChapters,{passive:true});
+      window.addEventListener("resize",requestChapters,{passive:true});
+      paintChapters();
+    }
+  }
+
 })();
