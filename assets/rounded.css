@@ -604,3 +604,7 @@ html.design-rounded .thoughts-story-ending a{font:500 13px var(--sans);text-deco
 @keyframes thoughts-arrow{50%{transform:translateY(7px)}}
 @media(max-width:700px){html.design-rounded .thoughts-story-opening{min-height:70svh;padding:50px 0 80px}html.design-rounded .thoughts-story-opening h2{font-size:clamp(27px,7vw,42px);line-height:1.65}html.design-rounded .thoughts-story-opening>p:not(.thoughts-kicker){font-size:12px;line-height:2.2}html.design-rounded .thoughts-story-section{min-height:75svh;display:block;padding:90px 0 80px}html.design-rounded .thoughts-story-copy h3{font-size:clamp(29px,7.5vw,43px);margin:35px 0}html.design-rounded .thoughts-story-copy p{font-size:12px;line-height:2.4}html.design-rounded .thoughts-story-line{margin-top:50px}html.design-rounded .thoughts-story-ending{min-height:55svh}}
 @media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-story-scroll span{animation:none}html.design-rounded .thoughts-story-line{transform:none}}
+
+/* Visibility safeguard: content remains readable even if JS or observers fail. */
+html.design-rounded .thoughts-story .thoughts-reveal{opacity:1!important;transform:none!important}
+html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)}
