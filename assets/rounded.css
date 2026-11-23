@@ -272,3 +272,59 @@ html.design-rounded body:has(.work-explorer) .explorer-content.view-timeline {pa
  html.design-rounded body:has(.work-explorer) .explorer-toolbar button {font-size:10px;padding:10px 1px;}
  html.design-rounded body:has(.work-explorer) .explorer-map {height:100%;min-height:0;}
 }
+
+/* Mobile navigation always sits above the interactive fixed Hero. */
+html.design-rounded body.is-home > .bar {z-index:120;}
+html.design-rounded body.is-home > .nav-sheet {z-index:130;}
+html.design-rounded body.is-home .nav-toggle {position:relative;z-index:121;touch-action:manipulation;}
+html.design-rounded body.is-home .cover-pin {z-index:0;}
+/* Voronoi is a permanent canvas; secondary views slide over it without remounting. */
+html.design-rounded body:has(.work-explorer) .explorer-content {
+  position:relative;isolation:isolate;height:calc(100svh - var(--header));overflow:hidden;
+}
+html.design-rounded body:has(.work-explorer) .explorer-map-layer {
+  position:absolute;inset:0;z-index:0;
+}
+html.design-rounded body:has(.work-explorer) .explorer-map-layer .explorer-map {
+  position:absolute;inset:0;width:100%;height:100%;min-height:0;
+}
+html.design-rounded body:has(.work-explorer) .explorer-subview {
+  position:absolute;inset:0;z-index:2;overflow-y:auto;overscroll-behavior:contain;
+  background:rgba(246,243,238,.98);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(22px);
+  transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;
+  -webkit-overflow-scrolling:touch;
+}
+html.design-rounded body:has(.work-explorer) .view-grid .explorer-subview,
+html.design-rounded body:has(.work-explorer) .view-timeline .explorer-subview {
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);
+  transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;
+}
+html.design-rounded body:has(.work-explorer) .explorer-subview-inner {
+  padding:clamp(92px,12vw,116px) var(--pad) 45px;
+}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar {
+  display:flex;align-items:center;gap:3px;width:auto;max-width:calc(100% - 2 * var(--pad));
+  background:rgba(233,229,221,.94);backdrop-filter:blur(16px);
+  border:1px solid rgba(100,95,85,.12);padding:4px;border-radius:13px;
+}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar button {
+  flex:0 0 auto;padding:12px 14px;white-space:nowrap;
+}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar .explorer-primary {
+  font-weight:650;letter-spacing:-.015em;
+}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar-divider {
+  width:1px;height:20px;background:rgba(50,47,40,.16);margin:0 2px;
+}
+html.design-rounded body:has(.work-explorer) .page-hero {z-index:5;}
+@media(max-width:700px){
+ html.design-rounded body:has(.work-explorer) .explorer-toolbar {right:var(--pad);top:12px;width:auto;}
+ html.design-rounded body:has(.work-explorer) .explorer-toolbar button {font-size:11px;padding:11px 9px;}
+ html.design-rounded body:has(.work-explorer) .explorer-toolbar .explorer-primary {padding-inline:11px;}
+ html.design-rounded body:has(.work-explorer) .page-hero {top:calc(var(--header) + 20px);}
+}
+@media(prefers-reduced-motion:reduce){
+ html.design-rounded body:has(.work-explorer) .explorer-subview {transition:none;transform:none;}
+}
