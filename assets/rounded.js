@@ -48,10 +48,10 @@
       explorer.className="work-explorer";
       explorer.setAttribute("aria-label","作品表示");
       explorer.innerHTML='<div class="explorer-toolbar" role="group" aria-label="作品の表示形式">'+
-        '<button type="button" class="explorer-primary" data-view="voronoi" aria-pressed="true" aria-label="ボロノイマップに戻る">◈ <span>Voronoi</span></button>'+
-        '<span class="explorer-toolbar-divider" aria-hidden="true"></span>'+
-        '<button type="button" data-view="grid" aria-pressed="false">Grid</button>'+
-        '<button type="button" data-view="timeline" aria-pressed="false">Timeline</button>'+
+        '<button type="button" class="explorer-primary" data-view="voronoi" aria-pressed="true" aria-label="ボロノイ表示" title="Voronoi">'+
+        '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 3.5 11 2l4.5 8-6 5-7-3zM15.5 10 22 5v13l-8 4-4.5-7zM11 2 22 5l-6.5 5"/></svg></button>'+
+        '<button type="button" data-view="grid" aria-pressed="false" aria-label="グリッド表示" title="Grid">'+
+        '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="8" height="8" rx="1.5"/><rect x="13.5" y="2.5" width="8" height="8" rx="1.5"/><rect x="2.5" y="13.5" width="8" height="8" rx="1.5"/><rect x="13.5" y="13.5" width="8" height="8" rx="1.5"/></svg></button>'+
         '</div><div class="explorer-content view-voronoi">'+
         '<div class="explorer-map-layer"></div>'+
         '<div class="explorer-subview" aria-hidden="true"><div class="explorer-subview-inner"></div></div></div>';
@@ -67,18 +67,6 @@
         '<span class="explorer-info"><span class="explorer-date">'+esc(item.date||"時期未設定")+'</span>'+
         '<strong>'+esc(item.title)+'</strong></span></a>';}
       function renderGrid(){subviewInner.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
-      function renderTimeline(){
-        var groups={};
-        items.forEach(function(item){var year=/^(\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
-        var keys=Object.keys(groups).sort(function(a,b){return a==="Other"?1:b==="Other"?-1:Number(b)-Number(a);});
-        subviewInner.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){
-          return '<section class="explorer-year"><h2>'+esc(year==="Other"?"OTHER":year)+'</h2><div>'+
-          groups[year].map(function(item){return '<a href="'+esc(item.url)+'" class="explorer-timeline-row">'+
-            imageHtml(item)+'<span class="explorer-timeline-info"><span class="explorer-date">'+esc(item.date||"時期未設定")+'</span>'+
-            '<strong>'+esc(item.title)+'</strong></span>'+
-            '<span class="explorer-timeline-arrow" aria-hidden="true">↗</span></a>';}).join("")+'</div></section>';
-        }).join("")+'</div>';
-      }
       function renderVoronoi(){
         mapLayer.innerHTML='<section class="works-map explorer-map" id="works-map" aria-label="ドラッグして作品を探索">'+
           '<canvas class="map-canvas" tabindex="0" aria-label="作品マップ。ドラッグして移動、タップで選択し、もう一度タップして開く"></canvas>'+
@@ -103,7 +91,6 @@
         buttons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v));});
         panel.className="explorer-content view-"+v;
         if(v==="grid")renderGrid();
-        else if(v==="timeline")renderTimeline();
         subview.setAttribute("aria-hidden",String(!sub));
         subview.inert=!sub;
         if(!sub)subviewInner.innerHTML="";
