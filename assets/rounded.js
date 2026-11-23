@@ -248,7 +248,7 @@
 
   // Subtle, scroll-linked motion; all content remains readable without JavaScript.
   var scrollStory = document.querySelector(".thoughts-story");
-  if (scrollStory && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (scrollStory && !scrollStory.querySelector(".thoughts-stack") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     var storySections = Array.from(scrollStory.querySelectorAll(".thoughts-story-section"));
     var storyOpening = scrollStory.querySelector(".thoughts-story-opening");
     var storyEnding = scrollStory.querySelector(".thoughts-story-ending");
@@ -347,61 +347,93 @@
 
   // Stacking Thoughts: the final viewport contains all three condensed ideas.
   var stack=document.querySelector(".thoughts-stack");
-  if(stack&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  if(stack&&rounded){
+    var staticStack=window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 560px)");
     var cards=Array.from(stack.querySelectorAll(".thoughts-stack-card"));
     var deck=stack.querySelector(".thoughts-stack-deck");
     var stage=stack.querySelector(".thoughts-stack-stage");
+    var opening=stage.querySelector(".thoughts-story-opening");
     var ticking=false;
-    function cap(x){return Math.max(0,Math.min(1,x));}
-    function mix(a,b,t){return a+(b-a)*cap(t);}
-    function keyframe(t,keys){
-      for(var i=1;i<keys.length;i++)if(t<=keys[i][0]){
-        var k=cap((t-keys[i-1][0])/(keys[i][0]-keys[i-1][0]));
-        k=k*k*(3-2*k);
-        return mix(keys[i-1][1],keys[i][1],k);
-      }
-      return keys[keys.length-1][1];
+    function clampStack(value){return Math.min(1,Math.max(0,value));}
+    function smoothStack(value){
+      var t=clampStack(value);
+      return t*t*(3-2*t);
     }
     function renderStack(){
       ticking=false;
-      var vh=window.innerHeight||700;
-      var r=stack.getBoundingClientRect();
-      var p=cap(-r.top/Math.max(1,r.height-vh));
-      var h=deck.getBoundingClientRect().height;
-      var gap=Math.max(8,Math.min(14,h*.02));
-      var compact=Math.max(73,Math.min(112,h*.20));
-      var third=(h-2*gap)/3;
-      var y1=0,y2=compact+gap,y3=compact*2+gap*2;
-      var tab=Math.max(50,Math.min(76,h*.14));
-      var introCard=Math.max(100,Math.min(145,h*.27));
-      var layout=[
-        {y:[[0,0],[.18,0],[.55,0],[1,0]],height:[[0,introCard],[.18,h],[.35,compact],[.72,third],[1,third]]},
-        {y:[[0,tab],[.18,tab],[.43,y2],[.68,y2],[1,third+gap]],height:[[0,introCard],[.18,introCard],[.43,h-y2],[.68,compact],[1,third]]},
-        {y:[[0,tab*2],[.43,tab*2],[.70,y3],[1,2*(third+gap)]],height:[[0,introCard],[.43,introCard],[.70,h-y3],[1,third]]}
+      if(staticStack.matches){
+        cards.forEach(function(card){
+          card.classList.remove("is-compact");
+          card.removeAttribute("style");
+        });
+        stack.classList.remove("is-complete");
+        stack.removeAttribute("style");
+        return;
+      }
+      var stageHeight=stage.offsetHeight;
+      var stickyTop=parseFloat(getComputedStyle(stage).top)||0;
+      var p=clampStack((stickyTop-stack.getBoundingClientRect().top)/Math.max(1,stack.offsetHeight-stageHeight));
+      var intro=smoothStack(p/.16);
+      var deckHeight=deck.offsetHeight;
+      var openingEnd=opening.offsetTop+opening.offsetHeight+16;
+      var offset=Math.max(0,openingEnd-deck.offsetTop)*(1-intro);
+      var gap=8;
+      var compact=65;
+      var tab=34;
+      var finalHeight=(deckHeight-2*gap)/3;
+
+      // Each reading position reserves room for the other two card headers.
+      var scenes=[
+        [0,    [[0,84],[tab+10,84],[2*(tab+10),66]]],
+        [.18,  [[0,deckHeight-2*tab],[deckHeight-2*tab,tab],[deckHeight-tab,tab]]],
+        [.30,  [[0,deckHeight-2*tab],[deckHeight-2*tab,tab],[deckHeight-tab,tab]]],
+        [.43,  [[0,compact],[compact+gap,deckHeight-compact-gap-tab],[deckHeight-tab,tab]]],
+        [.55,  [[0,compact],[compact+gap,deckHeight-compact-gap-tab],[deckHeight-tab,tab]]],
+        [.68,  [[0,compact],[compact+gap,compact],[2*(compact+gap),deckHeight-2*(compact+gap)]]],
+        [.80,  [[0,compact],[compact+gap,compact],[2*(compact+gap),deckHeight-2*(compact+gap)]]],
+        [.93,  [[0,finalHeight],[finalHeight+gap,finalHeight],[2*(finalHeight+gap),finalHeight]]]
       ];
-      stack.style.setProperty("--stack-intro-progress",cap(p/.20).toFixed(4));
+      var next=scenes.findIndex(function(scene){return scene[0]>p;});
+      if(next<0)next=scenes.length-1;
+      var from=scenes[next-1];
+      var to=scenes[next];
+      var progress=smoothStack((p-from[0])/(to[0]-from[0]));
+      var reading=[[.09,.18,.30,.36],[.34,.43,.55,.61],[.59,.68,.80,.87]];
+
+      stack.style.setProperty("--stack-intro-progress",intro.toFixed(4));
+      stack.style.setProperty("--stack-intro-offset",offset.toFixed(1)+"px");
       cards.forEach(function(card,i){
-        var top=keyframe(p,layout[i].y);
-        var height=keyframe(p,layout[i].height);
+        var start=from[1][i];
+        var end=to[1][i];
+        var top=start[0]+(end[0]-start[0])*progress;
+        var height=start[1]+(end[1]-start[1])*progress;
+        var cue=reading[i];
+        var body=smoothStack((p-cue[0])/(cue[1]-cue[0]))*
+          (1-smoothStack((p-cue[2])/(cue[3]-cue[2])));
+        card.classList.toggle("is-compact",body===0);
         card.style.setProperty("--stack-y",top.toFixed(1)+"px");
         card.style.height=height.toFixed(1)+"px";
-        var condensed=i===0?(p<.08||p>.31):i===1?(p<.32||p>.61):(p<.57||p>.83);
-        card.classList.toggle("is-compact",condensed);
-        var body=(i===0?cap((.27-p)/.12):i===1?cap((.72-p)/.12):cap((.84-p)/.12));
         card.style.setProperty("--stack-body-opacity",body.toFixed(3));
-        // Editorial title wipe starts as each card enters the deck.
-        var reveal=i===0?(p<.08?1:cap((p-.08)/.12)):i===1?(p<.30?1:cap((p-.30)/.17)):(p<.55?1:cap((p-.55)/.18));
-        card.style.setProperty("--stack-title",reveal.toFixed(3));
-        card.style.setProperty("--stack-editorial",cap(reveal*1.6).toFixed(3));
-        card.style.setProperty("--stack-edge",cap((reveal-.12)/.76).toFixed(3));
+        card.style.setProperty("--stack-editorial",body.toFixed(3));
+        card.style.setProperty("--stack-edge","1");
+        var visibleHeight=height;
+        if(i<cards.length-1){
+          var nextTop=from[1][i+1][0]+(to[1][i+1][0]-from[1][i+1][0])*progress;
+          visibleHeight=Math.min(visibleHeight,nextTop-top);
+        }
+        var heading=smoothStack((visibleHeight-50)/12)*smoothStack(p/.12);
+        card.style.setProperty("--stack-compact-title",heading.toFixed(3));
       });
+
       stack.style.setProperty("--stack-progress",p.toFixed(4));
-      stack.style.setProperty("--stack-outro-opacity",cap((p-.83)/.12).toFixed(3));
-      stack.classList.toggle("is-complete",p>.92);
+      stack.style.setProperty("--stack-outro-opacity",smoothStack((p-.88)/.07).toFixed(3));
+      stack.classList.toggle("is-complete",p>.88);
     }
     function scheduleStack(){if(!ticking){ticking=true;requestAnimationFrame(renderStack);}}
     window.addEventListener("scroll",scheduleStack,{passive:true});
     window.addEventListener("resize",scheduleStack,{passive:true});
+    staticStack.addEventListener("change",scheduleStack);
+    document.fonts.ready.then(scheduleStack);
     renderStack();
   }
 
