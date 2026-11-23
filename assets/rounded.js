@@ -386,6 +386,11 @@
         card.classList.toggle("is-compact",condensed);
         var body=(i===0?cap((.27-p)/.12):i===1?cap((.72-p)/.12):cap((.84-p)/.12));
         card.style.setProperty("--stack-body-opacity",body.toFixed(3));
+        // Editorial title wipe starts as each card enters the deck.
+        var reveal=i===0?cap(p/.12):i===1?cap((p-.30)/.17):cap((p-.55)/.18);
+        card.style.setProperty("--stack-title",reveal.toFixed(3));
+        card.style.setProperty("--stack-editorial",cap(reveal*1.6).toFixed(3));
+        card.style.setProperty("--stack-edge",cap((reveal-.12)/.76).toFixed(3));
       });
       stack.style.setProperty("--stack-progress",p.toFixed(4));
       stack.style.setProperty("--stack-outro-opacity",cap((p-.83)/.12).toFixed(3));
