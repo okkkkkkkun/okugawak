@@ -372,22 +372,25 @@
       var compact=Math.max(73,Math.min(112,h*.20));
       var third=(h-2*gap)/3;
       var y1=0,y2=compact+gap,y3=compact*2+gap*2;
+      var tab=Math.max(50,Math.min(76,h*.14));
+      var introCard=Math.max(100,Math.min(145,h*.27));
       var layout=[
-        {y:[[0,0],[.28,0],[.55,0],[1,0]],height:[[0,h],[.28,compact],[.55,compact],[.78,third],[1,third]]},
-        {y:[[0,h+45],[.28,h+45],[.48,y2],[.72,y2],[1,third+gap]],height:[[0,h],[.28,h],[.48,h-y2],[.72,compact],[1,third]]},
-        {y:[[0,h+90],[.48,h+90],[.72,y3],[1,2*(third+gap)]],height:[[0,h],[.48,h],[.72,h-y3],[1,third]]}
+        {y:[[0,0],[.18,0],[.55,0],[1,0]],height:[[0,introCard],[.18,h],[.35,compact],[.72,third],[1,third]]},
+        {y:[[0,tab],[.18,tab],[.43,y2],[.68,y2],[1,third+gap]],height:[[0,introCard],[.18,introCard],[.43,h-y2],[.68,compact],[1,third]]},
+        {y:[[0,tab*2],[.43,tab*2],[.70,y3],[1,2*(third+gap)]],height:[[0,introCard],[.43,introCard],[.70,h-y3],[1,third]]}
       ];
+      stack.style.setProperty("--stack-intro-progress",cap(p/.20).toFixed(4));
       cards.forEach(function(card,i){
         var top=keyframe(p,layout[i].y);
         var height=keyframe(p,layout[i].height);
         card.style.setProperty("--stack-y",top.toFixed(1)+"px");
         card.style.height=height.toFixed(1)+"px";
-        var condensed=i===0?p>.13:i===1?p>.61:p>.83;
+        var condensed=i===0?(p<.08||p>.31):i===1?(p<.32||p>.61):(p<.57||p>.83);
         card.classList.toggle("is-compact",condensed);
         var body=(i===0?cap((.27-p)/.12):i===1?cap((.72-p)/.12):cap((.84-p)/.12));
         card.style.setProperty("--stack-body-opacity",body.toFixed(3));
         // Editorial title wipe starts as each card enters the deck.
-        var reveal=i===0?cap(p/.12):i===1?cap((p-.30)/.17):cap((p-.55)/.18);
+        var reveal=i===0?(p<.08?1:cap((p-.08)/.12)):i===1?(p<.30?1:cap((p-.30)/.17)):(p<.55?1:cap((p-.55)/.18));
         card.style.setProperty("--stack-title",reveal.toFixed(3));
         card.style.setProperty("--stack-editorial",cap(reveal*1.6).toFixed(3));
         card.style.setProperty("--stack-edge",cap((reveal-.12)/.76).toFixed(3));
