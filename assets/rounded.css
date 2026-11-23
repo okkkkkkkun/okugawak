@@ -785,3 +785,29 @@ html.design-rounded .thoughts-intro-card b{font-weight:500}
  html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack)>p:not(.thoughts-kicker){font-size:10px}
  html.design-rounded .thoughts-intro-stack{height:125px;margin-top:9px}
 }
+
+
+/* One continuous Thoughts scene: intro and actual cards share a sticky viewport */
+html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero{padding-top:clamp(12px,2vh,22px);padding-bottom:0;min-height:0}
+html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero h1{font-size:clamp(32px,6vw,56px);margin:0}
+html.design-rounded .thoughts-stack-stage>.thoughts-story-opening{position:absolute;z-index:5;top:clamp(16px,4vh,42px);left:0;right:0;width:min(100%,900px);height:auto;min-height:0;padding:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;opacity:calc(1 - var(--stack-intro-progress,0));transform:translateY(calc(var(--stack-intro-progress,0)*-28px));pointer-events:none}
+html.design-rounded .thoughts-stack-stage>.thoughts-story-opening h2{font-size:clamp(24px,4.2vw,50px);line-height:1.4;margin:clamp(12px,2vh,24px) 0}
+html.design-rounded .thoughts-stack-stage>.thoughts-story-opening>p:not(.thoughts-kicker){font-size:clamp(11px,1.3vw,14px);line-height:1.85;margin:0}
+html.design-rounded .thoughts-stack-stage>.thoughts-story-opening .thoughts-story-scroll{margin-top:clamp(12px,2vh,22px)}
+html.design-rounded .thoughts-stack-stage>.thoughts-stack-head{position:absolute;top:clamp(8px,3vh,28px);opacity:var(--stack-intro-progress,0)}
+html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{position:absolute;top:17%;left:50%;transform:translate(-50%,calc((1 - var(--stack-intro-progress,0))*40svh));height:min(57svh,540px);min-height:270px}
+html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro{position:absolute;bottom:clamp(25px,5vh,60px);left:50%;transform:translate(-50%,calc((1 - var(--stack-outro-opacity,0))*22px));}
+html.design-rounded .thoughts-stack-stage>.thoughts-stack-scroll{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);opacity:var(--stack-intro-progress,0)}
+html.design-rounded .thoughts-stack-card.is-compact h3{margin:auto 0}
+@media(max-width:700px){
+ html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero .page-no,
+ html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero .page-en{display:block}
+ html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero h1{font-size:clamp(31px,8vw,43px)}
+ html.design-rounded .thoughts-stack-stage>.thoughts-story-opening{top:clamp(8px,2vh,20px)}
+ html.design-rounded .thoughts-stack-stage>.thoughts-story-opening h2{font-size:clamp(21px,5.7vw,31px);line-height:1.4;margin:12px 0}
+ html.design-rounded .thoughts-stack-stage>.thoughts-story-opening>p:not(.thoughts-kicker){font-size:11px;line-height:1.75}
+ html.design-rounded .thoughts-stack-stage>.thoughts-story-opening .thoughts-story-scroll{margin-top:12px}
+ html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{top:17%;height:55svh;min-height:250px;transform:translate(-50%,calc((1 - var(--stack-intro-progress,0))*43svh))}
+ html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro{bottom:32px}
+}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack-stage>.thoughts-story-opening,html.design-rounded .thoughts-stack-stage>.thoughts-stack-head,html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck,html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro,html.design-rounded .thoughts-stack-stage>.thoughts-stack-scroll{position:relative;top:auto;bottom:auto;left:auto;transform:none;opacity:1;pointer-events:auto}}
