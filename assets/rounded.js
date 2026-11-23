@@ -46,7 +46,7 @@
       kicker.textContent="KOTA OKUGAWA  /  PORTFOLIO";
       var signature=document.createElement("strong");
       signature.className="foot-signature";
-      signature.textContent=name;
+      signature.textContent="奥川航大  |  Kota okugawa";
       var org=document.createElement("p");
       org.className="foot-affiliation";
       affiliation.forEach(function(part,i){
