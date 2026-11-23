@@ -613,7 +613,7 @@ def profile_page(data: dict) -> str:
 <div class="photos">{photos}</div>
 """
     site = data["site"]
-    return section_page(file, "profile", "Profile", "プロフィール", "01", inner, data, f'{site["nameJa"]} / {site["nameEn"]}')
+    return section_page(file, "profile", "Profile", "プロフィール", "01", inner, data, "")
 
 
 def work_page(data: dict) -> str:
