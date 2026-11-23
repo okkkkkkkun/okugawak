@@ -304,10 +304,9 @@ def tool_row(from_file: str, data: dict) -> str:
 
 def work_listing(from_file: str, data: dict) -> str:
     return (
-        '<p class="log-label">道具</p>'
-        + tool_row(from_file, data)
-        + '<p class="log-label">作品 · 新しい順</p>'
+        '<template id="work-source">'
         + work_rows(from_file, data["works"])
+        + '</template>'
     )
 
 
@@ -618,7 +617,7 @@ def profile_page(data: dict) -> str:
 
 def work_page(data: dict) -> str:
     file = "02_Works/index.html"
-    return section_page(file, "work", "Work", "作品", "02", work_listing(file, data), data, "新しい順")
+    return section_page(file, "work", "Work", "作品", "02", work_listing(file, data), data, "")
 
 
 def redirect_page(target: str, title: str, canonical: str) -> str:
