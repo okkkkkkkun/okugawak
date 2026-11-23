@@ -98,14 +98,21 @@ html.design-rounded body.is-home .works-map {
   }
 }
 
-/* Lower the draggable K mark without changing its geometry or interaction. */
-@media (max-width: 700px) {
-  html.design-rounded body.is-home .hero-k {
-    top: calc(var(--header) + 3rem);
-  }
+/* Keep the interaction field high, but start the draggable K lower.
+   This gives the movable chevron extra upward / diagonal travel. */
+html.design-rounded body.is-home .hero-k {
+  top: calc(var(--header) + .35rem);
+  height: min(55vh, 420px);
 }
-@media (min-width: 701px) {
+html.design-rounded body.is-home .hero-k .assemble {
+  transform: translateY(2.65rem);
+}
+@media (min-width: 901px) {
   html.design-rounded body.is-home .hero-k {
-    top: calc(var(--header) + 2.5rem);
+    top: calc(var(--header) + 1.35rem);
+    height: min(52vh, 450px);
+  }
+  html.design-rounded body.is-home .hero-k .assemble {
+    transform: translateY(1.15rem);
   }
 }
