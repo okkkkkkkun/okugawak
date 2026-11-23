@@ -247,3 +247,28 @@ html.design-rounded body.is-home > .bar {
   width:100%;
   box-sizing:border-box;
 }
+
+/* Hero-only landing and fullscreen Work map. */
+html.design-rounded body.is-home {height:100svh;overflow:hidden;overscroll-behavior:none;}
+html.design-rounded body.is-home .cover-pin {position:fixed;inset:0;width:100%;height:100svh;min-height:0;}
+html.design-rounded body.is-home .hero-only-main {position:absolute;width:1px;height:1px;overflow:hidden;}
+html.design-rounded body.is-home .cover-copy {padding-bottom:calc(4.5rem + env(safe-area-inset-bottom));}
+html.design-rounded body.is-home .cover-affil {bottom:calc(14px + env(safe-area-inset-bottom));}
+html.design-rounded body:has(.work-explorer) .page {padding:0;min-height:calc(100svh - var(--header));}
+html.design-rounded body:has(.work-explorer) .page-hero {position:absolute;z-index:8;top:calc(var(--header) + 12px);left:var(--pad);padding:0;pointer-events:none;}
+html.design-rounded body:has(.work-explorer) .page-hero .page-no,
+html.design-rounded body:has(.work-explorer) .page-hero .page-en {display:none;}
+html.design-rounded body:has(.work-explorer) .page-hero h1 {font-size:clamp(16px,3vw,23px);line-height:1.2;margin:0;background:rgba(246,243,238,.92);padding:9px 12px;border-radius:9px;}
+html.design-rounded body:has(.work-explorer) .page-body {padding:0;max-width:none;}
+html.design-rounded body:has(.work-explorer) .work-explorer {position:relative;min-height:calc(100svh - var(--header));}
+html.design-rounded body:has(.work-explorer) .explorer-toolbar {position:absolute;z-index:9;top:12px;right:var(--pad);width:min(65vw,390px);margin:0;}
+html.design-rounded body:has(.work-explorer) .explorer-content.view-voronoi {height:calc(100svh - var(--header));}
+html.design-rounded body:has(.work-explorer) .explorer-map {height:100%;min-height:0;border-radius:0;}
+html.design-rounded body:has(.work-explorer) .explorer-content.view-grid,
+html.design-rounded body:has(.work-explorer) .explorer-content.view-timeline {padding:clamp(85px,12vw,110px) var(--pad) 50px;}
+@media(max-width:700px){
+ html.design-rounded body:has(.work-explorer) .page-hero h1 {font-size:15px;}
+ html.design-rounded body:has(.work-explorer) .explorer-toolbar {width:min(68vw,310px);}
+ html.design-rounded body:has(.work-explorer) .explorer-toolbar button {font-size:10px;padding:10px 1px;}
+ html.design-rounded body:has(.work-explorer) .explorer-map {height:100%;min-height:0;}
+}
