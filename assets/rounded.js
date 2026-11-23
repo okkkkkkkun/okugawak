@@ -328,10 +328,11 @@
         var vh=window.innerHeight||800;
         chapterItems.forEach(function(chapter){
           var r=chapter.getBoundingClientRect();
-          var p=chapterClamp((vh*.82-r.top)/(vh*.62));
+          var stickyDistance=Math.max(1,r.height-vh);
+          var p=chapterClamp((-r.top)/stickyDistance);
           chapter.style.setProperty("--chapter-progress",p.toFixed(4));
           chapter.querySelectorAll(".thoughts-type-line").forEach(function(line,i){
-            var lp=chapterClamp((p-(i*.24))/.52);
+            var lp=chapterClamp((p-(i*.16))/.48);
             line.style.setProperty("--line-reveal",lp.toFixed(4));
           });
         });
