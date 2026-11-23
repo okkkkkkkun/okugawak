@@ -89,14 +89,18 @@
         script.dataset.workMap="true";
         panel.appendChild(script);
       }
+      var mapPanel=null;
       function switchView(v){
         buttons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v));});
         panel.className="explorer-content view-"+v;
-        if(v==="timeline")renderTimeline();else if(v==="voronoi")renderVoronoi();else renderGrid();
+        if(v==="voronoi"){
+          if(mapPanel){panel.replaceChildren(mapPanel);}
+          else {renderVoronoi();mapPanel=panel.querySelector(".explorer-map");var data=panel.querySelector("#works-map-data");if(data)mapPanel.appendChild(data);}
+        } else if(v==="timeline")renderTimeline();else renderGrid();
         try{sessionStorage.setItem("work-explorer-view",v);}catch(e){}
       }
       buttons.forEach(function(b){b.addEventListener("click",function(){switchView(b.dataset.view);});});
-      var initial="grid";try{initial=sessionStorage.getItem("work-explorer-view")||"grid";}catch(e){}
+      var initial="voronoi";try{initial=sessionStorage.getItem("work-explorer-view")||"voronoi";}catch(e){}
       switchView(["grid","voronoi","timeline"].includes(initial)?initial:"grid");
     }
   }
