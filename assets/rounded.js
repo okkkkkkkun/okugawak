@@ -244,4 +244,49 @@
       reveals.forEach(function(el){observer.observe(el)});
     } else reveals.forEach(function(el){el.classList.add("is-visible")});
   }
+
+  // Subtle, scroll-linked motion; all content remains readable without JavaScript.
+  var scrollStory = document.querySelector(".thoughts-story");
+  if (scrollStory && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var storySections = Array.from(scrollStory.querySelectorAll(".thoughts-story-section"));
+    var storyOpening = scrollStory.querySelector(".thoughts-story-opening");
+    var storyEnding = scrollStory.querySelector(".thoughts-story-ending");
+    var progress = document.createElement("div");
+    progress.className = "thoughts-story-progress";
+    progress.setAttribute("aria-hidden","true");
+    progress.innerHTML = '<span class="thoughts-story-progress-number">THOUGHTS</span><span class="thoughts-story-progress-track"><span class="thoughts-story-progress-fill"></span></span><span class="thoughts-story-progress-number">01 — 03</span>';
+    document.body.appendChild(progress);
+    var scheduled = false;
+    function clamp(n){return Math.max(0,Math.min(1,n));}
+    function updateScrollStory(){
+      scheduled=false;
+      var vh=window.innerHeight || 800;
+      var start=scrollStory.getBoundingClientRect().top;
+      var end=scrollStory.getBoundingClientRect().bottom;
+      var total=Math.max(1,scrollStory.offsetHeight-vh);
+      var pct=clamp(-start/total);
+      progress.style.setProperty("--thought-page-progress",pct.toFixed(4));
+      progress.classList.toggle("is-active",start < vh*.25 && end > vh*.65);
+      if(storyOpening){
+        var opening=storyOpening.getBoundingClientRect();
+        storyOpening.style.setProperty("--thought-opening-shift",clamp(-opening.top/Math.max(1,opening.height)).toFixed(4));
+      }
+      storySections.forEach(function(section){
+        var rect=section.getBoundingClientRect();
+        var reveal=clamp((vh*.88-rect.top)/(vh*.55));
+        section.style.setProperty("--thought-reveal",reveal.toFixed(4));
+      });
+      if(storyEnding){
+        var closing=storyEnding.getBoundingClientRect();
+        storyEnding.style.setProperty("--thought-ending-progress",clamp((vh*.9-closing.top)/(vh*.55)).toFixed(4));
+      }
+    }
+    function scheduleScrollStory(){
+      if(!scheduled){scheduled=true;requestAnimationFrame(updateScrollStory);}
+    }
+    window.addEventListener("scroll",scheduleScrollStory,{passive:true});
+    window.addEventListener("resize",scheduleScrollStory,{passive:true});
+    updateScrollStory();
+  }
+
 })();
