@@ -239,3 +239,11 @@ html.design-rounded body .page:has(#football-photo),
 html.design-rounded body .page:has(.page-body .mail) {
   padding-top: clamp(12px, 2.5vw, 24px);
 }
+
+/* Home header overlays the hero instead of reserving a separate blank band. */
+html.design-rounded body.is-home > .bar {
+  position:fixed;
+  inset:0 0 auto 0;
+  width:100%;
+  box-sizing:border-box;
+}
