@@ -30,8 +30,8 @@
   // Work Explorer: all views derive from the same existing work links.
   if (rounded && /\/02_Works\/index\.html$/.test(location.pathname)) {
     var body = document.querySelector(".page-body");
-    var original = body && body.querySelector(".works");
-    var tool = body && body.querySelector("#tool");
+    var source = body && body.querySelector("#work-source");
+    var original = source && source.content.querySelector(".works");
     if (body && original) {
       var items = Array.from(original.querySelectorAll(".work-row")).map(function (article, i) {
         var a = article.querySelector("a.row"), image = article.querySelector("img");
@@ -40,16 +40,10 @@
           img:image ? image.src : "", date:time ? time.textContent.trim() : "",
           description:(article.querySelector(".excerpt") || {}).textContent || "",order:i};
       });
-      if (tool) {
-        var ta=tool.querySelector("a.row");
-        items.push({title:"Football & Photo",url:ta.href,img:"",date:"",
-          description:(tool.querySelector(".excerpt") || {}).textContent || "",order:items.length,kind:"Tool"});
-      }
       var lead=document.querySelector(".page-hero .page-lead");
       if(lead) lead.remove();
       body.querySelectorAll(".log-label").forEach(function(el){el.remove();});
-      original.remove();
-      if(tool) tool.remove();
+      source.remove();
       var explorer=document.createElement("section");
       explorer.className="work-explorer";
       explorer.setAttribute("aria-label","作品表示");
