@@ -236,4 +236,12 @@
     if(nav.matches(".nav-sheet ol"))nav.querySelectorAll(".no").forEach(function(no,i){no.textContent=String(i+1).padStart(2,"0")});
   });
 
+  var story = document.querySelector(".thoughts-story");
+  if (story) {
+    var reveals = story.querySelectorAll(".thoughts-reveal");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var observer = new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}})},{threshold:.12});
+      reveals.forEach(function(el){observer.observe(el)});
+    } else reveals.forEach(function(el){el.classList.add("is-visible")});
+  }
 })();
