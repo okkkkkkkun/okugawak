@@ -608,3 +608,22 @@ html.design-rounded .thoughts-story-ending a{font:500 13px var(--sans);text-deco
 /* Visibility safeguard: content remains readable even if JS or observers fail. */
 html.design-rounded .thoughts-story .thoughts-reveal{opacity:1!important;transform:none!important}
 html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)}
+
+
+/* Thoughts / scroll choreography: never hide editorial content */
+html.design-rounded .thoughts-story{position:relative}
+html.design-rounded .thoughts-story-section{--thought-progress:0;--thought-reveal:0;overflow:clip}
+html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(var(--thought-reveal,0));transition:none}
+html.design-rounded .thoughts-story-section .thoughts-story-index{opacity:calc(.48 + var(--thought-reveal,0)*.52);transition:opacity .12s linear}
+html.design-rounded .thoughts-story-section .thoughts-story-copy h3{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*18px),0);transition:none}
+html.design-rounded .thoughts-story-section .thoughts-story-copy p{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*9px),0);transition:none}
+html.design-rounded .thoughts-story-opening h2{transform:translate3d(0,calc(var(--thought-opening-shift,0)*-24px),0)}
+html.design-rounded .thoughts-story-ending h3{transform:translate3d(0,calc((1 - var(--thought-ending-progress,1))*16px),0)}
+html.design-rounded .thoughts-story .thoughts-reveal{opacity:1!important;transform:none!important}
+html.design-rounded .thoughts-story-progress{position:fixed;right:clamp(14px,2.6vw,42px);top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:14px;pointer-events:none;opacity:0;transition:opacity .35s ease}
+html.design-rounded .thoughts-story-progress.is-active{opacity:1}
+html.design-rounded .thoughts-story-progress-track{height:88px;width:1px;background:var(--line);position:relative;overflow:hidden}
+html.design-rounded .thoughts-story-progress-fill{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--ink);transform:scaleY(var(--thought-page-progress,0));transform-origin:top}
+html.design-rounded .thoughts-story-progress-number{font:500 9px var(--mono);color:var(--muted);writing-mode:vertical-rl;letter-spacing:.1em}
+@media(max-width:700px){html.design-rounded .thoughts-story-progress{right:12px}.thoughts-story-progress-track{height:55px}html.design-rounded .thoughts-story-section .thoughts-story-copy h3{transform:translate3d(0,calc((1 - var(--thought-reveal,0))*10px),0)}}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)}html.design-rounded .thoughts-story-section .thoughts-story-copy h3,html.design-rounded .thoughts-story-section .thoughts-story-copy p,html.design-rounded .thoughts-story-opening h2,html.design-rounded .thoughts-story-ending h3{transform:none}html.design-rounded .thoughts-story-progress{display:none}}
