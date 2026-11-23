@@ -688,3 +688,44 @@ html.design-rounded .thoughts-type-line>span{display:block}
  html.design-rounded .thoughts-story-section .thoughts-story-copy p,html.design-rounded .thoughts-story-section .thoughts-story-index{transform:none!important;opacity:1!important}
  html.design-rounded .thoughts-story-section .thoughts-story-line{transform:scaleX(1)!important}
 }
+
+
+/* Stacking Thoughts — architectural cards, one-screen overview */
+html.design-rounded .thoughts-stack{height:480svh;position:relative;margin:0}
+html.design-rounded .thoughts-stack-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:clamp(55px,8vh,95px) 0 clamp(24px,4vh,45px);overflow:hidden}
+html.design-rounded .thoughts-stack-head{width:min(100%,900px);display:flex;justify-content:space-between;gap:15px;margin-bottom:clamp(15px,2.5vh,26px);font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.08em;color:var(--muted)}
+html.design-rounded .thoughts-stack-deck{position:relative;width:min(100%,900px);height:min(63svh,590px);min-height:330px;flex:none;isolation:isolate}
+html.design-rounded .thoughts-stack-card{position:absolute;inset:0 auto auto 0;width:100%;height:100%;box-sizing:border-box;padding:clamp(17px,3vw,39px);border:1px solid rgba(29,44,33,.18);border-radius:clamp(8px,1.4vw,15px);overflow:hidden;box-shadow:0 14px 38px rgba(27,40,30,.10);will-change:transform,height;display:flex;flex-direction:column;align-items:stretch;transform:translate3d(0,var(--stack-y,110%),0);transition:box-shadow .2s}
+html.design-rounded .thoughts-stack-card:nth-child(1){background:#dfe5dc;color:#26362b;z-index:1}
+html.design-rounded .thoughts-stack-card:nth-child(2){background:#c5d0c4;color:#25372c;z-index:2}
+html.design-rounded .thoughts-stack-card:nth-child(3){background:#35493e;color:#f2f3ed;z-index:3}
+html.design-rounded .thoughts-stack-card-head{display:flex;justify-content:space-between;gap:12px;font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.06em;opacity:.76;flex:none}
+html.design-rounded .thoughts-stack-card h3{font:600 clamp(23px,4.5vw,55px)/1.38 var(--sans);letter-spacing:-.055em;margin:auto 0 clamp(12px,2.5vh,24px);max-width:100%;flex:none}
+html.design-rounded .thoughts-stack-card p{font:400 clamp(11px,1.25vw,14px)/2.1 var(--sans);margin:0;max-width:740px;opacity:var(--stack-body-opacity,1);transform:translateY(calc((1 - var(--stack-body-opacity,1))*15px));overflow:hidden;max-height:calc(var(--stack-body-opacity,1)*200px);flex:none}
+html.design-rounded .thoughts-stack-card.is-compact h3{font-size:clamp(15px,2.2vw,27px);line-height:1.3;margin:auto 0}
+html.design-rounded .thoughts-stack-card.is-compact p{display:none}
+html.design-rounded .thoughts-stack-outro{width:min(100%,900px);display:flex;justify-content:space-between;align-items:end;gap:18px;margin-top:clamp(12px,2vh,22px);opacity:var(--stack-outro-opacity,0);transform:translateY(calc((1 - var(--stack-outro-opacity,0))*22px));pointer-events:none}
+html.design-rounded .thoughts-stack-outro span{font:500 10px/1.5 var(--mono);color:var(--muted);letter-spacing:.07em}
+html.design-rounded .thoughts-stack-outro strong{font:600 clamp(20px,3.5vw,42px)/1.4 var(--sans);letter-spacing:-.055em}
+html.design-rounded .thoughts-stack-outro a{font:500 12px var(--sans);color:inherit;white-space:nowrap;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px}
+html.design-rounded .thoughts-stack.is-complete .thoughts-stack-outro{pointer-events:auto}
+html.design-rounded .thoughts-stack-scroll{width:min(100%,900px);display:flex;justify-content:space-between;align-items:center;margin-top:16px;font:500 9px var(--mono);letter-spacing:.09em;color:var(--muted)}
+html.design-rounded .thoughts-stack-track{width:120px;height:1px;background:var(--line);position:relative}
+html.design-rounded .thoughts-stack-track>span{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--stack-progress,0))}
+@media(max-width:700px){
+ html.design-rounded .thoughts-stack{height:430svh}
+ html.design-rounded .thoughts-stack-stage{padding:70px 0 20px}
+ html.design-rounded .thoughts-stack-deck{height:min(60svh,530px);min-height:300px}
+ html.design-rounded .thoughts-stack-card{padding:clamp(16px,4vw,23px);border-radius:10px}
+ html.design-rounded .thoughts-stack-card h3{font-size:clamp(24px,6.4vw,36px);line-height:1.45}
+ html.design-rounded .thoughts-stack-card p{font-size:clamp(10px,2.7vw,12px);line-height:1.9}
+ html.design-rounded .thoughts-stack-card.is-compact h3{font-size:clamp(15px,4.2vw,21px)}
+ html.design-rounded .thoughts-stack-card-head{font-size:9px}
+ html.design-rounded .thoughts-stack-outro{align-items:center;flex-wrap:wrap}
+ html.design-rounded .thoughts-stack-outro span{width:100%;font-size:9px}
+ html.design-rounded .thoughts-stack-outro strong{font-size:clamp(22px,5.4vw,31px)}
+ html.design-rounded .thoughts-stack-outro a{font-size:11px}
+ html.design-rounded .thoughts-stack-track{width:80px}
+}
+@media(max-height:650px){html.design-rounded .thoughts-stack-stage{padding-top:48px}.design-rounded .thoughts-stack-deck{height:53svh;min-height:260px}.design-rounded .thoughts-stack-card p{font-size:10px;line-height:1.65}.design-rounded .thoughts-stack-card h3{font-size:clamp(21px,4vw,37px)}}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack{height:auto}.design-rounded .thoughts-stack-stage{height:auto;position:relative;overflow:visible}.design-rounded .thoughts-stack-deck{height:auto;display:grid;gap:12px}.design-rounded .thoughts-stack-card{position:relative;transform:none!important;height:auto!important;min-height:160px}.design-rounded .thoughts-stack-card p{opacity:1;max-height:none;transform:none}.design-rounded .thoughts-stack-outro{opacity:1;transform:none;pointer-events:auto}.design-rounded .thoughts-stack-scroll{display:none}}
