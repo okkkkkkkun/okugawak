@@ -27,6 +27,54 @@
     });
   }
 
+  // Responsive editorial footer for the rounded design. Keep all original links and credits.
+  if (rounded) {
+    document.querySelectorAll(".site-foot").forEach(function(foot){
+      var original=Array.from(foot.querySelectorAll(":scope > p"));
+      if(original.length<5 || foot.querySelector(".foot-layout"))return;
+      var affiliation=original[0].textContent.trim().split("/").filter(Boolean);
+      var name=original[1].textContent.trim();
+      var mail=original[2].querySelector("a");
+      var brand=original[3].querySelector("a");
+      var copyright=original[4].textContent.trim();
+      var layout=document.createElement("div");
+      layout.className="foot-layout";
+      var identity=document.createElement("div");
+      identity.className="foot-identity";
+      var kicker=document.createElement("span");
+      kicker.className="foot-kicker";
+      kicker.textContent="KOTA OKUGAWA  /  PORTFOLIO";
+      var signature=document.createElement("strong");
+      signature.className="foot-signature";
+      signature.textContent=name;
+      var org=document.createElement("p");
+      org.className="foot-affiliation";
+      affiliation.forEach(function(part,i){
+        if(i)org.appendChild(document.createElement("br"));
+        org.appendChild(document.createTextNode(part));
+      });
+      identity.append(kicker,signature,org);
+      var contact=document.createElement("div");
+      contact.className="foot-contact";
+      var contactLabel=document.createElement("span");
+      contactLabel.className="foot-kicker";
+      contactLabel.textContent="CONTACT";
+      if(mail){mail.className="foot-mail";contact.append(contactLabel,mail.cloneNode(true));}
+      if(brand){var link=brand.cloneNode(true);link.className="foot-brand";contact.appendChild(link);}
+      var base=document.createElement("div");
+      base.className="foot-base";
+      var credit=document.createElement("small");
+      credit.textContent=copyright;
+      var top=document.createElement("a");
+      top.className="foot-top";
+      top.href="#";
+      top.textContent="Back to top ↑";
+      base.append(credit,top);
+      layout.append(identity,contact,base);
+      foot.replaceChildren(layout);
+    });
+  }
+
   // Work Explorer: all views derive from the same existing work links.
   if (rounded && /\/02_Works\/index\.html$/.test(location.pathname)) {
     var body = document.querySelector(".page-body");
