@@ -729,3 +729,23 @@ html.design-rounded .thoughts-stack-track>span{position:absolute;inset:0;backgro
 }
 @media(max-height:650px){html.design-rounded .thoughts-stack-stage{padding-top:48px}.design-rounded .thoughts-stack-deck{height:53svh;min-height:260px}.design-rounded .thoughts-stack-card p{font-size:10px;line-height:1.65}.design-rounded .thoughts-stack-card h3{font-size:clamp(21px,4vw,37px)}}
 @media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack{height:auto}.design-rounded .thoughts-stack-stage{height:auto;position:relative;overflow:visible}.design-rounded .thoughts-stack-deck{height:auto;display:grid;gap:12px}.design-rounded .thoughts-stack-card{position:relative;transform:none!important;height:auto!important;min-height:160px}.design-rounded .thoughts-stack-card p{opacity:1;max-height:none;transform:none}.design-rounded .thoughts-stack-outro{opacity:1;transform:none;pointer-events:auto}.design-rounded .thoughts-stack-scroll{display:none}}
+
+
+/* Editorial motion + adopted Kiln brand palette */
+html.design-rounded .thoughts-stack{--stack-paper:#f6f3ee;--stack-ink:#161513;--stack-muted:#5c574f;--stack-accent:#e24a1b}
+html.design-rounded .thoughts-stack-card:nth-child(1){background:#f6f3ee;color:#161513;border-color:rgba(22,21,19,.22)}
+html.design-rounded .thoughts-stack-card:nth-child(2){background:#e8e2d9;color:#161513;border-color:rgba(22,21,19,.24)}
+html.design-rounded .thoughts-stack-card:nth-child(3){background:#161513;color:#f6f3ee;border-color:#161513}
+html.design-rounded .thoughts-stack-card{box-shadow:0 12px 32px rgba(22,21,19,.12)}
+html.design-rounded .thoughts-stack-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--stack-accent);transform:scaleX(var(--stack-edge,0));transform-origin:left;pointer-events:none}
+html.design-rounded .thoughts-stack-card::after{content:attr(data-stack-card);position:absolute;right:clamp(14px,3vw,36px);top:17%;font:600 clamp(100px,20vw,240px)/1 "Instrument Sans",sans-serif;letter-spacing:-.12em;color:currentColor;opacity:calc(.035 * var(--stack-editorial,0));pointer-events:none}
+html.design-rounded .thoughts-stack-card-head{position:relative;z-index:2}
+html.design-rounded .thoughts-stack-card h3{position:relative;z-index:2;transform:translate3d(0,calc((1 - var(--stack-title,1))*32px),0);opacity:calc(.45 + var(--stack-title,1)*.55);clip-path:inset(0 0 calc((1 - var(--stack-title,1))*105%) 0);will-change:clip-path,transform}
+html.design-rounded .thoughts-stack-card p{position:relative;z-index:2}
+html.design-rounded .thoughts-stack-card.is-compact h3{clip-path:none;transform:none;opacity:1}
+html.design-rounded .thoughts-stack-head{color:var(--stack-muted)}
+html.design-rounded .thoughts-stack-outro strong{color:var(--stack-ink)}
+html.design-rounded .thoughts-stack-outro a{color:var(--stack-ink)}
+html.design-rounded .thoughts-stack-track>span{background:var(--stack-accent)}
+html.design-rounded .thoughts-stack-card:nth-child(3)::before{background:#e24a1b}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack-card h3{clip-path:none;transform:none;opacity:1}html.design-rounded .thoughts-stack-card::before{transform:scaleX(1)}}
