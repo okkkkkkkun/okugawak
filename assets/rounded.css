@@ -59,3 +59,10 @@ html.design-rounded body.is-home .works-map {
   html.design-rounded body.is-home .cover-pin,
   html.design-rounded body.is-home .sheet { scroll-behavior:auto; }
 }
+
+/* A restrained code-editor typing treatment for the Hero motto. */
+.design-rounded .cover-en {display:flex;align-items:center;white-space:pre;font-variant-ligatures:none;}
+.design-rounded .editor-typing {white-space:pre;}
+.design-rounded .editor-caret {display:inline-block;width:1.5px;height:1.1em;margin-left:2px;background:currentColor;vertical-align:middle;animation:editor-caret-blink 1s steps(1,end) infinite;}
+@keyframes editor-caret-blink {50%{opacity:0;}}
+@media (prefers-reduced-motion:reduce){.design-rounded .editor-caret{animation:none;opacity:.65;}}
