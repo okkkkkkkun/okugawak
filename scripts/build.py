@@ -220,7 +220,14 @@ def profile_block(from_file: str, data: dict) -> str:
     <div>
       {manuscript(profile["intro"])}
       <p class="lede">{esc(site["nameJa"])} / {esc(site["nameEn"])}</p>
+      <section class="profile-history" aria-labelledby="career-heading">
+      <div class="profile-history-head"><h2 id="career-heading">Career</h2><span>EDUCATION / WORK</span></div>
       <ol class="timeline">{rows}</ol>
+    </section>
+    <section class="profile-history profile-activities" aria-labelledby="activities-heading">
+      <div class="profile-history-head"><h2 id="activities-heading">Activities</h2><span>SELECTED HISTORY</span></div>
+      <p class="profile-history-empty">活動履歴は準備中</p>
+    </section>
     </div>
   </div>
   <div class="photos">{photos}</div>
