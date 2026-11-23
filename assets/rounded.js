@@ -11,6 +11,21 @@
       a.href = url.href;
     });
   }
+  if (rounded) {
+    // Work links and detail pages share a small geometric, responsive vocabulary.
+    // Preserve native navigation, accessibility, and the existing page reveals.
+    document.querySelectorAll(".work-row a.row").forEach(function (link) {
+      var frame = link.querySelector(".frame");
+      if (!frame) return;
+      link.addEventListener("pointerdown", function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        frame.style.transform = "scale(.995)";
+      });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function (eventName) {
+        link.addEventListener(eventName, function () { frame.style.transform = ""; });
+      });
+    });
+  }
   if (!document.body.classList.contains("is-home")) return;
   var link = document.createElement("a");
   link.className = "design-switch";
