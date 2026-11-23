@@ -152,7 +152,7 @@
     }
   }
 
-  if (!document.body.classList.contains("is-home")) return;
+  if (document.body.classList.contains("is-home")) {
   var link = document.createElement("a");
   link.className = "design-switch";
   link.textContent = rounded ? "Original design" : "Rounded preview";
@@ -191,6 +191,7 @@
         setTimeout(typeNext, 600);
       }
     }
+  }
   }
   // Spatial Reveal deliberately uses the native scroll flow.
   // No duplicate canvas, decorative Voronoi, scroll interpolation or snapping.
