@@ -230,7 +230,12 @@ html.design-rounded body.is-home .hero-k .assemble {
   .design-rounded .explorer-map {height:65svh;min-height:410px;}
 }
 
-/* Work Explorer: header is sticky and already occupies layout space; avoid double top offset. */
-html.design-rounded body .page:has(.work-explorer) {
+/* Consistent page start beneath the sticky header.
+   Keep project-detail layouts untouched; apply to section landing pages only. */
+html.design-rounded body .page:has(.work-explorer),
+html.design-rounded body .page:has(.profile-grid),
+html.design-rounded body .page:has(.quotes),
+html.design-rounded body .page:has(#football-photo),
+html.design-rounded body .page:has(.page-body .mail) {
   padding-top: clamp(12px, 2.5vw, 24px);
 }
