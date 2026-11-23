@@ -749,3 +749,39 @@ html.design-rounded .thoughts-stack-outro a{color:var(--stack-ink)}
 html.design-rounded .thoughts-stack-track>span{background:var(--stack-accent)}
 html.design-rounded .thoughts-stack-card:nth-child(3)::before{background:#e24a1b}
 @media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack-card h3{clip-path:none;transform:none;opacity:1}html.design-rounded .thoughts-stack-card::before{transform:scaleX(1)}}
+
+
+/* Intro: visible three-card stack before the first scroll */
+html.design-rounded body:has(.thoughts-intro-stack) .page-hero{box-sizing:border-box;min-height:0;height:auto;padding-top:clamp(12px,2vh,25px);padding-bottom:0}
+html.design-rounded body:has(.thoughts-intro-stack) .page-hero .page-no,
+html.design-rounded body:has(.thoughts-intro-stack) .page-hero .page-en{margin:0 0 4px}
+html.design-rounded body:has(.thoughts-intro-stack) .page-hero h1{font-size:clamp(35px,6vw,65px);margin:0}
+html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack){box-sizing:border-box;min-height:0;height:auto;padding:clamp(15px,3vh,34px) 0 0;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack) h2{font-size:clamp(25px,4.5vw,52px);line-height:1.4;margin:clamp(10px,2vh,20px) 0}
+html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack)>p:not(.thoughts-kicker){font-size:clamp(11px,1.2vw,14px);line-height:1.85;margin:0}
+html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack) .thoughts-story-scroll{margin:clamp(12px,2vh,22px) 0 0}
+html.design-rounded .thoughts-intro-stack{position:relative;box-sizing:border-box;width:100%;height:clamp(128px,20svh,210px);margin-top:clamp(12px,2.5vh,25px);flex:none;overflow:hidden;pointer-events:none}
+html.design-rounded .thoughts-intro-card{position:absolute;left:0;right:0;box-sizing:border-box;height:clamp(80px,12svh,120px);border:1px solid rgba(22,21,19,.25);border-top:3px solid #e24a1b;border-radius:10px 10px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:clamp(12px,2vw,21px);box-shadow:0 -8px 24px rgba(22,21,19,.06);font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.05em;color:#161513}
+html.design-rounded .thoughts-intro-card:nth-child(1){top:0;background:#f6f3ee;z-index:1}
+html.design-rounded .thoughts-intro-card:nth-child(2){top:clamp(43px,6.5svh,66px);background:#e8e2d9;z-index:2}
+html.design-rounded .thoughts-intro-card:nth-child(3){top:clamp(86px,13svh,132px);background:#161513;color:#f6f3ee;z-index:3}
+html.design-rounded .thoughts-intro-card b{font-weight:500}
+@media(max-width:700px){
+ html.design-rounded body:has(.thoughts-intro-stack) .page-hero{padding-top:12px}
+ html.design-rounded body:has(.thoughts-intro-stack) .page-hero h1{font-size:clamp(32px,9vw,46px)}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack){padding-top:clamp(12px,2vh,22px)}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack) h2{font-size:clamp(22px,5.8vw,32px);line-height:1.45;margin:12px 0}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack)>p:not(.thoughts-kicker){font-size:11px;line-height:1.75}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack) .thoughts-story-scroll{margin-top:12px}
+ html.design-rounded .thoughts-intro-stack{height:clamp(115px,18svh,160px);margin-top:14px}
+ html.design-rounded .thoughts-intro-card{height:90px;padding:12px;font-size:9px}
+ html.design-rounded .thoughts-intro-card:nth-child(2){top:42px}
+ html.design-rounded .thoughts-intro-card:nth-child(3){top:84px}
+}
+@media(max-height:720px) and (max-width:700px){
+ html.design-rounded body:has(.thoughts-intro-stack) .page-hero .page-no,
+ html.design-rounded body:has(.thoughts-intro-stack) .page-hero .page-en{display:none}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack) h2{font-size:22px}
+ html.design-rounded .thoughts-story-opening:has(.thoughts-intro-stack)>p:not(.thoughts-kicker){font-size:10px}
+ html.design-rounded .thoughts-intro-stack{height:125px;margin-top:9px}
+}
