@@ -428,3 +428,33 @@ html.design-rounded .foot-top {
   }
   html.design-rounded .foot-top {font-size:10px;}
 }
+
+/* Refined footer identity and editor-inspired typographic hierarchy. */
+html.design-rounded .foot-signature {
+  font-size:clamp(15px,1.65vw,22px);
+  line-height:1.45;font-weight:500;letter-spacing:-.025em;
+}
+html.design-rounded .foot-kicker,
+html.design-rounded .foot-top,
+html.design-rounded .foot-base small {
+  font-family:"IBM Plex Mono",monospace;
+}
+html.design-rounded .foot-affiliation {
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  letter-spacing:.015em;
+}
+html.design-rounded .foot-mail {
+  font-family:"IBM Plex Mono",monospace;
+  font-size:clamp(12px,1vw,14px);font-weight:400;
+  letter-spacing:-.02em;
+}
+html.design-rounded .foot-brand {
+  font-family:"IBM Plex Mono","Zen Kaku Gothic New",monospace;
+  letter-spacing:.02em;
+}
+@media(max-width:700px){
+  html.design-rounded .foot-signature {
+    font-size:15px;line-height:1.5;letter-spacing:-.03em;
+  }
+  html.design-rounded .foot-mail {font-size:12px;}
+}
