@@ -67,7 +67,7 @@
       function renderGrid(){panel.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
       function renderTimeline(){
         var groups={};
-        items.forEach(function(item){var year=/^(\\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
+        items.forEach(function(item){var year=/^(\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
         var keys=Object.keys(groups).sort(function(a,b){return a==="Other"?1:b==="Other"?-1:Number(b)-Number(a);});
         panel.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){
           return '<section class="explorer-year"><h2>'+esc(year==="Other"?"OTHER":year)+'</h2><div>'+
