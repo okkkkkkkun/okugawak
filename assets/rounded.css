@@ -97,3 +97,15 @@ html.design-rounded body.is-home .works-map {
     bottom:16px;
   }
 }
+
+/* Lower the draggable K mark without changing its geometry or interaction. */
+@media (max-width: 700px) {
+  html.design-rounded body.is-home .hero-k {
+    top: calc(var(--header) + 3rem);
+  }
+}
+@media (min-width: 701px) {
+  html.design-rounded body.is-home .hero-k {
+    top: calc(var(--header) + 2.5rem);
+  }
+}
