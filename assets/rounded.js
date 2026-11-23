@@ -47,23 +47,31 @@
       var explorer=document.createElement("section");
       explorer.className="work-explorer";
       explorer.setAttribute("aria-label","作品表示");
-      explorer.innerHTML='<div class="explorer-toolbar" role="group" aria-label="表示形式">'+
-        ['Grid','Voronoi','Timeline'].map(function(v){return '<button type="button" data-view="'+v.toLowerCase()+'" aria-pressed="false">'+v+'</button>';}).join('')+
-        '</div><div class="explorer-content" aria-live="polite"></div>';
+      explorer.innerHTML='<div class="explorer-toolbar" role="group" aria-label="作品の表示形式">'+
+        '<button type="button" class="explorer-primary" data-view="voronoi" aria-pressed="true" aria-label="ボロノイマップに戻る">◈ <span>Voronoi</span></button>'+
+        '<span class="explorer-toolbar-divider" aria-hidden="true"></span>'+
+        '<button type="button" data-view="grid" aria-pressed="false">Grid</button>'+
+        '<button type="button" data-view="timeline" aria-pressed="false">Timeline</button>'+
+        '</div><div class="explorer-content view-voronoi">'+
+        '<div class="explorer-map-layer"></div>'+
+        '<div class="explorer-subview" aria-hidden="true"><div class="explorer-subview-inner"></div></div></div>';
       body.prepend(explorer);
       var panel=explorer.querySelector(".explorer-content");
+      var mapLayer=explorer.querySelector(".explorer-map-layer");
+      var subview=explorer.querySelector(".explorer-subview");
+      var subviewInner=explorer.querySelector(".explorer-subview-inner");
       var buttons=Array.from(explorer.querySelectorAll("[data-view]"));
       function esc(s){return String(s||"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
       function imageHtml(item){return item.img?'<span class="explorer-image"><img loading="lazy" alt="" src="'+esc(item.img)+'"></span>':'<span class="explorer-image explorer-placeholder" aria-hidden="true">↗</span>';}
       function card(item,index){return '<a class="explorer-card" href="'+esc(item.url)+'">'+imageHtml(item)+
         '<span class="explorer-info"><span class="explorer-index">'+String(index+1).padStart(2,"0")+' / '+esc(item.date||item.kind||"Tool")+'</span>'+
         '<strong>'+esc(item.title)+'</strong></span></a>';}
-      function renderGrid(){panel.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
+      function renderGrid(){subviewInner.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
       function renderTimeline(){
         var groups={};
         items.forEach(function(item){var year=/^(\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
         var keys=Object.keys(groups).sort(function(a,b){return a==="Other"?1:b==="Other"?-1:Number(b)-Number(a);});
-        panel.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){
+        subviewInner.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){
           return '<section class="explorer-year"><h2>'+esc(year==="Other"?"OTHER":year)+'</h2><div>'+
           groups[year].map(function(item){return '<a href="'+esc(item.url)+'" class="explorer-timeline-row">'+
             imageHtml(item)+'<span class="explorer-timeline-info"><strong>'+esc(item.title)+'</strong>'+
@@ -72,7 +80,7 @@
         }).join("")+'</div>';
       }
       function renderVoronoi(){
-        panel.innerHTML='<section class="works-map explorer-map" id="works-map" aria-label="ドラッグして作品を探索">'+
+        mapLayer.innerHTML='<section class="works-map explorer-map" id="works-map" aria-label="ドラッグして作品を探索">'+
           '<canvas class="map-canvas" tabindex="0" aria-label="作品マップ。ドラッグして移動、タップで選択し、もう一度タップして開く"></canvas>'+
           '<div class="map-tools"><p class="map-hint" id="map-hint">DRAG TO EXPLORE</p>'+
           '<button type="button" id="map-shuffle" aria-label="シャッフル">↝</button>'+
@@ -83,25 +91,29 @@
         node.textContent=JSON.stringify(items.filter(function(item){return item.img;}).map(function(item){
           return {title:item.title,href:item.url,thumb:item.img,year:item.date.slice(0,4),kind:item.kind||"作品"};
         }));
-        panel.appendChild(node);
+        mapLayer.appendChild(node);
         var script=document.createElement("script");
         script.src=new URL("../assets/top.js",location.href).href;
         script.dataset.workMap="true";
-        panel.appendChild(script);
+        mapLayer.appendChild(script);
       }
-      var mapPanel=null;
+      renderVoronoi();
       function switchView(v){
+        var sub=v!=="voronoi";
         buttons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v));});
         panel.className="explorer-content view-"+v;
-        if(v==="voronoi"){
-          if(mapPanel){panel.replaceChildren(mapPanel);}
-          else {renderVoronoi();mapPanel=panel.querySelector(".explorer-map");var data=panel.querySelector("#works-map-data");if(data)mapPanel.appendChild(data);}
-        } else if(v==="timeline")renderTimeline();else renderGrid();
-        try{sessionStorage.setItem("work-explorer-view",v);}catch(e){}
+        if(v==="grid")renderGrid();
+        else if(v==="timeline")renderTimeline();
+        subview.setAttribute("aria-hidden",String(!sub));
+        subview.inert=!sub;
+        if(!sub)subviewInner.innerHTML="";
+        // Keep the canvas mounted: no image reload, no reset of cell positions.
+        if(!sub)requestAnimationFrame(function(){window.dispatchEvent(new Event("resize"));});
       }
       buttons.forEach(function(b){b.addEventListener("click",function(){switchView(b.dataset.view);});});
-      var initial="voronoi";try{initial=sessionStorage.getItem("work-explorer-view")||"voronoi";}catch(e){}
-      switchView(["grid","voronoi","timeline"].includes(initial)?initial:"grid");
+      // Always open Work in its primary Voronoi experience.
+      subview.inert=true;
+      switchView("voronoi");
     }
   }
 
