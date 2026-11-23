@@ -27,7 +27,7 @@
   }
 
   var dialog = document.querySelector(".lightbox");
-  if (!dialog) return;
+  if (dialog) {
   var view = dialog.querySelector("img");
   document.querySelectorAll("[data-full]").forEach(function (button) {
     button.addEventListener("click", function () {
@@ -42,6 +42,7 @@
   dialog.addEventListener("close", function () {
     view.removeAttribute("src");
   });
+  }
 
   var toggle = document.querySelector(".nav-toggle");
   var sheet = document.getElementById("nav-sheet");
