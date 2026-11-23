@@ -66,3 +66,34 @@ html.design-rounded body.is-home .works-map {
 .design-rounded .editor-caret {display:inline-block;width:1.5px;height:1.1em;margin-left:2px;background:currentColor;vertical-align:middle;animation:editor-caret-blink 1s steps(1,end) infinite;}
 @keyframes editor-caret-blink {50%{opacity:0;}}
 @media (prefers-reduced-motion:reduce){.design-rounded .editor-caret{animation:none;opacity:.65;}}
+
+/* Hero typography hierarchy: the name is a signature, the affiliation a quiet credit. */
+.design-rounded body.is-home .cover-kicker {
+  font-size:clamp(11px,0.82vw,13px);
+  line-height:1.5;
+  letter-spacing:.09em;
+  font-weight:500;
+  margin-bottom:.9rem;
+}
+.design-rounded body.is-home .cover-affil {
+  right:var(--pad);
+  bottom:clamp(16px,2vw,26px);
+  max-width:none;
+  width:max-content;
+  text-align:right;
+  font-size:clamp(10px,.72vw,12px);
+  line-height:1.65;
+  letter-spacing:-.025em;
+  font-weight:400;
+  white-space:nowrap;
+  opacity:.8;
+}
+@media(max-width:700px) {
+  .design-rounded body.is-home .cover-kicker {font-size:11px;letter-spacing:.08em;}
+  .design-rounded body.is-home .cover-affil {
+    font-size:10px;
+    line-height:1.6;
+    right:var(--pad);
+    bottom:16px;
+  }
+}
