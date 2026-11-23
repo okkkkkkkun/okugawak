@@ -194,4 +194,46 @@
   }
   // Spatial Reveal deliberately uses the native scroll flow.
   // No duplicate canvas, decorative Voronoi, scroll interpolation or snapping.
+
+  // Compare Thoughts variants; preserve the existing rounded preview.
+  var thoughts = document.querySelector("[data-thoughts-experience]");
+  if (thoughts) {
+    var mode = new URLSearchParams(location.search).get("thoughts") === "b" ? "b" : "a";
+    document.documentElement.setAttribute("data-thoughts-variant", mode);
+    thoughts.querySelectorAll("[data-mode]").forEach(function(link){
+      if(link.dataset.mode === mode)link.setAttribute("aria-current","true");
+      else link.removeAttribute("aria-current");
+    });
+    var svg = thoughts.querySelector(".thoughts-generator svg");
+    var density = thoughts.querySelector('[data-param="density"]');
+    var variation = thoughts.querySelector('[data-param="variation"]');
+    function drawThoughts(){
+      if(!svg)return;
+      var n=Number(density.value),v=Number(variation.value);
+      var lines=[];
+      for(var i=0;i<n;i++){
+        var points=[];
+        for(var j=0;j<=42;j++){
+          var x=10+j*8.1;
+          var y=18+i*174/Math.max(1,n-1)+Math.sin(j*.34+i*.4)*v*.22;
+          points.push((j?"L":"M")+x.toFixed(1)+" "+y.toFixed(1));
+        }
+        lines.push('<path d="'+points.join(" ")+'" fill="none" stroke="'+(mode==="b"?"#5e625b":i%5===0?"#a9d5b5":"#d4ded5")+'" stroke-width="'+(i%5===0?1.6:.75)+'" opacity=".7"/>');
+      }
+      svg.innerHTML=lines.join("");
+    }
+    [density,variation].forEach(function(el){if(el)el.addEventListener("input",drawThoughts)});
+    drawThoughts();
+  }
+  // Present the narrative order consistently in both desktop and mobile navigation.
+  document.querySelectorAll(".bar-nav, .nav-sheet ol").forEach(function(nav){
+    var links=Array.from(nav.children);
+    var desired=["Thoughts","Work","Profile","Personal","Contact"];
+    links.sort(function(a,b){
+      var rank=function(el){var txt=el.textContent;var idx=desired.findIndex(function(label){return txt.includes(label)});return idx<0?99:idx};
+      return rank(a)-rank(b);
+    }).forEach(function(el){nav.appendChild(el)});
+    if(nav.matches(".nav-sheet ol"))nav.querySelectorAll(".no").forEach(function(no,i){no.textContent=String(i+1).padStart(2,"0")});
+  });
+
 })();
