@@ -28,7 +28,7 @@
   }
 
   // Work Explorer: all views derive from the same existing work links.
-  if (rounded && /\\/02_Works\\/index\\.html$/.test(location.pathname)) {
+  if (rounded && /\/02_Works\/index\.html$/.test(location.pathname)) {
     var body = document.querySelector(".page-body");
     var original = body && body.querySelector(".works");
     var tool = body && body.querySelector("#tool");
@@ -68,7 +68,7 @@
       function renderList(){panel.innerHTML='<div class="explorer-list">'+items.map(function(item,i){return '<a href="'+esc(item.url)+'" class="explorer-list-row"><span class="explorer-index">'+String(i+1).padStart(2,"0")+'</span><strong>'+esc(item.title)+'</strong><span class="explorer-date">'+esc(item.date||item.kind||"Tool")+'</span><span aria-hidden="true">↗</span></a>';}).join("")+'</div>';}
       function renderTimeline(){
         var groups={};
-        items.forEach(function(item){var year=/^(\\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
+        items.forEach(function(item){var year=/^(\d{4})/.exec(item.date);var key=year?year[1]:"Other";(groups[key]||(groups[key]=[])).push(item);});
         var keys=Object.keys(groups).sort(function(a,b){return a==="Other"?1:b==="Other"?-1:Number(b)-Number(a);});
         panel.innerHTML='<div class="explorer-timeline">'+keys.map(function(year){return '<section class="explorer-year"><h2>'+esc(year)+'</h2><div>'+groups[year].map(function(item){return '<a href="'+esc(item.url)+'"><span class="explorer-date">'+esc(item.date||item.kind||"Tool")+'</span><strong>'+esc(item.title)+'</strong><span aria-hidden="true">↗</span></a>';}).join("")+'</div></section>';}).join("")+'</div>';
       }
