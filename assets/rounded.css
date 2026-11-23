@@ -530,3 +530,53 @@ html.design-rounded .profile-activity-type {
   html.design-rounded .profile-activity-list time {font-size:9px;}
   html.design-rounded .profile-activity-type {font-size:9px;}
 }
+
+
+/* Thoughts — A/B comparison */
+html.design-rounded .thoughts-experience{--thought-accent:#a9c6b0;max-width:1100px;margin:auto}
+html.design-rounded .thoughts-mode{display:flex;gap:4px;position:sticky;top:calc(var(--header) + 8px);z-index:12;width:max-content;max-width:100%;padding:4px;border:1px solid var(--line);background:var(--paper);border-radius:50px;margin:0 0 28px auto}
+html.design-rounded .thoughts-mode a{font:500 10px/1.4 var(--mono);text-decoration:none;color:var(--muted);padding:10px 15px;border-radius:30px}
+html.design-rounded .thoughts-mode a[aria-current="true"]{background:var(--ink);color:var(--paper)}
+html.design-rounded .thoughts-intro{min-height:65vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(40px,8vw,100px) 0}
+html.design-rounded .thoughts-eyebrow,.design-rounded .thoughts-scroll,.design-rounded .thoughts-panel-top,.design-rounded .thoughts-reference,.design-rounded .thoughts-outro>span{font:500 10px/1.6 var(--mono);letter-spacing:.12em}
+html.design-rounded .thoughts-intro h2{font:600 clamp(56px,11vw,160px)/.93 var(--display);letter-spacing:-.075em;margin:30px 0}
+html.design-rounded .thoughts-intro h2 span,html.design-rounded .thoughts-intro h2 em{display:block}
+html.design-rounded .thoughts-intro h2 em{font-weight:500}
+html.design-rounded .thoughts-intro>p:not(.thoughts-eyebrow){font-size:clamp(13px,1.5vw,18px);line-height:1.8}
+html.design-rounded .thoughts-scroll{margin-top:55px;color:var(--muted)}
+html.design-rounded .thoughts-panels{display:grid;gap:clamp(45px,8vw,110px)}
+html.design-rounded .thoughts-panel{min-height:70vh;padding:clamp(25px,5vw,60px);background:#171b19;color:#f3f3ee;border-radius:18px;overflow:hidden}
+html.design-rounded .thoughts-panel-top{display:flex;justify-content:space-between;color:#a6b1a9}
+html.design-rounded .thoughts-panel h2{font:600 clamp(35px,6.5vw,80px)/1.03 var(--display);letter-spacing:-.055em;margin:clamp(30px,5vw,70px) 0 16px}
+html.design-rounded .thoughts-panel>p{font-size:clamp(12px,1.2vw,15px);color:#bfc7c0;line-height:1.8}
+html.design-rounded .thoughts-generator{margin:35px 0 15px}
+html.design-rounded .thoughts-generator svg{display:block;width:100%;height:auto;max-height:300px}
+html.design-rounded .thoughts-controls{display:flex;gap:24px;flex-wrap:wrap}
+html.design-rounded .thoughts-controls label{display:flex;align-items:center;gap:14px;flex:1;min-width:170px;font:11px var(--mono);color:#c4d0c6}
+html.design-rounded .thoughts-controls input{flex:1;accent-color:#b4d7b9;cursor:pointer}
+html.design-rounded .thoughts-abstract{height:clamp(160px,27vw,300px);display:flex;align-items:center;justify-content:center;gap:15px;margin:30px auto;transform:skewY(-8deg)}
+html.design-rounded .thoughts-abstract span{height:45%;width:9%;border:1px solid #b4c8b7;border-radius:45% 45% 3px 3px;transform:translateY(var(--shift,0px)) rotate(var(--turn,0deg));opacity:.65;transition:transform 1.2s}
+html.design-rounded .thoughts-abstract span:nth-child(2){--shift:-28px;--turn:12deg;height:65%}
+html.design-rounded .thoughts-abstract span:nth-child(3){--shift:15px;--turn:-15deg;height:90%}
+html.design-rounded .thoughts-abstract span:nth-child(4){--shift:-10px;--turn:9deg;height:75%}
+html.design-rounded .thoughts-abstract span:nth-child(5){--shift:20px;height:55%}
+html.design-rounded .thoughts-reference{border-top:1px solid #465049;padding-top:15px;margin-top:30px;color:#9ca89e}
+html.design-rounded .thoughts-reference strong{display:block;font:400 13px/1.8 var(--sans);color:#f1f1e9;letter-spacing:0;margin-top:5px}
+html.design-rounded .thoughts-outro{padding:clamp(80px,15vw,200px) 0}
+html.design-rounded .thoughts-outro p{font:600 clamp(35px,6vw,80px)/1.1 var(--display);letter-spacing:-.05em}
+html.design-rounded .thoughts-outro a{font:500 12px var(--mono)}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-experience{--thought-accent:#9c7e65}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-intro{min-height:75vh}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-panel{background:transparent;color:var(--ink);border-radius:0;border-top:1px solid var(--line);padding:60px 0;min-height:85vh;display:grid;grid-template-columns:1fr 1fr;column-gap:5vw;align-content:center}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-panel-top{grid-column:1/-1;color:var(--muted)}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-panel h2{grid-column:1/-1;margin:50px 0 22px}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-panel>p{grid-column:1/-1;color:var(--muted)}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-generator,html.design-rounded[data-thoughts-variant="b"] .thoughts-abstract{grid-column:1/-1}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-generator svg path{stroke:#5e625b}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-controls label{color:var(--ink)}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-controls input{accent-color:#99785d}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-abstract span{border-color:#84715f}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-reference{grid-column:1/-1;border-color:var(--line);color:var(--muted)}
+html.design-rounded[data-thoughts-variant="b"] .thoughts-reference strong{color:var(--ink)}
+@media(max-width:700px){html.design-rounded .thoughts-intro{min-height:55vh}html.design-rounded .thoughts-intro h2{font-size:clamp(54px,13vw,90px)}html.design-rounded .thoughts-panel{min-height:520px;padding:25px 20px}html.design-rounded .thoughts-panel h2{font-size:clamp(36px,9vw,55px)}html.design-rounded[data-thoughts-variant="b"] .thoughts-panel{min-height:590px;padding:35px 0}html.design-rounded .thoughts-mode{margin-bottom:10px}}
+@media(prefers-reduced-motion:no-preference){html.design-rounded[data-thoughts-variant="b"] .thoughts-panel{animation:thoughts-enter .75s both;animation-timeline:view();animation-range:entry 0% entry 55%}@keyframes thoughts-enter{from{opacity:.3;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}}
