@@ -561,10 +561,8 @@ def home_page(data: dict) -> str:
     site = data["site"]
     body = (
         cover(site)
-        + '<main class="sheet" id="content">'
-        + works_map(data)
-        + footer("index.html", site)
-        + "</main>"
+        + '<main id="content" class="hero-only-main" aria-label="トップページ"></main>'
+        + '<script src="assets/top.js" defer></script>'
     )
     description = f'{site["nameJa"]} / {site["nameEn"]}。建築とコンピュテーショナルデザイン。'
     return document("index.html", "Kota Okugawa", description, body, True, "top")
