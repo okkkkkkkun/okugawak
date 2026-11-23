@@ -333,3 +333,11 @@ html.design-rounded body:has(.work-explorer) .page-hero {z-index:5;}
 .design-rounded .explorer-timeline-info {gap:5px;}
 .design-rounded .explorer-year a .explorer-timeline-info strong {font-size:clamp(12px,2.8vw,18px);line-height:1.4;font-weight:600;overflow-wrap:anywhere;}
 .design-rounded .explorer-timeline-info .explorer-date {font:400 clamp(10px,2.5vw,12px)/1.4 "IBM Plex Mono",monospace;color:var(--muted);}
+
+/* Voronoi controls: two icon buttons aligned flush to the left. */
+html.design-rounded body:has(.work-explorer) .explorer-map .map-tools {
+  left:0;right:auto;bottom:calc(12px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;justify-content:flex-start;gap:8px;
+  width:auto;margin:0;padding:0 12px;
+}
+html.design-rounded body:has(.work-explorer) .explorer-map .map-tools button {margin:0;}
