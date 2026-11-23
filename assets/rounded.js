@@ -344,4 +344,57 @@
     }
   }
 
+
+  // Stacking Thoughts: the final viewport contains all three condensed ideas.
+  var stack=document.querySelector(".thoughts-stack");
+  if(stack&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    var cards=Array.from(stack.querySelectorAll(".thoughts-stack-card"));
+    var deck=stack.querySelector(".thoughts-stack-deck");
+    var stage=stack.querySelector(".thoughts-stack-stage");
+    var ticking=false;
+    function cap(x){return Math.max(0,Math.min(1,x));}
+    function mix(a,b,t){return a+(b-a)*cap(t);}
+    function keyframe(t,keys){
+      for(var i=1;i<keys.length;i++)if(t<=keys[i][0]){
+        var k=cap((t-keys[i-1][0])/(keys[i][0]-keys[i-1][0]));
+        k=k*k*(3-2*k);
+        return mix(keys[i-1][1],keys[i][1],k);
+      }
+      return keys[keys.length-1][1];
+    }
+    function renderStack(){
+      ticking=false;
+      var vh=window.innerHeight||700;
+      var r=stack.getBoundingClientRect();
+      var p=cap(-r.top/Math.max(1,r.height-vh));
+      var h=deck.getBoundingClientRect().height;
+      var gap=Math.max(8,Math.min(14,h*.02));
+      var compact=Math.max(73,Math.min(112,h*.20));
+      var third=(h-2*gap)/3;
+      var y1=0,y2=compact+gap,y3=compact*2+gap*2;
+      var layout=[
+        {y:[[0,0],[.28,0],[.55,0],[1,0]],height:[[0,h],[.28,compact],[.55,compact],[.78,third],[1,third]]},
+        {y:[[0,h+45],[.28,h+45],[.48,y2],[.72,y2],[1,third+gap]],height:[[0,h],[.28,h],[.48,h-y2],[.72,compact],[1,third]]},
+        {y:[[0,h+90],[.48,h+90],[.72,y3],[1,2*(third+gap)]],height:[[0,h],[.48,h],[.72,h-y3],[1,third]]}
+      ];
+      cards.forEach(function(card,i){
+        var top=keyframe(p,layout[i].y);
+        var height=keyframe(p,layout[i].height);
+        card.style.setProperty("--stack-y",top.toFixed(1)+"px");
+        card.style.height=height.toFixed(1)+"px";
+        var condensed=i===0?p>.13:i===1?p>.61:p>.83;
+        card.classList.toggle("is-compact",condensed);
+        var body=(i===0?cap((.27-p)/.12):i===1?cap((.72-p)/.12):cap((.84-p)/.12));
+        card.style.setProperty("--stack-body-opacity",body.toFixed(3));
+      });
+      stack.style.setProperty("--stack-progress",p.toFixed(4));
+      stack.style.setProperty("--stack-outro-opacity",cap((p-.83)/.12).toFixed(3));
+      stack.classList.toggle("is-complete",p>.92);
+    }
+    function scheduleStack(){if(!ticking){ticking=true;requestAnimationFrame(renderStack);}}
+    window.addEventListener("scroll",scheduleStack,{passive:true});
+    window.addEventListener("resize",scheduleStack,{passive:true});
+    renderStack();
+  }
+
 })();
