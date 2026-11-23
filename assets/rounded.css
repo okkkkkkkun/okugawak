@@ -580,3 +580,27 @@ html.design-rounded[data-thoughts-variant="b"] .thoughts-reference{grid-column:1
 html.design-rounded[data-thoughts-variant="b"] .thoughts-reference strong{color:var(--ink)}
 @media(max-width:700px){html.design-rounded .thoughts-intro{min-height:55vh}html.design-rounded .thoughts-intro h2{font-size:clamp(54px,13vw,90px)}html.design-rounded .thoughts-panel{min-height:520px;padding:25px 20px}html.design-rounded .thoughts-panel h2{font-size:clamp(36px,9vw,55px)}html.design-rounded[data-thoughts-variant="b"] .thoughts-panel{min-height:590px;padding:35px 0}html.design-rounded .thoughts-mode{margin-bottom:10px}}
 @media(prefers-reduced-motion:no-preference){html.design-rounded[data-thoughts-variant="b"] .thoughts-panel{animation:thoughts-enter .75s both;animation-timeline:view();animation-range:entry 0% entry 55%}@keyframes thoughts-enter{from{opacity:.3;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}}
+
+
+/* Thoughts — quiet editorial story */
+html.design-rounded .thoughts-story{max-width:1160px;margin:auto}
+html.design-rounded .thoughts-story-opening{min-height:calc(100svh - 160px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:70px 0 95px}
+html.design-rounded .thoughts-kicker,html.design-rounded .thoughts-story-scroll,html.design-rounded .thoughts-story-index,html.design-rounded .thoughts-story-ending>p{font:500 10px/1.7 var(--mono);letter-spacing:.12em;color:var(--muted)}
+html.design-rounded .thoughts-story-opening h2{font:600 clamp(30px,5.5vw,75px)/1.42 var(--sans);letter-spacing:-.055em;margin:35px 0}
+html.design-rounded .thoughts-story-opening h2 em{font-style:normal;font-weight:500}
+html.design-rounded .thoughts-story-opening>p:not(.thoughts-kicker){font-size:clamp(13px,1.3vw,17px);line-height:2.3;color:var(--muted)}
+html.design-rounded .thoughts-story-scroll{margin-top:70px}
+html.design-rounded .thoughts-story-scroll span{display:inline-block;margin-left:16px;animation:thoughts-arrow 2s ease-in-out infinite}
+html.design-rounded .thoughts-story-section{min-height:75svh;display:grid;grid-template-columns:minmax(180px,.7fr) minmax(0,1.6fr);gap:30px 5vw;align-content:center;padding:100px 0 90px;position:relative;border-top:1px solid var(--line)}
+html.design-rounded .thoughts-story-index{padding-top:14px}
+html.design-rounded .thoughts-story-copy h3{font:600 clamp(29px,4.2vw,60px)/1.5 var(--sans);letter-spacing:-.055em;margin:0 0 40px}
+html.design-rounded .thoughts-story-copy p{font-size:clamp(12px,1.12vw,15px);line-height:2.5;color:var(--muted);margin:0}
+html.design-rounded .thoughts-story-line{grid-column:2;width:100%;height:1px;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
+html.design-rounded .thoughts-story-section.is-visible .thoughts-story-line{transform:scaleX(1)}
+html.design-rounded .thoughts-story-ending{min-height:65svh;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:80px 0}
+html.design-rounded .thoughts-story-ending h3{font:600 clamp(35px,5.5vw,75px)/1.4 var(--sans);letter-spacing:-.06em;margin:30px 0 50px}
+html.design-rounded .thoughts-story-ending a{font:500 13px var(--sans);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:10px}
+@media(prefers-reduced-motion:no-preference){html.design-rounded .thoughts-reveal{opacity:0;transform:translateY(24px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}html.design-rounded .thoughts-reveal.is-visible{opacity:1;transform:translateY(0)}}
+@keyframes thoughts-arrow{50%{transform:translateY(7px)}}
+@media(max-width:700px){html.design-rounded .thoughts-story-opening{min-height:70svh;padding:50px 0 80px}html.design-rounded .thoughts-story-opening h2{font-size:clamp(27px,7vw,42px);line-height:1.65}html.design-rounded .thoughts-story-opening>p:not(.thoughts-kicker){font-size:12px;line-height:2.2}html.design-rounded .thoughts-story-section{min-height:75svh;display:block;padding:90px 0 80px}html.design-rounded .thoughts-story-copy h3{font-size:clamp(29px,7.5vw,43px);margin:35px 0}html.design-rounded .thoughts-story-copy p{font-size:12px;line-height:2.4}html.design-rounded .thoughts-story-line{margin-top:50px}html.design-rounded .thoughts-story-ending{min-height:55svh}}
+@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-story-scroll span{animation:none}html.design-rounded .thoughts-story-line{transform:none}}
