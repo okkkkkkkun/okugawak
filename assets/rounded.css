@@ -116,3 +116,46 @@ html.design-rounded body.is-home .hero-k .assemble {
     transform: translateY(1.15rem);
   }
 }
+
+/* Work experience: restrained geometry and tactile feedback. */
+.design-rounded .work-row a.row .frame {
+  position:relative;
+  isolation:isolate;
+  border-radius:clamp(12px,1.8vw,20px);
+  transition:border-radius .42s cubic-bezier(.2,.8,.2,1),box-shadow .42s ease;
+}
+.design-rounded .work-row a.row .frame::after {
+  content:"";position:absolute;inset:0;border:1px solid rgba(246,243,238,.18);
+  border-radius:inherit;pointer-events:none;
+}
+.design-rounded .work-row a.row .frame img {
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .45s ease,opacity .45s ease;
+}
+.design-rounded .work-row a.row .more {
+  display:inline-flex;align-items:center;gap:.45em;
+  border-bottom-color:transparent;transition:color .25s ease,gap .3s ease;
+}
+.design-rounded .work-row a.row .more::after {
+  content:"↗";font-size:1.1em;color:var(--accent);
+}
+@media(hover:hover) and (pointer:fine){
+  .design-rounded .work-row a.row:hover .frame,
+  .design-rounded .work-row a.row:focus-visible .frame {border-radius:clamp(18px,2.6vw,28px);box-shadow:0 12px 35px rgba(22,21,19,.10);}
+  .design-rounded .work-row a.row:hover .frame img,
+  .design-rounded .work-row a.row:focus-visible .frame img {transform:scale(1.025);filter:none;opacity:1;}
+  .design-rounded .work-row a.row:hover .more,
+  .design-rounded .work-row a.row:focus-visible .more {gap:.8em;color:var(--accent);}
+}
+.design-rounded .work-row a.row:focus-visible {outline:2px solid var(--accent);outline-offset:5px;border-radius:12px;}
+.design-rounded .page .lead-frame .shot {border-radius:clamp(12px,2vw,22px);overflow:hidden;}
+.design-rounded .page .pager a {transition:color .25s ease,transform .3s ease;}
+@media(hover:hover) and (pointer:fine){
+  .design-rounded .page .pager a:hover {color:var(--accent);transform:translateX(4px);}
+}
+.design-rounded .work-row .frame:active {transform:scale(.995);}
+@media(prefers-reduced-motion:reduce){
+  .design-rounded .work-row a.row .frame,
+  .design-rounded .work-row a.row .frame img,
+  .design-rounded .work-row a.row .more,
+  .design-rounded .page .pager a {transition:none;transform:none;}
+}
