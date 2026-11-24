@@ -11,15 +11,7 @@ html.design-rounded { --rounded-gap: 4px; --rounded-radius: 7px; }
 .design-rounded .site-foot { border-radius:var(--rounded-radius) var(--rounded-radius) 0 0; }
 @media (prefers-reduced-motion:reduce) { .design-rounded .cover-copy,.design-rounded .cover-affil,.design-rounded .hero-k { opacity:1;transition:none; }  }
 
-/* Softened Geometry on secondary pages: restrained frames and UI surfaces. */
-.design-rounded .page .shot,
-.design-rounded .page .shot img,
-.design-rounded .page .frame,
-.design-rounded .page .frame img,
-.design-rounded .page-hero img {border-radius:clamp(8px,1.8vw,18px);overflow:hidden;}
-.design-rounded .page .work-row .frame {border-radius:clamp(8px,1.8vw,18px);overflow:hidden;}
 .design-rounded .page .page-hero {border-radius:0 0 14px 14px;}
-.design-rounded .page .shot:focus-visible {outline-offset:4px;}
 @media(prefers-reduced-motion:reduce){.design-rounded .rounded-map-bridge{display:none;}}
 
 /* Spatial Reveal: the hero and the works map are separate, uninterrupted surfaces. */
@@ -118,12 +110,11 @@ html.design-rounded body.is-home .hero-k .assemble {
 .design-rounded .work-row a.row .frame {
   position:relative;
   isolation:isolate;
-  border-radius:clamp(12px,1.8vw,20px);
-  transition:border-radius .42s cubic-bezier(.2,.8,.2,1),box-shadow .42s ease;
+  transition:box-shadow .42s ease;
 }
 .design-rounded .work-row a.row .frame::after {
   content:"";position:absolute;inset:0;border:1px solid rgba(246,243,238,.18);
-  border-radius:inherit;pointer-events:none;
+  pointer-events:none;
 }
 .design-rounded .work-row a.row .frame img {
   transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .45s ease,opacity .45s ease;
@@ -137,14 +128,13 @@ html.design-rounded body.is-home .hero-k .assemble {
 }
 @media(hover:hover) and (pointer:fine){
   .design-rounded .work-row a.row:hover .frame,
-  .design-rounded .work-row a.row:focus-visible .frame {border-radius:clamp(18px,2.6vw,28px);box-shadow:0 12px 35px rgba(22,21,19,.10);}
+  .design-rounded .work-row a.row:focus-visible .frame {box-shadow:0 12px 35px rgba(22,21,19,.10);}
   .design-rounded .work-row a.row:hover .frame img,
   .design-rounded .work-row a.row:focus-visible .frame img {transform:scale(1.025);filter:none;opacity:1;}
   .design-rounded .work-row a.row:hover .more,
   .design-rounded .work-row a.row:focus-visible .more {gap:.8em;color:var(--accent);}
 }
 .design-rounded .work-row a.row:focus-visible {outline:2px solid var(--accent);outline-offset:5px;border-radius:12px;}
-.design-rounded .page .lead-frame .shot {border-radius:clamp(12px,2vw,22px);overflow:hidden;}
 .design-rounded .page .pager a {transition:color .25s ease,transform .3s ease;}
 @media(hover:hover) and (pointer:fine){
   .design-rounded .page .pager a:hover {color:var(--accent);transform:translateX(4px);}
@@ -168,7 +158,7 @@ html.design-rounded body.is-home .hero-k .assemble {
 .design-rounded .explorer-content {min-height:180px;}
 .design-rounded .explorer-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,38px) clamp(10px,2vw,25px);}
 .design-rounded .explorer-card {display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none;}
-.design-rounded .explorer-image {display:grid;place-items:center;aspect-ratio:1/1;overflow:hidden;border-radius:clamp(10px,2vw,20px);background:#e5e0d7;color:#80786f;font:500 32px/1 var(--mono);}
+.design-rounded .explorer-image {display:grid;place-items:center;aspect-ratio:1/1;overflow:hidden;background:#e5e0d7;color:#80786f;font:500 32px/1 var(--mono);}
 .design-rounded .explorer-image img {width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1);}
 .design-rounded .explorer-info {display:flex;flex-direction:column;gap:5px;min-width:0;}
 .design-rounded .explorer-info strong {font-size:clamp(12px,2.8vw,18px);line-height:1.4;font-weight:600;overflow-wrap:anywhere;}
@@ -201,7 +191,7 @@ html.design-rounded body.is-home .hero-k .assemble {
   gap:clamp(12px,3vw,22px);align-items:center;padding:12px 0;min-height:84px;
 }
 .design-rounded .explorer-timeline-row .explorer-image {
-  aspect-ratio:1/1;border-radius:10px;font-size:19px;
+  aspect-ratio:1/1;font-size:19px;
 }
 .design-rounded .explorer-timeline-info {display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;}
 .design-rounded .explorer-year a .explorer-timeline-info strong {
