@@ -1,5 +1,40 @@
 (function(){
   document.documentElement.classList.add("design-rounded");
+
+  // Use one tangent distance on both axes, even when the frame is rectangular.
+  var photoFrameSelector = ".portrait, .page .shot, .page .frame, .page-hero img, .explorer-image";
+  var photoFillets;
+  if ("ResizeObserver" in window && window.CSS && CSS.supports("clip-path", 'path("M 0 0 H 1 V 1 Z")')) {
+    photoFillets = new ResizeObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var frame = entry.target;
+        var size = entry.borderBoxSize && entry.borderBoxSize[0];
+        var width = size ? size.inlineSize : frame.offsetWidth;
+        var height = size ? size.blockSize : frame.offsetHeight;
+        if (!width || !height) return;
+
+        var trim = Math.min(width, height) * 0.15;
+        var path = [
+          "M", trim, 0, "H", width - trim,
+          "Q", width, 0, width, trim, "V", height - trim,
+          "Q", width, height, width - trim, height, "H", trim,
+          "Q", 0, height, 0, height - trim, "V", trim,
+          "Q", 0, 0, trim, 0, "Z"
+        ];
+        frame.style.setProperty("--photo-clip", 'path("' + path.join(" ") + '")');
+        frame.classList.add("photo-fillet");
+      });
+    });
+  }
+
+  function watchPhotoFrames(root, watch) {
+    if (!photoFillets) return;
+    root.querySelectorAll(photoFrameSelector).forEach(function (frame) {
+      if (watch) photoFillets.observe(frame, { box: "border-box" });
+      else photoFillets.unobserve(frame);
+    });
+  }
+
   // Work links and detail pages share a small geometric, responsive vocabulary.
   // Preserve native navigation, accessibility, and the existing page reveals.
   document.querySelectorAll(".work-row a.row").forEach(function (link) {
@@ -98,7 +133,10 @@
       function card(item,index){return '<a class="explorer-card" href="'+esc(item.url)+'">'+imageHtml(item)+
         '<span class="explorer-info"><span class="explorer-date">'+esc(item.date||"時期未設定")+'</span>'+
         '<strong>'+esc(item.title)+'</strong></span></a>';}
-      function renderGrid(){subviewInner.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';}
+      function renderGrid(){
+        subviewInner.innerHTML='<div class="explorer-grid">'+items.map(card).join("")+'</div>';
+        watchPhotoFrames(subviewInner, true);
+      }
       function renderVoronoi(){
         mapLayer.innerHTML='<section class="works-map explorer-map" id="works-map" aria-label="ドラッグして作品を探索">'+
           '<canvas class="map-canvas" tabindex="0" aria-label="作品マップ。ドラッグして移動、タップで選択し、もう一度タップして開く"></canvas>'+
@@ -122,10 +160,13 @@
         var sub=v!=="voronoi";
         buttons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v));});
         panel.className="explorer-content view-"+v;
-        if(v==="grid")renderGrid();
+        if(v==="grid" && !subviewInner.firstElementChild)renderGrid();
         subview.setAttribute("aria-hidden",String(!sub));
         subview.inert=!sub;
-        if(!sub)subviewInner.innerHTML="";
+        if(!sub){
+          watchPhotoFrames(subviewInner, false);
+          subviewInner.innerHTML="";
+        }
         // Keep the canvas mounted: no image reload, no reset of cell positions.
         if(!sub)requestAnimationFrame(function(){window.dispatchEvent(new Event("resize"));});
       }
@@ -136,6 +177,8 @@
       source.remove();
     }
   }
+
+  watchPhotoFrames(document, true);
 
   if (document.body.classList.contains("is-home")) {
     var tagline = document.querySelector(".cover-en");
