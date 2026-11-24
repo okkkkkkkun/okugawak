@@ -135,16 +135,11 @@ html.design-rounded body.is-home .hero-k .assemble {
   .design-rounded .work-row a.row:focus-visible .more {gap:.8em;color:var(--accent);}
 }
 .design-rounded .work-row a.row:focus-visible {outline:2px solid var(--accent);outline-offset:5px;border-radius:12px;}
-.design-rounded .page .pager a {transition:color .25s ease,transform .3s ease;}
-@media(hover:hover) and (pointer:fine){
-  .design-rounded .page .pager a:hover {color:var(--accent);transform:translateX(4px);}
-}
 .design-rounded .work-row .frame:active {transform:scale(.995);}
 @media(prefers-reduced-motion:reduce){
   .design-rounded .work-row a.row .frame,
   .design-rounded .work-row a.row .frame img,
-  .design-rounded .work-row a.row .more,
-  .design-rounded .page .pager a {transition:none;transform:none;}
+  .design-rounded .work-row a.row .more {transition:none;transform:none;}
 }
 
 /* Work Explorer — shared content, four distinct visual lenses. */
@@ -966,7 +961,21 @@ html.design-rounded .page:has(.personal-journal) .page-hero h1 {font-size:clamp(
 .work-detail .work-detail-summary .tag {margin-inline-end:.65em}
 .work-detail > .page-body > .prose > h2:first-child {margin-top:0}
 .work-detail .pager {
-  margin-top:0;padding-top:11px;border-top:1px solid var(--line);
+  margin-top:0;padding-top:clamp(18px,3vw,28px);border-top:1px solid var(--line);
+}
+.work-detail .work-back {
+  min-height:48px;gap:11px;padding:0 17px;border:1px solid var(--line);
+  border-radius:999px;background:var(--paper-2);color:var(--ink);
+  font-weight:700;font-size:14px;text-decoration:none;
+}
+.work-back-arrow {color:var(--accent);font:500 18px/1 var(--mono)}
+.work-detail .work-back:focus-visible {outline:2px solid var(--accent);outline-offset:4px}
+@media (hover:hover) and (pointer:fine) {
+  .work-detail .work-back:hover {border-color:var(--accent)}
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .work-back-arrow {transition:transform .2s ease}
+  .work-detail .work-back:hover .work-back-arrow {transform:translateX(-3px)}
 }
 @media (min-width:800px) {
   .work-detail-intro {
