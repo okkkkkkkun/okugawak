@@ -879,3 +879,12 @@ html.design-rounded .thoughts-stack.is-animated .thoughts-story-opening {
   .design-rounded .thoughts-stack.is-animated .thoughts-stack-card-copy h3 {grid-row:2}
   .design-rounded .thoughts-stack.is-animated .thoughts-stack-card-copy p {grid-row:3}
 }
+@media (max-width:360px) {
+  html.design-rounded .thoughts-stack .thoughts-story-opening > p br {display:none}
+  .design-rounded .thoughts-stack.is-animated .thoughts-story-scroll {margin-top:8px}
+}
+@media (max-width:360px) and (max-height:640px) {
+  .design-rounded .thoughts-stack.is-animated .thoughts-stack-card {--stack-large-title:20px}
+  .design-rounded .thoughts-stack.is-animated .thoughts-stack-card-copy {--stack-art-size:56px}
+  .design-rounded .thoughts-stack.is-animated .thoughts-stack-card p {line-height:1.55;margin-top:calc(7px * var(--stack-body,0))}
+}
