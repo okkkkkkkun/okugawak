@@ -265,7 +265,8 @@ def work_rows(from_file: str, works: list[dict]) -> str:
     ordered = log_works(works)
     for index, work in enumerate(ordered, start=1):
         link = href(from_file, work["file"])
-        thumb = href(from_file, work["thumb"]) if work.get("thumb") else ""
+        thumb = work.get("thumbnail") or work.get("thumb") or ""
+        thumb = href(from_file, thumb) if thumb else ""
         line = work.get("addresses") or excerpt(work.get("paragraphs") or [])
         line_class = "manuscript" if placeholder(line) else "excerpt"
         label = date_label(work)
@@ -531,7 +532,7 @@ def document(from_file: str, title: str, description: str, body: str, home: bool
 def works_map(data: dict) -> str:
     items = []
     for work in log_works(data["works"]):
-        thumb = work.get("thumb") or ""
+        thumb = work.get("thumbnail") or work.get("thumb") or ""
         when = stamp(work)
         items.append({
             "title": work["title"],

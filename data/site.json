@@ -139,6 +139,7 @@
       "title": "山根木材 福岡支店",
       "file": "02_Works/linktoPage/yamanefukuoka/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/yamanefukuoka.png",
+      "thumbnail": "assets/work-thumbnails/yamane-fukuoka.webp",
       "note": [
         "Jan,2020"
       ],
@@ -215,6 +216,7 @@
       "title": "山根木材 福山支店",
       "file": "02_Works/linktoPage/yamanefukuyama/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/yamanefukuyama.png",
+      "thumbnail": "assets/work-thumbnails/yamane-fukuyama.webp",
       "note": [
         "May,2021"
       ],
@@ -307,6 +309,7 @@
       "title": "Transition Teahouse",
       "file": "02_Works/linktoPage/teahouse/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/teahouse.png",
+      "thumbnail": "assets/work-thumbnails/transition-teahouse.webp",
       "note": [
         "September,2022"
       ],
@@ -370,6 +373,7 @@
       "title": "Origami Teahouse",
       "file": "02_Works/linktoPage/teahouse_Summit/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/OrigamiTeahouse.png",
+      "thumbnail": "assets/work-thumbnails/origami-teahouse.webp",
       "note": [
         "May,2023　G7 Summit Hiroshima Openning Reception"
       ],
@@ -408,6 +412,7 @@
       "title": "バーチャル広工大",
       "file": "02_Works/linktoPage/VirtualHIT/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/virtual.png",
+      "thumbnail": "assets/work-thumbnails/virtual-hiroshima-it.webp",
       "note": [
         "May-Aug,2020"
       ],
@@ -436,6 +441,7 @@
       "title": "大和ハウス広島支店設計部　エントランス",
       "file": "02_Works/linktoPage/Daiwa/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/daiwa.png",
+      "thumbnail": "assets/work-thumbnails/daiwa-hiroshima.webp",
       "note": [
         "May,2020"
       ],
@@ -475,6 +481,7 @@
       "title": "AAVS Osaka 2019",
       "file": "02_Works/linktoPage/aavs/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/handibot.png",
+      "thumbnail": "assets/work-thumbnails/aavs-osaka.webp",
       "note": [
         "Mar, 2019"
       ],
@@ -513,6 +520,7 @@
       "title": "Apple peal",
       "file": "02_Works/linktoPage/apple/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/apple.png",
+      "thumbnail": "assets/work-thumbnails/apple-peal.webp",
       "note": [
         "LU-ARC Summer Workshop 2th",
         "Sep,2019"
@@ -553,6 +561,7 @@
       "title": "Completement Virtual",
       "file": "02_Works/linktoPage/Fes/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/complement-virtual/Fes.png",
+      "thumbnail": "assets/work-thumbnails/complement-virtual.webp",
       "note": [
         "建築情報学会オンラインワークショップ「Fes」",
         "Apr, 2022"
@@ -578,6 +587,7 @@
       "title": "建築学生WS 宮島 2022",
       "file": "02_Works/linktoPage/kenchikugakuseiWS/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/kenchikugakusei.png",
+      "thumbnail": "assets/work-thumbnails/miyajima-workshop.webp",
       "note": [
         "Aug,2022"
       ],
@@ -637,6 +647,7 @@
       "title": "Boxes House",
       "file": "02_Works/linktoPage/Boxes/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/boxes.png",
+      "thumbnail": "assets/work-thumbnails/boxes-house.webp",
       "note": [
         "Jan,2017"
       ],
@@ -668,6 +679,7 @@
       "title": "Polygon Space",
       "file": "02_Works/linktoPage/Hexagon/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/hexagon.png",
+      "thumbnail": "assets/work-thumbnails/polygon-space.webp",
       "note": [
         "Jul,2018"
       ],
@@ -708,6 +720,7 @@
       "title": "Net Shopping for 2045",
       "file": "02_Works/linktoPage/Drone/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/drone.png",
+      "thumbnail": "assets/work-thumbnails/net-shopping-2045.webp",
       "note": [
         "HIT Design Studio 2018-2019",
         "Jan,2019"
@@ -739,6 +752,7 @@
       "title": "Simple A",
       "file": "02_Works/linktoPage/Aframe/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/Aframe.png",
+      "thumbnail": "assets/work-thumbnails/simple-a.webp",
       "note": [
         "June,2019"
       ],
@@ -765,6 +779,7 @@
       "title": "FUN LINE",
       "file": "02_Works/linktoPage/Funline/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/FunLine.png",
+      "thumbnail": "assets/work-thumbnails/fun-line.webp",
       "note": [
         "March,2021"
       ],
@@ -831,6 +846,7 @@
       "title": "EMARF学生アンバサダー",
       "file": "02_Works/linktoPage/EMARF/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/Emarf.png",
+      "thumbnail": "assets/work-thumbnails/emarf.webp",
       "note": [
         "June,2020"
       ],
@@ -869,6 +885,7 @@
       "title": "Laminate Stool",
       "file": "02_Works/linktoPage/Stool/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/laminate-stool/stool.png",
+      "thumbnail": "assets/work-thumbnails/laminate-stool.webp",
       "note": [
         "July,2017"
       ],
@@ -890,6 +907,7 @@
       "title": "Side Table",
       "file": "02_Works/linktoPage/Sidetable/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/sidetable.png",
+      "thumbnail": "assets/work-thumbnails/side-table.webp",
       "note": [
         "July,2020"
       ],
@@ -940,6 +958,7 @@
       "title": "Voronoi Clock 01",
       "file": "02_Works/linktoPage/Voronoiclock01/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-01/voronoi01.png",
+      "thumbnail": "assets/work-thumbnails/voronoi-clock-01.webp",
       "note": [
         "February,2019"
       ],
@@ -961,6 +980,7 @@
       "title": "Voronoi Clock 02",
       "file": "02_Works/linktoPage/Voronoiclock02/index.html",
       "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-02/voronoi02.png",
+      "thumbnail": "assets/work-thumbnails/voronoi-clock-02.webp",
       "note": [
         "March,2020"
       ],
