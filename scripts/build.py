@@ -641,7 +641,7 @@ def redirect_page(target: str, title: str, canonical: str) -> str:
 def thoughts_page(data: dict) -> str:
     file = "05_Thoughts/index.html"
     inner = """<section class="thoughts-story" aria-label="設計に対する考え"><div class="thoughts-stack" aria-label="3つの考えが積み重なるストーリー">
-<div class="thoughts-stack-stage"><header class="thoughts-story-opening"><p class="thoughts-kicker">DESIGN PHILOSOPHY</p><h2>デジタルを道具として、<br><em>リアルの世界を豊かにする。</em></h2><p>アイデアを形にし、試作で得た気づきを設計に戻す。<br>その繰り返しの中で、何を、誰とつくるかを問い直す。</p><span class="thoughts-story-scroll">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></header>
+<div class="thoughts-stack-stage"><header class="thoughts-story-opening"><p class="thoughts-kicker">DESIGN PHILOSOPHY</p><h2 lang="en">Digital Tools<br>to Expand What’s Possible</h2><p class="thoughts-opening-translation">デジタルを道具として、リアルの世界を豊かにする。</p><p>アイデアを形にし、試作で得た気づきを設計に戻す。<br>その繰り返しの中で、何を、誰とつくるかを問い直す。</p><span class="thoughts-story-scroll">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></header>
 <div class="thoughts-stack-head"><span>THOUGHTS / DESIGN PHILOSOPHY</span><span class="thoughts-stack-count">01 — 03</span></div>
 <div class="thoughts-stack-deck">
 <article class="thoughts-stack-card" data-stack-card="0"><div class="thoughts-stack-card-head"><span>01 / FORM THE IDEA</span><span>Make</span></div><div class="thoughts-stack-card-copy"><h3><span>アイデアを、</span><br><span>試せる形に。</span></h3><img class="thoughts-stack-art" src="../assets/thoughts/technology.webp" alt="" width="480" height="480" decoding="async"><p>画像の濃淡を、パーテーションの羽根の角度に置き換える。<br>デジタルの道具で発想を操作できる形にすると、模様や空間の見え方を具体的に検討できる。</p></div></article>
