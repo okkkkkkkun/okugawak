@@ -404,10 +404,28 @@ def personal_block(from_file: str, data: dict) -> str:
 """
 
 
+def contact_inner(data: dict) -> str:
+    site = data["site"]
+    mail = esc(site["email"])
+    affiliation = "<br>".join(esc(part) for part in site["affiliationDisplay"].split())
+    return f"""
+<div class="contact-card">
+  <div class="contact-identity">
+    <p class="contact-name">{esc(site["nameJa"])}</p>
+    <p class="contact-name-en" lang="en">{esc(site["nameEn"])}</p>
+    <p class="contact-affiliation">{affiliation}</p>
+  </div>
+  <div class="contact-method">
+    <span>メールを送る</span>
+    <a class="contact-mail" href="mailto:{mail}">
+      <span>{mail}</span><span aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+"""
+
+
 def contact_block(data: dict) -> str:
-    contact = data["contact"]
-    mail = data["site"]["email"]
-    facts = "".join(f"<li>{esc(line)}</li>" for line in contact["lines"])
     return f"""
 <section class="section" id="contact">
   <header class="sec-head">
@@ -417,9 +435,7 @@ def contact_block(data: dict) -> str:
       <h2>連絡</h2>
     </div>
   </header>
-  <p class="sec-en">{esc(contact["intro"])}</p>
-  <p><a class="mail" href="mailto:{esc(mail)}">{esc(mail)}</a></p>
-  <ul class="facts">{facts}</ul>
+  {contact_inner(data)}
 </section>
 """
 

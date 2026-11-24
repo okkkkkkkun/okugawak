@@ -29,12 +29,12 @@
       var box = mark.getBoundingClientRect();
       return box.width / 32 || 3;
     }
+    var tensionKnee = 14;
     function soften(x, y) {
       var d = Math.hypot(x, y);
-      var knee = 14;
-      if (d <= knee) return { x: x, y: y };
-      var extra = d - knee;
-      var eased = knee + extra / (1 + extra / 360);
+      if (d <= tensionKnee) return { x: x, y: y };
+      var extra = d - tensionKnee;
+      var eased = tensionKnee + extra / (1 + extra / 360);
       var scale = eased / d;
       return { x: x * scale, y: y * scale };
     }
@@ -250,6 +250,11 @@
       plane.vy = box.y - plane.y;
       plane.x = box.x;
       plane.y = box.y;
+      if (plane.drag.type === "touch" && !plane.drag.tensionReached && Math.hypot(box.x, box.y) >= tensionKnee) {
+        plane.drag.tensionReached = true;
+        flash();
+        if (typeof navigator.vibrate === "function") navigator.vibrate(12);
+      }
       paint();
       wakeMark();
     }
