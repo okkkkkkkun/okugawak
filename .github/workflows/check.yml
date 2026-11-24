@@ -12,5 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build pages from data/site.json
-        run: python3 scripts/build.py
+      - name: Check generated HTML
+        run: python3 scripts/build.py --check

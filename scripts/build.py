@@ -235,12 +235,13 @@ def profile_block(from_file: str, data: dict) -> str:
 
 
 def stamp(work: dict) -> tuple[int, int] | None:
-    blob = " ".join(work.get("note") or [])
-    found = re.search(r"([A-Za-z]{3,9})(?:\s*[-–]\s*[A-Za-z]+)?\s*,?\s*(20\d{2})", blob)
-    if not found:
-        return None
-    month = MONTHS.get(found.group(1).lower()[:3], 0)
-    return int(found.group(2)), month
+    for note in work.get("note") or []:
+        found = re.match(r"\s*([A-Za-z]{3,9})(?:\s*[-–]\s*[A-Za-z]+)?\s*,?\s*(20\d{2})\b", note)
+        if found:
+            month = MONTHS.get(found[1].lower()[:3])
+            if month:
+                return int(found[2]), month
+    return None
 
 
 def log_works(works: list[dict]) -> list[dict]:
@@ -265,10 +266,14 @@ def work_rows(from_file: str, works: list[dict]) -> str:
     for index, work in enumerate(ordered, start=1):
         link = href(from_file, work["file"])
         thumb = href(from_file, work["thumb"]) if work.get("thumb") else ""
-        note = " · ".join(work.get("note") or [])
         line = work.get("addresses") or excerpt(work.get("paragraphs") or [])
         line_class = "manuscript" if placeholder(line) else "excerpt"
-        note_html = f'<p class="work-note">{esc(note)}</p>' if note else ""
+        label = date_label(work)
+        date_html = (
+            f'<time datetime="{label.replace(".", "-")}">{esc(label)}</time>'
+            if stamp(work)
+            else f'<span class="work-date">{esc(label)}</span>'
+        )
         loading = "eager" if index <= 2 else "lazy"
         image = (
             f'<div class="frame"><img src="{esc(thumb)}" alt="" loading="{loading}" decoding="async"></div>'
@@ -281,7 +286,7 @@ def work_rows(from_file: str, works: list[dict]) -> str:
   <a class="row" href="{esc(link)}">
     {image}
     <div class="meta">
-      <time datetime="{esc(date_label(work))}">{esc(date_label(work))}</time>
+      {date_html}
       <h3>{esc(work["title"])}</h3>
       <p class="{line_class}">{esc(line)}</p>
     </div>
@@ -310,9 +315,9 @@ def tool_row(from_file: str, data: dict) -> str:
 
 def work_listing(from_file: str, data: dict) -> str:
     return (
-        '<template id="work-source">'
+        '<div id="work-source">'
         + work_rows(from_file, data["works"])
-        + '</template>'
+        + '</div>'
     )
 
 
@@ -638,9 +643,8 @@ def redirect_page(target: str, title: str, canonical: str) -> str:
 """
 
 
-def thoughts_page(data: dict) -> str:
-    file = "05_Thoughts/index.html"
-    inner = """<section class="thoughts-story" aria-label="設計に対する考え"><div class="thoughts-stack" aria-label="3つの考えが積み重なるストーリー">
+def thoughts_inner() -> str:
+    return """<section class="thoughts-story" aria-label="設計に対する考え"><div class="thoughts-stack" aria-label="3つの考えが積み重なるストーリー">
 <div class="thoughts-stack-stage"><header class="thoughts-story-opening"><p class="thoughts-kicker">DESIGN PHILOSOPHY</p><h2 lang="en">Digital Tools<br>to Expand What’s Possible</h2><p class="thoughts-opening-translation">デジタルを道具として、リアルの世界を豊かにする。</p><p>どんな形があり得るか。どんなつくり方ができるか。そこに誰が関われるか。<br>デジタルの道具を使うことで、設計のなかで選べることを増やしたい。</p><span class="thoughts-story-scroll">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></header>
 <div class="thoughts-stack-head"><span>THOUGHTS / DESIGN PHILOSOPHY</span><span class="thoughts-stack-count">01 — 03</span></div>
 <div class="thoughts-stack-deck">
@@ -652,5 +656,68 @@ def thoughts_page(data: dict) -> str:
 <div class="thoughts-stack-scroll" aria-hidden="true"><span>SCROLL TO STACK</span><span class="thoughts-stack-track"><span></span></span></div>
 </div>
 </div></section>"""
-    return section_page(file, "thoughts", "Thoughts", "考え", "01", inner, data, "")
 
+
+
+def thoughts_page(data: dict) -> str:
+    return section_page("05_Thoughts/index.html", "thoughts", "Thoughts", "考え", "01", thoughts_inner(), data)
+
+
+
+def update_page(path: str, render, check: bool) -> bool:
+    page = ROOT / path
+    previous = page.read_text(encoding="utf-8")
+    updated = render(previous)
+    if updated == previous:
+        return True
+    if check:
+        print(f"Out of date: {path}", file=sys.stderr)
+        return False
+    page.write_text(updated, encoding="utf-8")
+    print(f"Updated: {path}")
+    return True
+
+
+def replace_once(page: str, pattern: str, content: str) -> str:
+    rendered, count = re.subn(pattern, lambda _: content, page, flags=re.DOTALL)
+    if count != 1:
+        raise ValueError(f"Expected one generated section, found {count}: {pattern}")
+    return rendered
+
+
+def render_detail_dates(page: str, work: dict) -> str:
+    lead = " · ".join(part for part in (date_label(work), work.get("kind")) if part)
+    notes = " · ".join(work.get("note") or [])
+    page = replace_once(page, r'<p class="page-lead">[^<]*</p>', f'<p class="page-lead">{esc(lead)}</p>')
+    return replace_once(page, r'<p class="work-note">[^<]*</p>', f'<p class="work-note">{esc(notes)}</p>')
+
+
+def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="report stale generated content without writing")
+    options = parser.parse_args()
+    data = json.loads(DATA.read_text(encoding="utf-8"))
+    work_path = "02_Works/index.html"
+    personal_path = "04_Personal/index.html"
+    sections = {
+        work_path: work_listing(work_path, data),
+        "05_Thoughts/index.html": thoughts_inner(),
+        personal_path: personal_inner(personal_path, data),
+        "04_Contact/contact.html": contact_inner(data),
+    }
+    start = "    <!-- BEGIN GENERATED CONTENT -->"
+    end = "    <!-- END GENERATED CONTENT -->"
+    pattern = re.escape(start) + r".*?" + re.escape(end)
+    status = []
+    for path, content in sections.items():
+        replacement = f"{start}\n{content.strip()}\n{end}"
+        status.append(update_page(path, lambda page: replace_once(page, pattern, replacement), options.check))
+    for work in data["works"]:
+        status.append(update_page(work["file"], lambda page: render_detail_dates(page, work), options.check))
+    return 0 if all(status) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

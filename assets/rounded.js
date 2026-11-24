@@ -1,86 +1,71 @@
 (function(){
-  var rounded = new URLSearchParams(location.search).get("design") === "rounded";
-  document.documentElement.classList.toggle("design-rounded", rounded);
-  if (rounded) {
-    document.querySelectorAll("a[href]").forEach(function (a) {
-      var raw = a.getAttribute("href");
-      if (!raw || raw[0] === "#" || /^(mailto:|tel:|https?:|javascript:)/i.test(raw)) return;
-      var url = new URL(raw, location.href);
-      if (url.origin !== location.origin) return;
-      url.searchParams.set("design", "rounded");
-      a.href = url.href;
+  document.documentElement.classList.add("design-rounded");
+  // Work links and detail pages share a small geometric, responsive vocabulary.
+  // Preserve native navigation, accessibility, and the existing page reveals.
+  document.querySelectorAll(".work-row a.row").forEach(function (link) {
+    var frame = link.querySelector(".frame");
+    if (!frame) return;
+    link.addEventListener("pointerdown", function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      frame.style.transform = "scale(.995)";
     });
-  }
-  if (rounded) {
-    // Work links and detail pages share a small geometric, responsive vocabulary.
-    // Preserve native navigation, accessibility, and the existing page reveals.
-    document.querySelectorAll(".work-row a.row").forEach(function (link) {
-      var frame = link.querySelector(".frame");
-      if (!frame) return;
-      link.addEventListener("pointerdown", function () {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        frame.style.transform = "scale(.995)";
-      });
-      ["pointerup", "pointercancel", "pointerleave"].forEach(function (eventName) {
-        link.addEventListener(eventName, function () { frame.style.transform = ""; });
-      });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function (eventName) {
+      link.addEventListener(eventName, function () { frame.style.transform = ""; });
     });
-  }
+  });
 
   // Responsive editorial footer for the rounded design. Keep all original links and credits.
-  if (rounded) {
-    document.querySelectorAll(".site-foot").forEach(function(foot){
-      var original=Array.from(foot.querySelectorAll(":scope > p"));
-      if(original.length<5 || foot.querySelector(".foot-layout"))return;
-      var affiliation=original[0].textContent.trim().split("/").filter(Boolean);
-      var name=original[1].textContent.trim();
-      var mail=original[2].querySelector("a");
-      var brand=original[3].querySelector("a");
-      var copyright=original[4].textContent.trim();
-      var layout=document.createElement("div");
-      layout.className="foot-layout";
-      var identity=document.createElement("div");
-      identity.className="foot-identity";
-      var kicker=document.createElement("span");
-      kicker.className="foot-kicker";
-      kicker.textContent="KOTA OKUGAWA  /  PORTFOLIO";
-      var signature=document.createElement("strong");
-      signature.className="foot-signature";
-      signature.textContent="奥川航大  |  Kota okugawa";
-      var org=document.createElement("p");
-      org.className="foot-affiliation";
-      affiliation.forEach(function(part,i){
-        if(i)org.appendChild(document.createElement("br"));
-        org.appendChild(document.createTextNode(part));
-      });
-      identity.append(kicker,signature,org);
-      var contact=document.createElement("div");
-      contact.className="foot-contact";
-      var contactLabel=document.createElement("span");
-      contactLabel.className="foot-kicker";
-      contactLabel.textContent="CONTACT";
-      if(mail){mail.className="foot-mail";contact.append(contactLabel,mail.cloneNode(true));}
-      if(brand){var link=brand.cloneNode(true);link.className="foot-brand";contact.appendChild(link);}
-      var base=document.createElement("div");
-      base.className="foot-base";
-      var credit=document.createElement("small");
-      credit.textContent=copyright;
-      var top=document.createElement("a");
-      top.className="foot-top";
-      top.href="#";
-      top.textContent="Back to top ↑";
-      base.append(credit,top);
-      layout.append(identity,contact,base);
-      foot.replaceChildren(layout);
+  document.querySelectorAll(".site-foot").forEach(function(foot){
+    var original=Array.from(foot.querySelectorAll(":scope > p"));
+    if(original.length<5 || foot.querySelector(".foot-layout"))return;
+    var affiliation=original[0].textContent.trim().split("/").filter(Boolean);
+    var name=original[1].textContent.trim();
+    var mail=original[2].querySelector("a");
+    var brand=original[3].querySelector("a");
+    var copyright=original[4].textContent.trim();
+    var layout=document.createElement("div");
+    layout.className="foot-layout";
+    var identity=document.createElement("div");
+    identity.className="foot-identity";
+    var kicker=document.createElement("span");
+    kicker.className="foot-kicker";
+    kicker.textContent="KOTA OKUGAWA  /  PORTFOLIO";
+    var signature=document.createElement("strong");
+    signature.className="foot-signature";
+    signature.textContent="奥川航大  |  Kota okugawa";
+    var org=document.createElement("p");
+    org.className="foot-affiliation";
+    affiliation.forEach(function(part,i){
+      if(i)org.appendChild(document.createElement("br"));
+      org.appendChild(document.createTextNode(part));
     });
-  }
+    identity.append(kicker,signature,org);
+    var contact=document.createElement("div");
+    contact.className="foot-contact";
+    var contactLabel=document.createElement("span");
+    contactLabel.className="foot-kicker";
+    contactLabel.textContent="CONTACT";
+    if(mail){mail.className="foot-mail";contact.append(contactLabel,mail.cloneNode(true));}
+    if(brand){var link=brand.cloneNode(true);link.className="foot-brand";contact.appendChild(link);}
+    var base=document.createElement("div");
+    base.className="foot-base";
+    var credit=document.createElement("small");
+    credit.textContent=copyright;
+    var top=document.createElement("a");
+    top.className="foot-top";
+    top.href="#";
+    top.textContent="Back to top ↑";
+    base.append(credit,top);
+    layout.append(identity,contact,base);
+    foot.replaceChildren(layout);
+  });
 
   // Work Explorer: all views derive from the same existing work links.
-  if (rounded && /\/02_Works\/index\.html$/.test(location.pathname)) {
-    var body = document.querySelector(".page-body");
-    var source = body && body.querySelector("#work-source");
-    var original = source && source.content.querySelector(".works");
-    if (body && original) {
+  var source = document.querySelector(".page-body #work-source");
+  if (source) {
+    var body = source.parentElement;
+    var original = source.querySelector(".works");
+    if (original) {
       var items = Array.from(original.querySelectorAll(".work-row")).map(function (article, i) {
         var a = article.querySelector("a.row"), image = article.querySelector("img");
         var time = article.querySelector("time");
@@ -91,7 +76,6 @@
       var lead=document.querySelector(".page-hero .page-lead");
       if(lead) lead.remove();
       body.querySelectorAll(".log-label").forEach(function(el){el.remove();});
-      source.remove();
       var explorer=document.createElement("section");
       explorer.className="work-explorer";
       explorer.setAttribute("aria-label","作品表示");
@@ -149,17 +133,11 @@
       // Always open Work in its primary Voronoi experience.
       subview.inert=true;
       switchView("voronoi");
+      source.remove();
     }
   }
 
   if (document.body.classList.contains("is-home")) {
-  var link = document.createElement("a");
-  link.className = "design-switch";
-  link.textContent = rounded ? "Original design" : "Rounded preview";
-  link.href = rounded ? location.pathname : location.pathname + "?design=rounded";
-  link.setAttribute("aria-label", rounded ? "元のデザインを表示" : "Balancedデザインを表示");
-  document.body.appendChild(link);
-  if (rounded) {
     var tagline = document.querySelector(".cover-en");
     if (tagline) {
       var phrase = "Make / Run / Rethink.";
@@ -191,7 +169,6 @@
         setTimeout(typeNext, 600);
       }
     }
-  }
   }
   // Spatial Reveal deliberately uses the native scroll flow.
   // No duplicate canvas, decorative Voronoi, scroll interpolation or snapping.
@@ -347,7 +324,7 @@
 
   // Stacking Thoughts uses one scroll position for the deck, text and closing message.
   var stack = document.querySelector(".thoughts-stack");
-  if (stack && rounded) {
+  if (stack) {
     var staticStack = window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 560px)");
     var stage = stack.querySelector(".thoughts-stack-stage");
     var opening = stack.querySelector(".thoughts-story-opening");

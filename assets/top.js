@@ -574,7 +574,7 @@
     return seeds.map(function (_, index) { return cell(index); });
   }
 
-  var roundedMode = new URLSearchParams(location.search).get("design") === "rounded";
+  var roundedMode = document.documentElement.classList.contains("design-rounded");
   // Offset each polygon edge in parallel, then fillet the resulting corners.
   // This preserves the straight Voronoi edges instead of shrinking vertices toward a centroid.
   function roundedCellPath(ctx, poly) {

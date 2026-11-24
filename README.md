@@ -6,7 +6,7 @@ https://kota-okugawa.com
 
 ## 原稿の編集
 
-本文の正本は [`data/site.json`](data/site.json) です。表示用の HTML はここから生成します。
+作品の一覧・日付、Personalの写真、連絡先は [`data/site.json`](data/site.json) で管理します。「考え」の本文は [`scripts/build.py`](scripts/build.py) の `thoughts_inner` にあります。
 
 ```bash
 python3 scripts/build.py
@@ -34,7 +34,7 @@ python3 scripts/build.py
 | --- | --- |
 | `index.html` | トップ。プロフィール、作品、考え、仕事の外、連絡 |
 | `01_Profile/profile.html` | プロフィール |
-| `02_Works/work.html` | 作品一覧 |
+| `02_Works/index.html` | 作品一覧 |
 | `02_Works/linktoPage/` | 各作品 |
 | `03_Trip/trip.html` | 旧 Trip。Football & Photo へ転送 |
 | `04_Personal/index.html` | 仕事の外 |
@@ -45,4 +45,4 @@ python3 scripts/build.py
 
 GitHub Pages が `main` ブランチのルートを、カスタムドメイン `kota-okugawa.com`（`CNAME`）で配信しています。`main` へマージすると、同じ設定のまま公開されます。ビルド用のサーバーは不要で、生成済みの HTML をそのまま置きます。
 
-変更後は `python3 scripts/build.py` を実行し、生成された HTML も一緒にコミットします。GitHub Actions の `check` が、JSON と HTML のずれを見ます。
+原稿データの変更後は `python3 scripts/build.py` を実行し、更新された HTML も一緒にコミットします。GitHub Actions の `check` は、作品一覧・作品詳細の日付・考え・Personal・Contactの生成部分を検査します。
