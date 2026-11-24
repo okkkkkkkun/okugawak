@@ -687,10 +687,17 @@ def replace_once(page: str, pattern: str, content: str) -> str:
 
 
 def render_detail_dates(page: str, work: dict) -> str:
-    lead = " · ".join(part for part in (date_label(work), work.get("kind")) if part)
-    notes = " · ".join(work.get("note") or [])
-    page = replace_once(page, r'<p class="page-lead">[^<]*</p>', f'<p class="page-lead">{esc(lead)}</p>')
-    return replace_once(page, r'<p class="work-note">[^<]*</p>', f'<p class="work-note">{esc(notes)}</p>')
+    date = esc(date_label(work))
+    raw_notes = work.get("note") or []
+    notes = " · ".join(raw_notes)
+    repeated_date = len(raw_notes) == 1 and stamp(work) and re.fullmatch(r"[A-Za-z]{3,9}\s*,?\s*20\d{2}", notes.strip())
+    hidden = " hidden" if repeated_date else ""
+    page = replace_once(page, r'<p class="page-lead">[^<]*</p>', f'<p class="page-lead">{date}</p>')
+    return replace_once(
+        page,
+        r'<p class="work-note"(?: hidden)?>[^<]*</p>',
+        f'<p class="work-note"{hidden}>{esc(notes)}</p>',
+    )
 
 
 def main() -> int:
