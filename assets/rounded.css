@@ -690,121 +690,150 @@ html.design-rounded .thoughts-type-line>span{display:block}
 }
 
 
-/* Stacking Thoughts — architectural cards, one-screen overview */
-html.design-rounded .thoughts-stack{height:480svh;position:relative;margin:0}
-html.design-rounded .thoughts-stack-stage{height:100svh;position:sticky;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:clamp(55px,8vh,95px) 0 clamp(24px,4vh,45px);overflow:hidden}
-html.design-rounded .thoughts-stack-head{width:min(100%,900px);display:flex;justify-content:space-between;gap:15px;margin-bottom:clamp(15px,2.5vh,26px);font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.08em;color:var(--muted)}
-html.design-rounded .thoughts-stack-deck{position:relative;width:min(100%,900px);height:min(63svh,590px);min-height:330px;flex:none;isolation:isolate}
-html.design-rounded .thoughts-stack-card{position:absolute;inset:0 auto auto 0;width:100%;height:100%;box-sizing:border-box;padding:clamp(17px,3vw,39px);border:1px solid rgba(29,44,33,.18);border-radius:clamp(8px,1.4vw,15px);overflow:hidden;box-shadow:0 14px 38px rgba(27,40,30,.10);will-change:transform,height;display:flex;flex-direction:column;align-items:stretch;transform:translate3d(0,var(--stack-y,110%),0);transition:box-shadow .2s}
-html.design-rounded .thoughts-stack-card:nth-child(1){background:#dfe5dc;color:#26362b;z-index:1}
-html.design-rounded .thoughts-stack-card:nth-child(2){background:#c5d0c4;color:#25372c;z-index:2}
-html.design-rounded .thoughts-stack-card:nth-child(3){background:#35493e;color:#f2f3ed;z-index:3}
-html.design-rounded .thoughts-stack-card-head{display:flex;justify-content:space-between;gap:12px;font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.06em;opacity:.76;flex:none}
-html.design-rounded .thoughts-stack-card h3{font:600 clamp(23px,4.5vw,55px)/1.38 var(--sans);letter-spacing:-.055em;margin:auto 0 clamp(12px,2.5vh,24px);max-width:100%;flex:none}
-html.design-rounded .thoughts-stack-card p{font:400 clamp(11px,1.25vw,14px)/2.1 var(--sans);margin:0;max-width:740px;opacity:var(--stack-body-opacity,1);transform:translateY(calc((1 - var(--stack-body-opacity,1))*15px));flex:none}
-html.design-rounded .thoughts-stack-card.is-compact h3{font-size:clamp(15px,2.2vw,27px);line-height:1.3;margin:auto 0}
-html.design-rounded .thoughts-stack-card.is-compact p{position:absolute;opacity:0;pointer-events:none}
-html.design-rounded .thoughts-stack-outro{width:min(100%,900px);display:flex;justify-content:space-between;align-items:end;gap:18px;margin-top:clamp(12px,2vh,22px);opacity:var(--stack-outro-opacity,0);transform:translateY(calc((1 - var(--stack-outro-opacity,0))*22px));pointer-events:none}
-html.design-rounded .thoughts-stack-outro span{font:500 10px/1.5 var(--mono);color:var(--muted);letter-spacing:.07em}
-html.design-rounded .thoughts-stack-outro strong{font:600 clamp(20px,3.5vw,42px)/1.4 var(--sans);letter-spacing:-.055em}
-html.design-rounded .thoughts-stack-outro a{font:500 12px var(--sans);color:inherit;white-space:nowrap;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px}
-html.design-rounded .thoughts-stack.is-complete .thoughts-stack-outro{pointer-events:auto}
-html.design-rounded .thoughts-stack-scroll{width:min(100%,900px);display:flex;justify-content:space-between;align-items:center;margin-top:16px;font:500 9px var(--mono);letter-spacing:.09em;color:var(--muted)}
-html.design-rounded .thoughts-stack-track{width:120px;height:1px;background:var(--line);position:relative}
-html.design-rounded .thoughts-stack-track>span{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--stack-progress,0))}
-@media(max-width:700px){
- html.design-rounded .thoughts-stack{height:430svh}
- html.design-rounded .thoughts-stack-stage{padding:70px 0 20px}
- html.design-rounded .thoughts-stack-deck{height:min(60svh,530px);min-height:300px}
- html.design-rounded .thoughts-stack-card{padding:clamp(16px,4vw,23px);border-radius:10px}
- html.design-rounded .thoughts-stack-card h3{font-size:clamp(24px,6.4vw,36px);line-height:1.45}
- html.design-rounded .thoughts-stack-card p{font-size:clamp(10px,2.7vw,12px);line-height:1.9}
- html.design-rounded .thoughts-stack-card.is-compact h3{font-size:clamp(15px,4.2vw,21px)}
- html.design-rounded .thoughts-stack-card-head{font-size:9px}
- html.design-rounded .thoughts-stack-outro{align-items:center;flex-wrap:wrap}
- html.design-rounded .thoughts-stack-outro span{width:100%;font-size:9px}
- html.design-rounded .thoughts-stack-outro strong{font-size:clamp(22px,5.4vw,31px)}
- html.design-rounded .thoughts-stack-outro a{font-size:11px}
- html.design-rounded .thoughts-stack-track{width:80px}
+/* Stacking Thoughts */
+html.design-rounded .page:has(.thoughts-stack) {padding-top:clamp(12px,3svh,30px)}
+html.design-rounded .page:has(.thoughts-stack) .page-hero {
+  width:min(calc(100% - 2 * var(--pad)),900px);max-width:none;margin-inline:auto;padding:0;
 }
-@media(max-height:650px){html.design-rounded .thoughts-stack-stage{padding-top:48px}.design-rounded .thoughts-stack-deck{height:53svh;min-height:260px}.design-rounded .thoughts-stack-card p{font-size:10px;line-height:1.65}.design-rounded .thoughts-stack-card h3{font-size:clamp(21px,4vw,37px)}}
-@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack{height:auto}.design-rounded .thoughts-stack-stage{height:auto;position:relative;overflow:visible}.design-rounded .thoughts-stack-deck{height:auto;display:grid;gap:12px}.design-rounded .thoughts-stack-card{position:relative;transform:none!important;height:auto!important;min-height:160px}.design-rounded .thoughts-stack-card p{opacity:1;max-height:none;transform:none}.design-rounded .thoughts-stack-outro{opacity:1;transform:none;pointer-events:auto}.design-rounded .thoughts-stack-scroll{display:none}}
+html.design-rounded .page:has(.thoughts-stack) h1 {font-size:clamp(32px,6vw,56px);margin:0}
 
-
-/* Editorial motion + adopted Kiln brand palette */
-html.design-rounded .thoughts-stack{--stack-paper:#f6f3ee;--stack-ink:#161513;--stack-muted:#5c574f;--stack-accent:#e24a1b}
-html.design-rounded .thoughts-stack-card:nth-child(1){background:#f6f3ee;color:#161513;border-color:rgba(22,21,19,.22)}
-html.design-rounded .thoughts-stack-card:nth-child(2){background:#e8e2d9;color:#161513;border-color:rgba(22,21,19,.24)}
-html.design-rounded .thoughts-stack-card:nth-child(3){background:#161513;color:#f6f3ee;border-color:#161513}
-html.design-rounded .thoughts-stack-card{box-shadow:0 12px 32px rgba(22,21,19,.12)}
-html.design-rounded .thoughts-stack-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--stack-accent);transform:scaleX(var(--stack-edge,0));transform-origin:left;pointer-events:none}
-html.design-rounded .thoughts-stack-card::after{content:attr(data-stack-card);position:absolute;right:clamp(14px,3vw,36px);top:17%;font:600 clamp(100px,20vw,240px)/1 "Instrument Sans",sans-serif;letter-spacing:-.12em;color:currentColor;opacity:calc(.035 * var(--stack-editorial,0));pointer-events:none}
-html.design-rounded .thoughts-stack-card-head{position:relative;z-index:2}
-html.design-rounded .thoughts-stack-card h3{position:relative;z-index:2;transform:translate3d(0,calc((1 - var(--stack-title,1))*32px),0);opacity:calc(.45 + var(--stack-title,1)*.55);clip-path:inset(0 0 calc((1 - var(--stack-title,1))*105%) 0);will-change:clip-path,transform}
-html.design-rounded .thoughts-stack-card p{position:relative;z-index:2}
-html.design-rounded .thoughts-stack-card.is-compact h3{clip-path:none;transform:none;opacity:var(--stack-compact-title,1)}
-html.design-rounded .thoughts-stack-head{color:var(--stack-muted)}
-html.design-rounded .thoughts-stack-outro strong{color:var(--stack-ink)}
-html.design-rounded .thoughts-stack-outro a{color:var(--stack-ink)}
-html.design-rounded .thoughts-stack-track>span{background:var(--stack-accent)}
-html.design-rounded .thoughts-stack-card:nth-child(3)::before{background:#e24a1b}
-@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack-card h3{clip-path:none;transform:none;opacity:1}html.design-rounded .thoughts-stack-card::before{transform:scaleX(1)}}
-
-
-/* One continuous Thoughts scene: intro and actual cards share a sticky viewport */
-html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero{padding-top:clamp(12px,2vh,22px);padding-bottom:0;min-height:0}
-html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero h1{font-size:clamp(32px,6vw,56px);margin:0}
-html.design-rounded .thoughts-stack-stage>.thoughts-story-opening{position:absolute;z-index:5;top:clamp(16px,4vh,42px);left:0;right:0;width:min(100%,900px);height:auto;min-height:0;padding:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;opacity:calc(1 - var(--stack-intro-progress,0));transform:translateY(calc(var(--stack-intro-progress,0)*-28px));pointer-events:none}
-html.design-rounded .thoughts-stack-stage>.thoughts-story-opening h2{font-size:clamp(24px,4.2vw,50px);line-height:1.4;margin:clamp(12px,2vh,24px) 0}
-html.design-rounded .thoughts-stack-stage>.thoughts-story-opening>p:not(.thoughts-kicker){font-size:clamp(11px,1.3vw,14px);line-height:1.85;margin:0}
-html.design-rounded .thoughts-stack-stage>.thoughts-story-opening .thoughts-story-scroll{margin-top:clamp(12px,2vh,22px)}
-html.design-rounded .thoughts-stack-stage>.thoughts-stack-head{position:absolute;top:clamp(8px,3vh,28px);opacity:var(--stack-intro-progress,0)}
-html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{position:absolute;top:clamp(70px,13svh,120px);left:50%;transform:translate(-50%,var(--stack-intro-offset,0px));height:clamp(290px,calc(100svh - 240px),540px);min-height:0}
-html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro{position:absolute;bottom:clamp(25px,5vh,60px);left:50%;transform:translate(-50%,calc((1 - var(--stack-outro-opacity,0))*22px));}
-html.design-rounded .thoughts-stack-stage>.thoughts-stack-scroll{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);opacity:var(--stack-intro-progress,0)}
-html.design-rounded .thoughts-stack-card.is-compact h3{margin:auto 0}
-@media(max-width:700px){
- html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero .page-no,
- html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero .page-en{display:block}
- html.design-rounded body:has(.thoughts-stack-stage>.thoughts-story-opening) .page-hero h1{font-size:clamp(31px,8vw,43px)}
- html.design-rounded .thoughts-stack-stage>.thoughts-story-opening{top:clamp(8px,2vh,20px)}
- html.design-rounded .thoughts-stack-stage>.thoughts-story-opening h2{font-size:clamp(21px,5.7vw,31px);line-height:1.4;margin:12px 0}
- html.design-rounded .thoughts-stack-stage>.thoughts-story-opening>p:not(.thoughts-kicker){font-size:11px;line-height:1.75}
- html.design-rounded .thoughts-stack-stage>.thoughts-story-opening .thoughts-story-scroll{margin-top:12px}
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{height:clamp(270px,calc(100svh - 220px),540px)}
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro{bottom:32px}
+.design-rounded .thoughts-stack {
+  --stack-paper:#F6F3EE;
+  --stack-ink:#161513;
+  --stack-accent:#E24A1B;
+  --stack-width:min(100%,900px);
+  position:relative;
+  overflow-anchor:none;
 }
-@media(prefers-reduced-motion:reduce){html.design-rounded .thoughts-stack-stage>.thoughts-story-opening,html.design-rounded .thoughts-stack-stage>.thoughts-stack-head,html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck,html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro,html.design-rounded .thoughts-stack-stage>.thoughts-stack-scroll{position:relative;top:auto;bottom:auto;left:auto;transform:none;opacity:1;pointer-events:auto}}
+.design-rounded .thoughts-stack-stage {display:grid;justify-items:center;gap:16px;padding:16px 0}
+html.design-rounded .thoughts-stack .thoughts-story-opening {
+  width:var(--stack-width);min-height:0;padding:0;justify-content:start;
+}
+html.design-rounded .thoughts-stack .thoughts-story-opening h2 {
+  font-size:clamp(23px,4.2vw,50px);line-height:1.35;margin:clamp(10px,1.8svh,18px) 0;
+}
+html.design-rounded .thoughts-stack .thoughts-story-opening > p:not(.thoughts-kicker) {
+  font-size:clamp(12px,1.4vw,15px);line-height:1.75;margin:0;
+}
+.design-rounded .thoughts-stack .thoughts-story-scroll,
+.design-rounded .thoughts-stack-head,
+.design-rounded .thoughts-stack-scroll {display:none}
+.design-rounded .thoughts-stack-deck {width:var(--stack-width);display:grid;gap:10px;isolation:isolate}
+.design-rounded .thoughts-stack-card {
+  position:relative;box-sizing:border-box;min-width:0;padding:clamp(14px,2.4vw,26px);
+  border:1px solid rgba(22,21,19,.22);border-radius:clamp(9px,1.4vw,15px);
+  overflow:hidden;display:flex;flex-direction:column;gap:12px;
+  background:var(--stack-paper);color:var(--stack-ink);
+  box-shadow:0 10px 25px rgba(22,21,19,.10);
+}
+.design-rounded .thoughts-stack-card:nth-child(2) {background:#E8E2D9}
+.design-rounded .thoughts-stack-card:nth-child(3) {background:var(--stack-ink);color:var(--stack-paper)}
+.design-rounded .thoughts-stack-card::before {
+  content:"";position:absolute;top:0;inset-inline:0;height:2px;
+  background:var(--stack-accent);transform-origin:left;
+}
+.design-rounded .thoughts-stack-card-head {
+  display:flex;justify-content:space-between;gap:8px;flex:none;
+  font:500 clamp(9px,1vw,11px)/1.5 var(--mono);letter-spacing:.05em;opacity:.8;
+}
+.design-rounded .thoughts-stack-card-copy {flex:none}
+.design-rounded .thoughts-stack-card h3 {
+  font:600 clamp(21px,3.6vw,42px)/1.35 var(--sans);letter-spacing:-.045em;margin:0;
+}
+.design-rounded .thoughts-stack-card p {
+  font:400 clamp(13px,1.35vw,15px)/1.65 var(--sans);margin:8px 0 0;
+}
+.design-rounded .thoughts-stack-outro {
+  width:var(--stack-width);display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:4px 10px;align-items:end;
+}
+.design-rounded .thoughts-stack-outro span {
+  grid-column:1/-1;font:500 10px/1.5 var(--mono);color:var(--muted);letter-spacing:.07em;
+}
+.design-rounded .thoughts-stack-outro strong {font:600 clamp(19px,3.15vw,38px)/1.25 var(--sans);letter-spacing:-.055em}
+.design-rounded .thoughts-stack-outro strong br {display:none}
+.design-rounded .thoughts-stack-outro a {
+  font:500 12px/1.4 var(--sans);color:inherit;white-space:nowrap;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:4px;
+}
+@media (max-width:700px) {
+  html.design-rounded .thoughts-stack .thoughts-story-opening h2 {font-size:clamp(21px,5.7vw,32px)}
+}
+@media (max-width:360px) {
+  .design-rounded .thoughts-stack-card p br {display:none}
+}
 
-html.design-rounded .thoughts-stack-card{padding:clamp(12px,2.4vw,28px)}
-html.design-rounded .thoughts-stack-card.is-compact{padding-block:9px}
-html.design-rounded .thoughts-stack-card h3{margin:auto 0 clamp(8px,1.5vh,16px)}
-html.design-rounded .thoughts-stack-card p{font-size:clamp(13px,1.35vw,15px);line-height:1.65}
-html.design-rounded .thoughts-stack-card.is-compact h3{margin:auto 0;font-size:clamp(14px,2.2vw,24px)}
-html.design-rounded .thoughts-stack-card.is-compact h3 br,
-html.design-rounded .thoughts-stack.is-complete .thoughts-stack-outro strong br{display:none}
-html.design-rounded .thoughts-stack-outro{visibility:hidden}
-html.design-rounded .thoughts-stack.is-complete .thoughts-stack-outro{visibility:visible}
-html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{overflow-anchor:none}
-@media(max-width:700px){
- html.design-rounded .page:has(.thoughts-stack){padding-top:8px}
- html.design-rounded .thoughts-stack-card h3{font-size:clamp(21px,5.7vw,32px)}
- html.design-rounded .thoughts-stack-card.is-compact h3{font-size:clamp(14px,4vw,19px)}
- html.design-rounded .thoughts-stack-outro{column-gap:10px;row-gap:4px}
+.design-rounded .thoughts-stack.is-animated {height:420svh}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-stage {
+  position:sticky;top:0;height:100svh;padding:0;box-sizing:border-box;overflow:hidden;
 }
-@media(max-width:360px){
- html.design-rounded .thoughts-stack-card p br{display:none}
+html.design-rounded .thoughts-stack.is-animated .thoughts-story-opening {
+  position:absolute;top:clamp(10px,2.2svh,24px);left:50%;z-index:2;
+  transform:translate(-50%,calc(-24px * (1 - var(--stack-intro,1))));
+  opacity:var(--stack-intro,1);pointer-events:none;
 }
-@media(prefers-reduced-motion:reduce),(max-height:560px){
- html.design-rounded .thoughts-stack{height:auto}
- html.design-rounded .thoughts-stack-stage{position:relative;height:auto;overflow:visible;padding:18px 0;gap:16px}
- html.design-rounded .thoughts-stack-stage>.thoughts-story-opening,
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck,
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-outro{position:relative;inset:auto;transform:none;opacity:1}
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-head,
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-scroll,
- html.design-rounded .thoughts-stack-stage .thoughts-story-scroll{display:none}
- html.design-rounded .thoughts-stack-stage>.thoughts-stack-deck{height:auto;display:grid;gap:12px}
- html.design-rounded .thoughts-stack-card{position:relative;transform:none;height:auto;min-height:160px;gap:12px}
- html.design-rounded .thoughts-stack-outro{visibility:visible;pointer-events:auto}
+.design-rounded .thoughts-stack.is-animated .thoughts-story-scroll {display:block;margin-top:clamp(10px,2svh,18px)}
+.design-rounded .thoughts-stack.is-animated .thoughts-story-scroll span {animation:none}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-head,
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-scroll {
+  position:absolute;width:var(--stack-width);left:50%;transform:translateX(-50%);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font:500 9px/1.5 var(--mono);letter-spacing:.08em;color:var(--muted);pointer-events:none;
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-head {top:76px;opacity:var(--stack-running,0)}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-scroll {bottom:12px;opacity:var(--stack-running,0)}
+.design-rounded .thoughts-stack-track {width:clamp(70px,13vw,120px);height:1px;background:var(--line)}
+.design-rounded .thoughts-stack-track > span {
+  display:block;width:100%;height:100%;background:var(--stack-accent);
+  transform:scaleX(var(--stack-progress,0));transform-origin:left;
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-deck {
+  position:absolute;display:block;top:clamp(96px,13svh,120px);left:50%;
+  height:clamp(335px,calc(100svh - 205px),558px);
+  transform:translate(-50%,var(--stack-intro-offset,0px));
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card {
+  --stack-small-title:clamp(14px,2.2vw,24px);
+  --stack-large-title:clamp(22px,3.3vw,42px);
+  --stack-large-padding:clamp(12px,2.4vw,26px);
+  position:absolute;inset:0 0 auto;height:var(--stack-height);
+  transform:translate3d(0,var(--stack-y,0px),0);
+  padding-inline:var(--stack-large-padding);
+  padding-block:calc(9px + (var(--stack-large-padding) - 9px) * var(--stack-open,0));
+  gap:calc(3px + 9px * var(--stack-open,0));
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card-copy {margin-block:auto}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card h3 {
+  font-size:calc(var(--stack-small-title) + (var(--stack-large-title) - var(--stack-small-title)) * var(--stack-open,0));
+  opacity:var(--stack-heading,0);
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card h3 br {display:none}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card h3 span {display:inline-block;max-width:100%}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card p {
+  margin-top:calc(10px * var(--stack-body,0));max-height:calc(180px * var(--stack-body,0));
+  overflow:hidden;opacity:var(--stack-body,0);
+  transform:translateY(calc(6px * (1 - var(--stack-body,0))));
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-card::before {
+  transform:scaleX(calc(.28 + .72 * var(--stack-rule,0)));
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-outro {
+  position:absolute;left:50%;top:calc(clamp(96px,13svh,120px) + clamp(335px,100svh - 205px,558px) + 16px);
+  transform:translate(-50%,calc(10px * (1 - var(--stack-outro,0))));
+  opacity:var(--stack-outro,0);pointer-events:none;
+}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-outro[inert] {visibility:hidden}
+.design-rounded .thoughts-stack.is-animated .thoughts-stack-outro:not([inert]) {pointer-events:auto}
+@media (max-width:700px) {
+  .design-rounded .thoughts-stack.is-animated {height:400svh}
+  .design-rounded .thoughts-stack.is-animated .thoughts-stack-card {
+    --stack-small-title:clamp(14px,4vw,19px);--stack-large-title:clamp(22px,6.5vw,32px);
+  }
+  .design-rounded .thoughts-stack-outro a {font-size:11px}
+}
+@media (min-width:701px) and (max-height:660px) {
+  html.design-rounded .page:has(.thoughts-stack) {padding-top:12px}
+  html.design-rounded .page:has(.thoughts-stack) h1 {font-size:36px}
+  html.design-rounded .thoughts-stack .thoughts-story-opening h2 {font-size:28px}
+  html.design-rounded .thoughts-stack .thoughts-story-opening > p:not(.thoughts-kicker) {font-size:13px}
 }

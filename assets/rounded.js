@@ -345,96 +345,113 @@
   }
 
 
-  // Stacking Thoughts: the final viewport contains all three condensed ideas.
-  var stack=document.querySelector(".thoughts-stack");
-  if(stack&&rounded){
-    var staticStack=window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 560px)");
-    var cards=Array.from(stack.querySelectorAll(".thoughts-stack-card"));
-    var deck=stack.querySelector(".thoughts-stack-deck");
-    var stage=stack.querySelector(".thoughts-stack-stage");
-    var opening=stage.querySelector(".thoughts-story-opening");
-    var ticking=false;
-    function clampStack(value){return Math.min(1,Math.max(0,value));}
-    function smoothStack(value){
-      var t=clampStack(value);
-      return t*t*(3-2*t);
+  // Stacking Thoughts uses one scroll position for the deck, text and closing message.
+  var stack = document.querySelector(".thoughts-stack");
+  if (stack && rounded) {
+    var staticStack = window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 560px)");
+    var stage = stack.querySelector(".thoughts-stack-stage");
+    var opening = stack.querySelector(".thoughts-story-opening");
+    var deck = stack.querySelector(".thoughts-stack-deck");
+    var cards = Array.from(deck.querySelectorAll(".thoughts-stack-card"));
+    var outro = stack.querySelector(".thoughts-stack-outro");
+    var frame = 0;
+    var leadIn = 64;
+    var introOffset, scrollRange, poses;
+
+    function smooth(value) {
+      var t = Math.max(0, Math.min(1, value));
+      return t * t * (3 - 2 * t);
     }
-    function renderStack(){
-      ticking=false;
-      if(staticStack.matches){
-        cards.forEach(function(card){
-          card.classList.remove("is-compact");
-          card.removeAttribute("style");
-        });
-        stack.classList.remove("is-complete");
-        stack.removeAttribute("style");
+
+    function between(progress, start, end) {
+      return smooth((progress - start) / (end - start));
+    }
+
+    function reading(progress, start, full, hold, end) {
+      return between(progress, start, full) * (1 - between(progress, hold, end));
+    }
+
+    function measureStack() {
+      if (staticStack.matches) {
+        stack.classList.remove("is-animated");
+        outro.inert = false;
         return;
       }
-      var stageHeight=stage.offsetHeight;
-      var stickyTop=parseFloat(getComputedStyle(stage).top)||0;
-      var p=clampStack((stickyTop-stack.getBoundingClientRect().top)/Math.max(1,stack.offsetHeight-stageHeight));
-      var intro=smoothStack(p/.16);
-      var deckHeight=deck.offsetHeight;
-      var openingEnd=opening.offsetTop+opening.offsetHeight+16;
-      var offset=Math.max(0,openingEnd-deck.offsetTop)*(1-intro);
-      var gap=8;
-      var compact=65;
-      var tab=34;
-      var finalHeight=(deckHeight-2*gap)/3;
+      stack.classList.add("is-animated");
+      var height = deck.offsetHeight;
+      var tab = 36;
+      var compact = 66;
+      var gap = 8;
+      var step = compact + gap;
+      var summary = (height - 2 * gap) / 3;
 
-      // Each reading position reserves room for the other two card headers.
-      var scenes=[
-        [0,    [[0,84],[tab+10,84],[2*(tab+10),66]]],
-        [.18,  [[0,deckHeight-2*tab],[deckHeight-2*tab,tab],[deckHeight-tab,tab]]],
-        [.30,  [[0,deckHeight-2*tab],[deckHeight-2*tab,tab],[deckHeight-tab,tab]]],
-        [.43,  [[0,compact],[compact+gap,deckHeight-compact-gap-tab],[deckHeight-tab,tab]]],
-        [.55,  [[0,compact],[compact+gap,deckHeight-compact-gap-tab],[deckHeight-tab,tab]]],
-        [.68,  [[0,compact],[compact+gap,compact],[2*(compact+gap),deckHeight-2*(compact+gap)]]],
-        [.80,  [[0,compact],[compact+gap,compact],[2*(compact+gap),deckHeight-2*(compact+gap)]]],
-        [.93,  [[0,finalHeight],[finalHeight+gap,finalHeight],[2*(finalHeight+gap),finalHeight]]]
+      introOffset = Math.max(0, opening.offsetTop + opening.offsetHeight + 16 - deck.offsetTop);
+      scrollRange = stack.offsetHeight - stage.offsetHeight + leadIn;
+      poses = [
+        [0,    [[0,84],[44,84],[88,66]]],
+        [.19,  [[0,height-2*tab],[height-2*tab,tab],[height-tab,tab]]],
+        [.34,  [[0,height-2*tab],[height-2*tab,tab],[height-tab,tab]]],
+        [.45,  [[0,compact],[step,height-step-tab],[height-tab,tab]]],
+        [.59,  [[0,compact],[step,height-step-tab],[height-tab,tab]]],
+        [.70,  [[0,compact],[step,compact],[2*step,height-2*step]]],
+        [.84,  [[0,compact],[step,compact],[2*step,height-2*step]]],
+        [.96,  [[0,summary],[summary+gap,summary],[2*(summary+gap),summary]]]
       ];
-      var next=scenes.findIndex(function(scene){return scene[0]>p;});
-      if(next<0)next=scenes.length-1;
-      var from=scenes[next-1];
-      var to=scenes[next];
-      var progress=smoothStack((p-from[0])/(to[0]-from[0]));
-      var reading=[[.09,.18,.30,.36],[.34,.43,.55,.61],[.59,.68,.80,.87]];
+      scheduleStack();
+    }
 
-      stack.style.setProperty("--stack-intro-progress",intro.toFixed(4));
-      stack.style.setProperty("--stack-intro-offset",offset.toFixed(1)+"px");
-      cards.forEach(function(card,i){
-        var start=from[1][i];
-        var end=to[1][i];
-        var top=start[0]+(end[0]-start[0])*progress;
-        var height=start[1]+(end[1]-start[1])*progress;
-        var cue=reading[i];
-        var body=smoothStack((p-cue[0])/(cue[1]-cue[0]))*
-          (1-smoothStack((p-cue[2])/(cue[3]-cue[2])));
-        card.classList.toggle("is-compact",body===0);
-        card.style.setProperty("--stack-y",top.toFixed(1)+"px");
-        card.style.height=height.toFixed(1)+"px";
-        card.style.setProperty("--stack-body-opacity",body.toFixed(3));
-        card.style.setProperty("--stack-editorial",body.toFixed(3));
-        card.style.setProperty("--stack-edge","1");
-        var visibleHeight=height;
-        if(i<cards.length-1){
-          var nextTop=from[1][i+1][0]+(to[1][i+1][0]-from[1][i+1][0])*progress;
-          visibleHeight=Math.min(visibleHeight,nextTop-top);
-        }
-        var heading=smoothStack((visibleHeight-50)/12)*smoothStack(p/.12);
-        card.style.setProperty("--stack-compact-title",heading.toFixed(3));
+    function renderStack() {
+      frame = 0;
+      if (staticStack.matches) return;
+      var progress = Math.max(0, Math.min(1, (leadIn - stack.getBoundingClientRect().top) / scrollRange));
+      var next = poses.findIndex(function(pose) { return pose[0] > progress; });
+      if (next < 0) next = poses.length - 1;
+      var from = poses[next - 1];
+      var to = poses[next];
+      var travel = between(progress, from[0], to[0]);
+      var intro = 1 - between(progress, 0, .15);
+      var closing = between(progress, .87, .97);
+      var titleTimes = [[.08,.19,.34,.44],[.36,.45,.59,.69],[.61,.70,.84,.94]];
+      var bodyTimes = [[.13,.19,.34,.39],[.40,.45,.59,.64],[.66,.70,.84,.89]];
+      var positions = to[1].map(function(target, i) {
+        var start = from[1][i];
+        return [start[0] + (target[0] - start[0]) * travel, start[1] + (target[1] - start[1]) * travel];
       });
 
-      stack.style.setProperty("--stack-progress",p.toFixed(4));
-      stack.style.setProperty("--stack-outro-opacity",smoothStack((p-.88)/.07).toFixed(3));
-      stack.classList.toggle("is-complete",p>.88);
+      stack.style.setProperty("--stack-intro", intro.toFixed(4));
+      stack.style.setProperty("--stack-intro-offset", (intro * introOffset).toFixed(2) + "px");
+      stack.style.setProperty("--stack-running", between(progress, .08, .19).toFixed(4));
+      stack.style.setProperty("--stack-progress", progress.toFixed(4));
+      stack.style.setProperty("--stack-outro", closing.toFixed(4));
+      outro.inert = closing === 0;
+
+      cards.forEach(function(card, i) {
+        var top = positions[i][0];
+        var height = positions[i][1];
+        var visibleHeight = i < cards.length - 1 ? Math.min(height, positions[i + 1][0] - top) : height;
+        var open = reading(progress, ...titleTimes[i]);
+        var body = reading(progress, ...bodyTimes[i]);
+        var heading = between(visibleHeight, 47, 63) * between(progress, .04, .15);
+        card.style.setProperty("--stack-y", top.toFixed(2) + "px");
+        card.style.setProperty("--stack-height", height.toFixed(2) + "px");
+        card.style.setProperty("--stack-open", open.toFixed(4));
+        card.style.setProperty("--stack-heading", heading.toFixed(4));
+        card.style.setProperty("--stack-body", body.toFixed(4));
+        card.style.setProperty("--stack-rule", Math.max(open, closing, .5 * intro).toFixed(4));
+      });
     }
-    function scheduleStack(){if(!ticking){ticking=true;requestAnimationFrame(renderStack);}}
-    window.addEventListener("scroll",scheduleStack,{passive:true});
-    window.addEventListener("resize",scheduleStack,{passive:true});
-    staticStack.addEventListener("change",scheduleStack);
-    document.fonts.ready.then(scheduleStack);
-    renderStack();
+
+    function scheduleStack() {
+      if (!frame) frame = requestAnimationFrame(renderStack);
+    }
+
+    window.addEventListener("scroll", scheduleStack, {passive:true});
+    window.addEventListener("resize", measureStack, {passive:true});
+    staticStack.addEventListener("change", measureStack);
+    var stackSizing = new ResizeObserver(measureStack);
+    stackSizing.observe(opening);
+    stackSizing.observe(deck);
+    measureStack();
   }
 
 })();
