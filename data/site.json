@@ -68,13 +68,13 @@
     ]
   },
   "personal": {
-    "lead": "サンフレッチェ広島の試合を見る。写真も撮る。",
+    "lead": "サンフレッチェ広島を応援する。スタジアムの風景を、写真に残す。",
     "footballPhoto": {
       "titleJa": "Football & Photo",
       "titleEn": "Football & Photo",
       "when": "【ここに時期を記入】",
       "addresses": "サンフレッチェ広島の試合のあと、メモと配置を一枚のカードに残す。",
-      "body": "サンフレッチェ広島の試合を見る。写真も撮る。ガウルボードは、見たあとのメモと配置を一枚のカードに残す個人のアプリ。",
+      "body": "試合を観たあとのメモと選手の配置を、一枚のカードに残す個人アプリ。",
       "links": [
         {
           "label": "アプリ",
@@ -88,11 +88,13 @@
       "images": [
         {
           "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Russia.jpg",
+          "thumbnail": "assets/personal/russia.webp",
           "alt": "晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ歩いていく",
           "caption": "Russia — 晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ向かう"
         },
         {
           "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Europe.jpg",
+          "thumbnail": "assets/personal/europe.webp",
           "alt": "夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗",
           "caption": "Europe — 夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗"
         },

@@ -75,12 +75,13 @@ def up(label: str) -> str:
     return f'<span class="up"><span>{safe}</span><span aria-hidden="true">{safe}</span></span>'
 
 
-def shot(from_file: str, src: str, alt: str, wide: bool = False) -> str:
+def shot(from_file: str, src: str, alt: str, wide: bool = False, thumbnail: str | None = None) -> str:
     url = href(from_file, src)
+    photo = href(from_file, thumbnail) if thumbnail else url
     klass = "shot wide" if wide else "shot"
     return (
         f'<button type="button" class="{klass}" data-full="{esc(url)}" data-alt="{esc(alt)}">'
-        f'<img src="{esc(url)}" alt="{esc(alt)}" loading="lazy" decoding="async">'
+        f'<img src="{esc(photo)}" alt="{esc(alt)}" loading="lazy" decoding="async">'
         f"</button>"
     )
 
@@ -374,7 +375,7 @@ def photo_grid(from_file: str, images: list[dict]) -> str:
         if src:
             cells.append(
                 f'<figure class="{wide.strip()}">'
-                + shot(from_file, src, image.get("alt") or caption)
+                + shot(from_file, src, image.get("alt") or caption, thumbnail=image.get("thumbnail"))
                 + (f'<figcaption class="caption">{esc(caption)}</figcaption>' if caption else "")
                 + "</figure>"
             )
@@ -386,21 +387,23 @@ def photo_grid(from_file: str, images: list[dict]) -> str:
 
 
 def personal_inner(from_file: str, data: dict) -> str:
-    personal = data["personal"]
-    block = personal["footballPhoto"]
+    block = data["personal"]["footballPhoto"]
+    photos = [image for image in block["images"] if image.get("src")]
     links = "".join(
-        f'<a href="{esc(link["href"])}" target="_blank" rel="noopener noreferrer">{esc(link["label"])}</a>'
+        f'<a href="{esc(link["href"])}" target="_blank" rel="noopener noreferrer">'
+        f'{esc("アプリを開く" if link["label"] == "アプリ" else link["label"])}</a>'
         for link in block["links"]
     )
-    texts = [personal["lead"], block["body"], block["when"]]
     return f"""
-{pending_note(texts)}
-{manuscript(personal["lead"])}
-<article class="block" id="football-photo">
-  <h3>{esc(block["titleJa"])}</h3>
-  <p class="lede">{esc(block["body"])}</p>
-  <p class="links">{links}</p>
-  {photo_grid(from_file, block["images"])}
+<article class="personal-journal" id="football-photo" aria-label="{esc(block["titleJa"])}">
+  {photo_grid(from_file, photos)}
+  <section class="personal-app" aria-labelledby="personal-app-title">
+    <div>
+      <h2 id="personal-app-title">ガウルボード</h2>
+      <p>{esc(block["body"])}</p>
+    </div>
+    <p class="personal-app-links">{links}</p>
+  </section>
 </article>
 """
 

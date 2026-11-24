@@ -888,3 +888,43 @@ html.design-rounded .thoughts-stack.is-animated .thoughts-story-opening {
   .design-rounded .thoughts-stack.is-animated .thoughts-stack-card-copy {--stack-art-size:56px}
   .design-rounded .thoughts-stack.is-animated .thoughts-stack-card p {line-height:1.55;margin-top:calc(7px * var(--stack-body,0))}
 }
+
+/* Personal */
+html.design-rounded .page:has(.personal-journal) {
+  padding-top:clamp(16px,4svh,52px);
+}
+html.design-rounded .page:has(.personal-journal) .page-hero,
+html.design-rounded .page:has(.personal-journal) .page-body {
+  box-sizing:border-box;width:min(100%,calc(1060px + 2 * var(--pad)));max-width:none;margin-inline:auto;
+}
+html.design-rounded .page:has(.personal-journal) .page-hero {padding-bottom:clamp(20px,3.6vw,38px)}
+html.design-rounded .page:has(.personal-journal) .page-hero h1 {font-size:clamp(38px,6vw,68px)}
+html.design-rounded .page:has(.personal-journal) .page-lead {margin-top:10px}
+.design-rounded .personal-journal .mosaic {
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2vw,22px);
+}
+.design-rounded .personal-journal .mosaic figure {margin:0}
+.design-rounded .personal-journal .mosaic .feature {grid-column:auto}
+html.design-rounded .personal-journal .mosaic .shot img {
+  aspect-ratio:4/3;height:auto;object-fit:cover;
+}
+.design-rounded .personal-journal .caption {font-size:clamp(10px,1.4vw,13px);line-height:1.55}
+.design-rounded .personal-app {
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;
+  margin-top:clamp(20px,4vw,44px);padding:clamp(15px,2.4vw,26px);
+  border:1px solid var(--line);border-radius:12px;background:#EDE4D8;
+}
+.design-rounded .personal-app h2 {margin:0;font-size:clamp(18px,2.4vw,27px);line-height:1.25}
+.design-rounded .personal-app p {margin:7px 0 0;font-size:clamp(12px,1.4vw,14px);line-height:1.6}
+.design-rounded .personal-app .personal-app-links {display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;margin:0}
+.design-rounded .personal-app-links a {
+  display:inline-flex;align-items:center;min-height:44px;
+  text-underline-offset:3px;font-weight:700;white-space:nowrap;
+}
+.design-rounded .personal-app-links a:first-child {
+  padding:0 14px;border-radius:7px;background:var(--ink);color:var(--paper);text-decoration:none;
+}
+@media (max-width:360px) {
+  html.design-rounded .page:has(.personal-journal) .page-hero {padding-bottom:14px}
+  .design-rounded .personal-app {margin-top:14px;row-gap:10px}
+}
