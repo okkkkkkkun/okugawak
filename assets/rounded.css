@@ -907,6 +907,8 @@ html.design-rounded .page:has(.personal-journal) .page-hero h1 {font-size:clamp(
 .personal-photo-placeholder {aspect-ratio:4/3}
 .personal-journal .mosaic .shot img {height:auto;object-fit:cover}
 .personal-photo-placeholder {
+  display:grid;place-items:center;
+  font:500 clamp(11px,1.4vw,14px)/1.4 var(--mono);color:var(--muted);
   box-sizing:border-box;border:1px dashed var(--line);
   border-radius:clamp(8px,1.8vw,18px);background:var(--paper-2);
 }

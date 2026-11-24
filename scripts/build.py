@@ -377,7 +377,7 @@ def photo_grid(from_file: str, images: list[dict]) -> str:
                 + "</figure>"
             )
         else:
-            cells.append('<div class="personal-photo-placeholder" aria-hidden="true"></div>')
+            cells.append('<div class="personal-photo-placeholder" lang="en">Comingsoon</div>')
     return f'<div class="mosaic">{"".join(cells)}</div>'
 
 
