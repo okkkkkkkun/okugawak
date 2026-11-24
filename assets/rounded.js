@@ -437,6 +437,9 @@
         card.style.setProperty("--stack-open", open.toFixed(4));
         card.style.setProperty("--stack-heading", heading.toFixed(4));
         card.style.setProperty("--stack-body", body.toFixed(4));
+        var art = Math.max(body, .38 * closing);
+        card.style.setProperty("--stack-art-space", art.toFixed(4));
+        card.style.setProperty("--stack-art-visibility", Math.max(body, closing).toFixed(4));
         card.style.setProperty("--stack-rule", Math.max(open, closing, .5 * intro).toFixed(4));
       });
     }
