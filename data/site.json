@@ -1,5 +1,5 @@
 {
-  "_editor": "ヒーロー文、考え、仕事の外の短文は data/site.json で差し替える。写真を足すときは footballPhoto.images の空枠に Cloudflare R2 のURL（https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/）を入れる。画像ファイルはリポジトリに置かない。作品の addresses は同業者向けの一行。",
+  "_editor": "ヒーロー文と考えの短文は data/site.json で差し替える。Personalの写真は personal.gallery の空の src に Cloudflare R2 のURL（https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/）を入れる。画像ファイルはリポジトリに置かない。作品の addresses は同業者向けの一行。",
   "site": {
     "nameJa": "奥川 航大",
     "nameEn": "Kota Okugawa",
@@ -68,6 +68,12 @@
     ]
   },
   "personal": {
+    "gallery": [
+      {"src": ""},
+      {"src": ""},
+      {"src": ""},
+      {"src": ""}
+    ],
     "lead": "サンフレッチェ広島を応援する。スタジアムの風景を、写真に残す。",
     "footballPhoto": {
       "titleJa": "Football & Photo",

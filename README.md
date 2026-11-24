@@ -22,9 +22,8 @@ python3 scripts/build.py
 | --- | --- |
 | `profile.intro` | 自己紹介 |
 | `thoughts.lead` / `thoughts.items[].body` | 考え。ヒーローに合わせた草案 |
-| `personal.lead` / `footballPhoto.body` | Football & Photo の短文 |
+| `personal.gallery` | Personalの写真枠。空の `src` に写真のURLを入れる |
 | `footballPhoto.when` | ガウルボードの時期 |
-| `footballPhoto.images` の空の `src` | 追加の写真。URLは Cloudflare R2 |
 | `works[].addresses` | 同業者向けの一行。本文のない作品は印のまま |
 
 経歴、作品本文、連絡先、Trip の写真（Russia / Europe）、ガウルボードの説明は、既存のページと公開リポジトリから入っています。画像の中身は [docs/photo-catalog.md](docs/photo-catalog.md)。

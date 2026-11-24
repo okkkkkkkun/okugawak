@@ -366,45 +366,26 @@ def thoughts_block(data: dict) -> str:
 
 def photo_grid(from_file: str, images: list[dict]) -> str:
     cells = []
-    n = 0
     for image in images:
         src = image.get("src") or ""
-        caption = image.get("caption") or image.get("alt") or ""
-        n += 1
-        wide = " feature" if n == 1 and src else ""
+        caption = image.get("caption") or ""
         if src:
             cells.append(
-                f'<figure class="{wide.strip()}">'
+                '<figure>'
                 + shot(from_file, src, image.get("alt") or caption, thumbnail=image.get("thumbnail"))
                 + (f'<figcaption class="caption">{esc(caption)}</figcaption>' if caption else "")
                 + "</figure>"
             )
         else:
-            cells.append(
-                f'<figure class="slot"><span class="slot-no">{n:02d}</span><figcaption>{esc(caption)}</figcaption></figure>'
-            )
+            cells.append('<div class="personal-photo-placeholder" aria-hidden="true"></div>')
     return f'<div class="mosaic">{"".join(cells)}</div>'
 
 
 def personal_inner(from_file: str, data: dict) -> str:
-    block = data["personal"]["footballPhoto"]
-    photos = [image for image in block["images"] if image.get("src")]
-    links = "".join(
-        f'<a href="{esc(link["href"])}" target="_blank" rel="noopener noreferrer">'
-        f'{esc("アプリを開く" if link["label"] == "アプリ" else link["label"])}</a>'
-        for link in block["links"]
-    )
     return f"""
-<article class="personal-journal" id="football-photo" aria-label="{esc(block["titleJa"])}">
-  {photo_grid(from_file, photos)}
-  <section class="personal-app" aria-labelledby="personal-app-title">
-    <div>
-      <h2 id="personal-app-title">ガウルボード</h2>
-      <p>{esc(block["body"])}</p>
-    </div>
-    <p class="personal-app-links">{links}</p>
-  </section>
-</article>
+<section class="personal-journal" id="football-photo" aria-label="写真">
+  {photo_grid(from_file, data["personal"]["gallery"])}
+</section>
 """
 
 
