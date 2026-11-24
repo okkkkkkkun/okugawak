@@ -1,0 +1,1021 @@
+{
+  "_editor": "ヒーロー文と考えの短文は data/site.json で差し替える。Personalの写真は personal.gallery の空の src に Cloudflare R2 のURL（https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/）を入れる。画像ファイルはリポジトリに置かない。作品の addresses は同業者向けの一行。",
+  "site": {
+    "nameJa": "奥川 航大",
+    "nameEn": "Kota Okugawa",
+    "affiliationDisplay": "鹿島建設株式会社 建築設計本部 デジタルデザイン統括グループ",
+    "email": "okugawak@kajima.com",
+    "copyright": "All rights reserved, Copyright(C) 2023 KAJIMA CORPORATION",
+    "hero": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/profile/1-P1004005.jpg",
+    "statement": {
+      "ja": "考え、試し、つくり続ける。",
+      "en": "Make / Run / Rethink."
+    }
+  },
+  "profile": {
+    "intro": "【ここに自己紹介を記入】",
+    "portrait": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/profile/pic01.jpg",
+    "timeline": [
+      {
+        "year": "1998",
+        "text": "広島県広島市生まれ"
+      },
+      {
+        "year": "2016",
+        "text": "広陵高等学校普通科　卒業"
+      },
+      {
+        "year": "2020",
+        "text": "広島工業大学環境学部建築デザイン学科　卒業"
+      },
+      {
+        "year": "2023",
+        "text": "広島工業大学大学院工学系研究科環境学専攻　卒業"
+      },
+      {
+        "year": "2023",
+        "text": "鹿島建設株式会社建築設計本部デジタルデザイン統括グループ　入社"
+      }
+    ],
+    "photos": [
+      {
+        "src": "01_Profile/1-IMG_8766.jpg",
+        "alt": "プロフィール写真"
+      },
+      {
+        "src": "01_Profile/3-IMG_3650 (1).jpg",
+        "alt": "プロフィール写真"
+      },
+      {
+        "src": "01_Profile/4-IMG_0613.jpg",
+        "alt": "プロフィール写真"
+      },
+      {
+        "src": "01_Profile/5-IMG_2688.jpg",
+        "alt": "プロフィール写真"
+      }
+    ]
+  },
+  "thoughts": {
+    "lead": "つくりながら、考える。",
+    "items": [
+      {
+        "body": "手を先に動かす。考えは、試したあとに形を持つ。"
+      },
+      {
+        "body": "続けるものは、心が動いたほうから選ぶ。"
+      }
+    ]
+  },
+  "personal": {
+    "gallery": [
+      {"src": ""},
+      {"src": ""},
+      {"src": ""},
+      {"src": ""}
+    ],
+    "lead": "サンフレッチェ広島を応援する。スタジアムの風景を、写真に残す。",
+    "footballPhoto": {
+      "titleJa": "Football & Photo",
+      "titleEn": "Football & Photo",
+      "when": "【ここに時期を記入】",
+      "addresses": "サンフレッチェ広島の試合のあと、メモと配置を一枚のカードに残す。",
+      "body": "試合を観たあとのメモと選手の配置を、一枚のカードに残す個人アプリ。",
+      "links": [
+        {
+          "label": "アプリ",
+          "href": "https://gaulboard.vercel.app"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/okkkkkkkun/gaulboard"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Russia.jpg",
+          "thumbnail": "assets/personal/russia.webp",
+          "alt": "晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ歩いていく",
+          "caption": "Russia — 晴れた日、黄色い服の人たちがオレンジ色のスタジアムへ向かう"
+        },
+        {
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/personal/football/Europe.jpg",
+          "thumbnail": "assets/personal/europe.webp",
+          "alt": "夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗",
+          "caption": "Europe — 夜の満員スタジアム。キックオフ前、ピッチにフランスとアルバニアの大きな旗"
+        },
+        {
+          "src": "",
+          "alt": "【写真を追加】",
+          "caption": "【写真を追加】"
+        },
+        {
+          "src": "",
+          "alt": "【写真を追加】",
+          "caption": "【写真を追加】"
+        },
+        {
+          "src": "",
+          "alt": "【写真を追加】",
+          "caption": "【写真を追加】"
+        },
+        {
+          "src": "",
+          "alt": "【写真を追加】",
+          "caption": "【写真を追加】"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "intro": "Mail me",
+    "lines": [
+      "建築設計本部/デジタルデザイン統括グループ 奥川航大 Kota okugawa",
+      "mail：okugawak@kajima.com"
+    ]
+  },
+  "works": [
+    {
+      "title": "山根木材 福岡支店",
+      "file": "02_Works/linktoPage/yamanefukuoka/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/yamanefukuoka.png",
+      "thumbnail": "assets/work-thumbnails/yamane-fukuoka.webp",
+      "note": [
+        "Jan,2020"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "山根木材の福岡支店移転に伴う改装プロジェクト。広島工業大学・杉田宗研究室が産学連携として設計・施工を担当した。既存の鉄骨造の建物を木材の溢れる空間へ変えるため、CLTなどの木材の特性と新しい加工技術を活かし、オフィスと店舗を緩やかにつなぐパーテーションを考案した。私はコンピュテーショナルデザインとデジタルファブリケーションを用いたデザイン検討から、生産性を考慮した詳細設計まで、プロジェクト全体に関わった。",
+        "木材がランダムに組み合わさっているように見えながら、一定のルールによって疎密のグラデーションが生まれる木組みを考案した。RhinocerosとGrasshopperで3Dモデルを組み、木材の位置を調整しながら意匠を検討。1階は高さ2,800mm、2階は2,400mmとし、加工を簡略化するため、異なる高さでも同じグラデーションの基本パターンを用いた。",
+        "使用したのは35mm角の木材で、長さ550〜700mmの縦材・斜め材を組み合わせた。実物大での見え方、材料の強度、効率的な組み立て手順を確かめるため、研究室のCNC加工機でモックアップを繰り返し製作。3Dモデル上の印象だけでなく、実際の材料とスケールで成立するかを検証した。",
+        "生産性と意匠性を両立するため、縦材の部品数を抑え、基本となるグループを繰り返して全体を構成する方法を検討した。加工データの作成ミスを減らすため、研究室と製造側の間で加工方法やデータを綿密に調整。加工の効率化を図りながら、疎密のグラデーションが損なわれない構成へとまとめた。",
+        "現場での組み立ては研究室の学生4人を中心に行った。複雑に交差する4種類の斜め材を正しい順番で取り付けられるよう、材の長さごとに色分けした3Dモデルを用意し、iPadで確認しながら施工。縦材と斜め材はネイラーで固定し、縦材の下部はアングルで床面につなぐことで全体を組み上げた。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/1-P1014680.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/3-P1014707.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/back.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/8-IMG_9370.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/10-IMG_9373.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/9-P1004000.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/11-P1004009.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/2-IMG_3835.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/1-IMG_4136.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/4-IMG_3582.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/7-IMG_3630.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/6-IMG_3629.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/5-IMG_3611.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuoka/3-IMG_3606.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "木材の疎密をパラメトリックに制御し、CNC加工・製造側との調整・現場施工までつないだ木組みパーテーション。"
+    },
+    {
+      "title": "山根木材 福山支店",
+      "file": "02_Works/linktoPage/yamanefukuyama/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/yamanefukuyama.png",
+      "thumbnail": "assets/work-thumbnails/yamane-fukuyama.webp",
+      "note": [
+        "May,2021"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "山根木材との産学連携による木組みプロジェクトの第2段。福岡支店の改装に続き、福山支店1階の顧客打ち合わせを行う店舗空間に、木組み階段と木組みパーテーションを設計・施工した。前回のパーテーションで培った木組みの仕組みを発展させ、空間を仕切るだけでなく、人が上り下りする階段としての機能を持たせることに取り組んだ。",
+        "階段として必要な寸法と強度を確保するため、福岡支店で用いた300mmグリッドを500mmグリッドへ変更し、階段幅は2グリッド分の1,000mmとした。柱材の圧縮による座屈を防ぐため、北九州市立大学・藤田慎之輔研究室の助言を受け、初期デザイン段階から斜め材の配置と必要数量を検討。柱材・斜め材・床材の接続方法や柱材の配置も検証した。",
+        "加工データの作成を効率化するため、柱材の線データに属性情報を持たせる方法へ更新した。線データで木組みのグラデーションと斜め材の位置を検討した後、柱材ごとに斜め材が入る面、取り付け高さ、角度タイプ（4種類）を付与。形状だけでなく加工に必要な情報を一元的に扱えるようにした。",
+        "属性情報付きの柱材データから、ShopBot（3軸CNC加工機）用の加工データ、3Dモデル、加工位置を確認するAR表示を生成できるようにした。ShopBotで角材を加工するため、テーブルバイスで角材を固定する治具も設計し、データ生成だけでなく加工方法そのものも見直した。",
+        "階段は幅・高さが大きいため、複数回モックアップを製作して組み立て手順と施工可能性を確認した。最終的な木組み階段とパーテーションの組み立ては、杉田先生と研究室の学生4人で2日間かけて実施。構造検討、データ生成、加工、ARによる確認、施工をつなぐ設計プロセスへと発展させた。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/13-P1015822.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/14-P1015828.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/3-iso_view.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/5-ViewCapture20210730_154815.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/4-%E8%A7%A3%E6%9E%90.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/2-Fukuyama_Stair_02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/2-IMG_7752.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/1-P1015396.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/3-P1015537.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/5-P1015549.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/4-P1015544.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/6-P1015560.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/7-P1015587.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/8-P1015597.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/10-P1015611.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/9-P1015603.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/12-P1015626.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/yamane-fukuyama/P1015807.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "福岡支店で開発した木組みを階段へ発展させ、構造・属性情報・CNC加工・AR・施工を一つの設計プロセスに統合。"
+    },
+    {
+      "title": "Transition Teahouse",
+      "file": "02_Works/linktoPage/teahouse/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/teahouse.png",
+      "thumbnail": "assets/work-thumbnails/transition-teahouse.webp",
+      "note": [
+        "September,2022"
+      ],
+      "kind": "ワークショップ概要",
+      "paragraphs": [
+        "2022年8月12日〜16日に広島工業大学で開催された、英国ラフバラー大学との2回目の合同ワークショップ。広島工業大学から8人、ラフバラー大学から10人が参加し、広島の茶道家を招いて茶室の文化や体験を学んだ。",
+        "「Transition（移り変わり）」をテーマに、茶室が持つ日常から非日常への変化や、様々な場所へ展開される可能性をデザインと材料に落とし込んだ。折り方の変化（Transition in Fold）、高さの変化（Transition in Height）、日常から非日常への変化（Transition from the Ordinary to Extraordinary）の3つを設計の軸とした。",
+        "平凡な折り方（Normal Fold）から複雑な折り方（Complex Fold）へと変化する構成により、ゲストを日常から非日常へと促す可動式の茶室を提案した。材料や折り方の変化を通じて、様々な場所や状況に対応できる空間を目指した。",
+        "前回の2019年のワークショップでは言語の壁を感じたが、2回目は英単語・翻訳機・スケッチなどを使いながら議論に参加。広島工業大学とラフバラー大学の合同で編成された4グループの中で最優秀賞を獲得した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/IMG_2175.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/ELEVATION%201.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/ELEVATION%202.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/elevation%203.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/elevation%204.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%204.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/%E3%82%A2%E3%83%BC%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%205.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/2-IMG_2162.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/4-IMG_2187.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/5-IMG_2189.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/transition-teahouse/1-IMG_2097.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "折り方・高さ・日常から非日常への移り変わりを空間化した可動式茶室。国際ワークショップで最優秀賞を受賞。"
+    },
+    {
+      "title": "Origami Teahouse",
+      "file": "02_Works/linktoPage/teahouse_Summit/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/OrigamiTeahouse.png",
+      "thumbnail": "assets/work-thumbnails/origami-teahouse.webp",
+      "note": [
+        "May,2023　G7 Summit Hiroshima Openning Reception"
+      ],
+      "kind": "展示概要",
+      "paragraphs": [
+        "2019年の英国ラフバラー大学と広島工業大学の合同ワークショップで最優秀賞に選ばれた「Transitional Teahouse」を制作し、2023年5月、G7広島サミットの歓迎レセプションで展示した。",
+        "和紙にCNC加工機で正確に糊を垂らし、その上にもう1枚の和紙を重ねることで、和紙と糊だけを使ったフレキシブルな茶室を制作した。紙の折りや変形を活かし、柔軟に形を変えられる茶室を実現している。",
+        "全体形状の設計から、CNC加工機で糊を垂らすためのGコード生成までをGrasshopperで制御した。デジタル上の形状情報を加工機の動作へ変換し、素材の特性を活かした実物の制作につなげた。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/DSC07039%20%281%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/5-DSC07063.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/3-DSC07046.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/origami-teahouse/4-DSC07057.jpg"
+        },
+        {
+          "type": "video",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/OrigamiTeahouse_small.mp4"
+        }
+      ],
+      "listed": true,
+      "addresses": "最優秀賞を受賞したTransition Tea Houseを発展させ、和紙と糊、CNC加工、Grasshopperによる制御で制作。G7広島サミット歓迎レセプションに展示。"
+    },
+    {
+      "title": "バーチャル広工大",
+      "file": "02_Works/linktoPage/VirtualHIT/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/virtual.png",
+      "thumbnail": "assets/work-thumbnails/virtual-hiroshima-it.webp",
+      "note": [
+        "May-Aug,2020"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2020年、コロナ禍によるオンライン授業への移行で、大学へ一度も訪れたことのない新入生が生まれた。2019年10月から大学院生主体で学年を越えたつながりをつくっていた「NOTE」の活動をオンラインでも継続し、新入生にキャンパスの雰囲気を伝えるため、バーチャルキャンパスツアーを企画した。",
+        "キャンパスのモデリングには、授業で習得し日常的に使っていたRhinocerosを使用。大規模な制作を想定して要素ごとにレイヤーを分け、Unityへインポートした後のマテリアル割り当てを効率化した。clusterへのワールド公開に必要なUnityは、この制作を通じて習得。スマートフォンからも参加できるclusterを公開環境に選んだ。",
+        "制作開始から約3週間でワールドを完成させ、2020年6月に建築デザイン学科の新入生約30人を招待してツアーを開催。講義棟、売店、製図室、研究棟などを巡り、実際のキャンパスライフを感じてもらう機会をつくった。",
+        "中国新聞への掲載をきっかけに大学のWEBオープンキャンパスにも採用され、7月には高校生向けのツアーを開催。各学科の紹介動画を見られる「どこでもドア」や、キャンパス内を移動できるワープポイントを用意し、1日4回のイベントで合計約600人が参加した。県外からの参加者も多く、オンラインの利点を活かした大学広報へと展開した。",
+        "その後はオンライン3D講評会などにも活用。バーチャル空間だけで完結させるのではなく、そこで生まれた交流や熱気をリアルの活動へつなぎ、リアルの体験をバーチャルで拡張することが重要だと考えるようになった。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/1-IMG_6495.jpg"
+        },
+        {
+          "type": "video",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/virtual-hiroshima-it/%E3%83%90%E3%83%BC%E3%83%81%E3%83%A3%E3%83%AB%E5%BA%83%E5%B7%A5%E5%A4%A7_shortmovie.mp4"
+        }
+      ],
+      "listed": true,
+      "addresses": "コロナ禍で大学に来られない新入生向けに、Rhino・Unity・clusterで3週間で制作。新入生約30人のツアーから、WEBオープンキャンパス約600人の参加へ展開。"
+    },
+    {
+      "title": "大和ハウス広島支店設計部　エントランス",
+      "file": "02_Works/linktoPage/Daiwa/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/daiwa.png",
+      "thumbnail": "assets/work-thumbnails/daiwa-hiroshima.webp",
+      "note": [
+        "May,2020"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2020年5月、大和ハウス広島支店設計部の改修に伴い、オフィス空間と来客用エントランスを隔てるパーテーションを設計・制作した。広島工業大学建築デザイン学科・杉田宗研究室がデジタルファブリケーションを活用して取り組んだプロジェクトである。",
+        "お客様をエントランスへ引き込むような、流動性のある空間を目指した。厚さ2.5mmのシナ合板で羽状の部材を制作し、その形状や取り付け角度をパラメトリックに変化させた。",
+        "大和ハウスのシンボルマーク「エンドレスハート」がパーテーション全体に浮かび上がるよう、画像データから抽出した濃淡の数値を、羽を取り付ける角度へ置き換えるプログラムを作成。平面のロゴを、角度のグラデーションによる立体的な表現へ変換した。",
+        "クライアントから羽の形状に関する要望を聞き、オフィスの名称を羽に刻印するなど、利用者や場所に合わせた調整も行った。企業のシンボルを空間の意匠へ変換し、来客を迎える体験として表現した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/3-P1016073.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/4-P1016079.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/5-P1016114.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/1-P1015697.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/daiwa-hiroshima/2-P1015703.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "企業シンボル「エンドレスハート」の濃淡を羽の角度へ変換し、2.5mmシナ合板のパラメトリックなパーテーションとして制作。"
+    },
+    {
+      "title": "AAVS Osaka 2019",
+      "file": "02_Works/linktoPage/aavs/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/handibot.png",
+      "thumbnail": "assets/work-thumbnails/aavs-osaka.webp",
+      "note": [
+        "Mar, 2019"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2019年3月、AAスクールと竹中工務店大阪本店が共同開催した国際ワークショップに参加。伝統的な技術と最先端の技術を組み合わせることで生まれる可能性を探った。",
+        "私はHandibot（手持ちのCNC加工機）の操作を担当し、3Dでデザインされた複雑な加工を実現した。デジタルファブリケーションによる機械加工だけで完結させず、手加工と組み合わせてパビリオンの軸部を制作した。",
+        "多国籍の参加者とコミュニケーションを取りながら加工方法を検討し、デジタル上の形状を実際の部材へ変換するプロセスを経験した。本人が「ものづくり活動の原点」として紹介しているワークショップである。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/1-So%20Sugita%20-%20P1002043.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/2-So%20Sugita%20-%20P1002138.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/3-So%20Sugita%20-%20P1002157.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/4-So%20Sugita%20-%20P1002199.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/aavs-osaka/5-Svenja%20F%20-%20P3251008.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "AAスクールと竹中工務店の国際ワークショップで、HandibotによるCNC加工と手加工を組み合わせ、パビリオンの軸部を制作。"
+    },
+    {
+      "title": "Apple peal",
+      "file": "02_Works/linktoPage/apple/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/apple.png",
+      "thumbnail": "assets/work-thumbnails/apple-peal.webp",
+      "note": [
+        "LU-ARC Summer Workshop 2th",
+        "Sep,2019"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2019年9月、英国ラフバラー大学で行われた1週間の国際建築ワークショップに参加。大学内で収穫される大量のリンゴを保存・販売するアップルストアを提案した。",
+        "リンゴの収穫、配送、販売、調理までの一連のストーリーを「リンゴの皮」に重ね、敷地内の3本の大きな木の間に生まれるアクティビティを、リンゴの皮のような曲面でつなぐ構成とした。キッチン、ダイニングテーブル、ショップ、ストレージ、休憩スペースなどを配置し、学生や地域の人が昼休みや放課後に訪れる場所を想定した。",
+        "設計では、まず大木の間を抜けるウォークスルーを考え、次に木の周辺のアクティビティを設定。それらをつなぐ建築ボリュームを検討し、最後にアクティビティを包み込む「リンゴの川」のような建築へ展開した。",
+        "私は3Dモデリングとレンダリング作成を担当。リンゴの皮を模した3次曲面について、メンバーの考えやコンセプトに沿う形を検討した。海外と日本の建築学生が、言葉の壁を越えて意見を出し合い、一つの提案をつくり上げた経験となった。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/09_2.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/1-P1003442.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/2-P1003532.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/3-P1003629.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/apple-peal/4-P1003771.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "ラフバラー大学の国際ワークショップで、敷地の3本の大木とリンゴの収穫から消費までの行為をつなぐアップルストアを提案。3Dモデリングとレンダリングを担当。"
+    },
+    {
+      "title": "Completement Virtual",
+      "file": "02_Works/linktoPage/Fes/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/complement-virtual/Fes.png",
+      "thumbnail": "assets/work-thumbnails/complement-virtual.webp",
+      "note": [
+        "建築情報学会オンラインワークショップ「Fes」",
+        "Apr, 2022"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2022年4月、建築情報学会の新しい活動として開催された短期集中型のオンラインワークショップに参加。社会人による「THINKING」（3日間）と、学生中心の「CODING+MAKING」（5日間）の2部構成で、前半で練ったアイデアを後半の参加者が選んで実装する形式だった。",
+        "課題は、建築情報学会の会員が集まり、様々な活動を行うリアルとバーチャルが共存するグラウンドを考えること。リアル空間には、解体が始まっていた中銀カプセルタワーの跡地を利用する条件があった。私は鹿島建設AE・情報の久保氏と同じグループに参加した。",
+        "VR研究において、人が実際には壁に沿って曲がっていても、まっすぐ歩く映像を見せられると錯覚する現象を手がかりに、リアル空間とバーチャル空間の「歩くことによる体感の差異」に着目した。",
+        "階段を上る、分岐を選ぶ、歩くという行為を繰り返すリアル建築のユニットと、それに対応するバーチャル空間を構想。入口・中間スペース・会場など、リアルへ戻れる接続点を設け、発表や講演会の予備知識を体験しながら会場へたどり着く構成を提案した。",
+        "バーチャル空間を単独で完結させず、身体感覚を持つリアル建築によって補完し、両者を往復する体験として設計した。"
+      ],
+      "media": [
+        {
+          "type": "video",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/complement-virtual/ComplementVirtual_movie_fin.mp4"
+        }
+      ],
+      "listed": true,
+      "addresses": "リアルとバーチャルが共存する場を構想し、VRの歩行錯覚を手がかりに、身体感覚を補完するリアル建築と仮想空間を提案。"
+    },
+    {
+      "title": "建築学生WS 宮島 2022",
+      "file": "02_Works/linktoPage/kenchikugakuseiWS/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/kenchikugakusei.png",
+      "thumbnail": "assets/work-thumbnails/miyajima-workshop.webp",
+      "note": [
+        "Aug,2022"
+      ],
+      "kind": "ワークショップ概要",
+      "paragraphs": [
+        "2022年、令和の大改修を迎える宮島・厳島神社で開催された建築学生ワークショップ。全国各地から審査を通過した建築学生が集まり、聖地にフォリーを制作した。",
+        "東京・金沢・大阪の学生5人グループで班長を務め、約3か月の設計期間と、2022年8月23日〜29日の1週間の制作期間を通じて、プロジェクトマネジメントをしながらグループを率いた。",
+        "竹を用いたフォリーの設計では、竹の長さや頂点の高さなどを3Dモデリングによって導いた。現地では干潮時にしか組み立て作業ができない条件を踏まえて制作を進めた。",
+        "完成したフォリーは厳島神社の国宝・平舞台のすぐ横に設置。満潮時には波の揺れによって動き、干潮時には様々な角度から見ることができる作品となった。千畳閣で公開プレゼンテーションも行い、来場者へ制作物を説明した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/4788396659002199975%20%281%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/1-IMG_1463.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/2-IMG_1503.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/IMG_1571.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/3-IMG_1599.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/4-IMG_1648.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/5-IMG_1658.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/6-IMG_2582.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/7-%E5%85%AC%E9%96%8B%E3%83%97%E3%83%AC%E3%82%BC%E3%81%AE%E6%A7%98%E5%AD%90.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/miyajima-workshop/Pesentation.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "東京・金沢・大阪の学生5人チームで班長を務め、3か月の設計と1週間の現地制作をマネジメント。竹のフォリーをデジタルモデリングで設計。"
+    },
+    {
+      "title": "Boxes House",
+      "file": "02_Works/linktoPage/Boxes/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/boxes.png",
+      "thumbnail": "assets/work-thumbnails/boxes-house.webp",
+      "note": [
+        "Jan,2017"
+      ],
+      "kind": "設計概要",
+      "paragraphs": [
+        "学部1年生後期の設計課題「愛着を持って住まう家」で、将来自分が住んでみたい住宅を設計した。夫婦2人と長男・次女の子ども2人の家族を想定し、用途に応じた大きさのボックスを中庭を軸に積み上げるように配置した。",
+        "1階には家族でスポーツ観戦を臨場感よく楽しめるシアタールームと長男の部屋を配置。中庭を回り込む階段を上がると次女の部屋、夫婦の部屋があり、階段を上りきった先にリビング・ダイニング・キッチンがある構成とした。",
+        "中庭に面して窓を多く設け、階段を住宅の中心軸とすることで、どこにいても家族の気配を感じられる住まいを目指した。浴室は寝室の下に生まれるデッドスペースを活用し、浴槽に入ったときの目線が中庭の地面の高さと重なるように配置した。",
+        "リビングとキッチンを住宅の高い位置に置き、住宅街でも光を取り込みやすくした。各室の高さ関係を考えながらボックスを積み重ね、外観と内部の空間構成を両立させることに苦労した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/2-myhouse01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/1-Diagram.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/boxes-house/3-myhouse_danmen.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "中庭と階段を中心に家族の気配をつなぐ住宅。用途別のボックス配置と断面構成を検討した学部1年次の設計課題。"
+    },
+    {
+      "title": "Polygon Space",
+      "file": "02_Works/linktoPage/Hexagon/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/hexagon.png",
+      "thumbnail": "assets/work-thumbnails/polygon-space.webp",
+      "note": [
+        "Jul,2018"
+      ],
+      "kind": "設計概要",
+      "paragraphs": [
+        "学部3年次でのパビリオン設計課題にて、多面体で構成される自由形のパビリオンを設計した。様々な形に対応可能なジョイントの設計も行った。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/1-ss%20v3.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/5-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%892.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/4-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%894.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/3-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%896.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/6-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%8910.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/polygon-space/2-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%899.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "学部3年次でのパビリオン設計課題にて、多面体で構成される自由形のパビリオンを設計した。"
+    },
+    {
+      "title": "Net Shopping for 2045",
+      "file": "02_Works/linktoPage/Drone/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/drone.png",
+      "thumbnail": "assets/work-thumbnails/net-shopping-2045.webp",
+      "note": [
+        "HIT Design Studio 2018-2019",
+        "Jan,2019"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "杉田宗研究室3年次のデザインスタジオ課題「Transition」。2045年のネット通販がどのように進化するかを予測し、それによって建築や都市がどう変化し、新たなデザインが生まれるかを考えた。",
+        "従来はトラックで多くの荷物を配送するため、積載効率のよい段ボールが梱包に使われてきた。一方、ドローンを使って荷物を効率よく運ぶ未来を想定し、そのための新しい道具をデザインした。",
+        "風呂敷と人工筋肉を組み合わせ、様々な形状の荷物を包み込む。包んだ荷物をドローンに接続して運ぶことで、形状に合わせた保持と梱包材の低減につなげることを意図した。配送手段の変化を起点に、荷物の包み方・固定方法・運搬方法をデザイン対象とした提案である。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/2-01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/1-%E9%A2%A8%E5%91%82%E6%95%B7%20%E5%8C%85%E3%81%BF%E6%96%B9.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/net-shopping-2045/3-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-01-20%20012600.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "ドローン配送を想定し、風呂敷と人工筋肉で様々な形の荷物を包んで運ぶ、梱包材削減を意図した未来の配送ツールを提案。"
+    },
+    {
+      "title": "Simple A",
+      "file": "02_Works/linktoPage/Aframe/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/Aframe.png",
+      "thumbnail": "assets/work-thumbnails/simple-a.webp",
+      "note": [
+        "June,2019"
+      ],
+      "kind": "設計概要",
+      "paragraphs": [
+        "広島工業大学4年次の特別設計演習課題「最小の建築都市（ギャラリー）」として、大学食堂前の敷地に、人々をつなぐギャラリーを設計した。ログハウスやテントなどで使われてきた、単純で作りやすいAフレーム構造に着目した。",
+        "Aフレームの地面に接する2つの端点は敷地形状から、頂点はそこを通る人の動線から決定することで、ギャラリーと人の通り道を一体化することを目指した。",
+        "斜め材と横材はそれぞれ2パターンの長さで構成し、同じ長さの部材を使うことで制作のしやすさにも配慮した。敷地形状がフレームの頂点や重なり方のグラデーションに影響し、内部空間にも抑揚が生まれるデザインとした。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/1-01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/simple-a/2-07.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "敷地形状と人の動線をAフレームの幾何学的な変化に反映し、ギャラリーと通り道を一体化するパビリオンを提案。"
+    },
+    {
+      "title": "FUN LINE",
+      "file": "02_Works/linktoPage/Funline/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/FunLine.png",
+      "thumbnail": "assets/work-thumbnails/fun-line.webp",
+      "note": [
+        "March,2021"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "広島県とフラー株式会社の共同アプリ開発インターンに参加し、スタジアムの熱狂をリモートでつなぐオンラインスポーツ観戦アプリ「FUN LINE」を企画した。現地観戦の一体感や応援の熱量を、離れた場所にいる人とも共有できる体験を目指した。",
+        "約半年間のプロジェクトで、企画とUI/UXデザインを担当。アイデアをアプリの画面・機能へ落とし込み、開発メンバーと連携しながら実装と実証実験まで進めた。",
+        "スポーツ観戦を単に映像視聴する行為としてではなく、離れた人同士が同じ試合を見ながら熱狂を共有する体験として捉え、オンライン上での応援やコミュニケーションのあり方を検討した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/7-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%288%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/2-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%283%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/3-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%284%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/4-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%285%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/5-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%286%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/6-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%287%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/8-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%289%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/9-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2810%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/10-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2811%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/11-20210828_Mimosa%E3%83%81%E3%83%BC%E3%83%A0%E6%88%90%E6%9E%9C%E7%99%BA%E8%A1%A8%20%2812%29.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/12-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-08-28%2014.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/fun-line/1-%E4%BF%AE%E4%BA%86%E8%A8%BC-temp-Center.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "広島県とフラー株式会社の共同インターンで、スタジアムの熱狂をリモートでつなぐオンライン観戦アプリを企画。約半年間、企画・UI/UXデザインから開発・実証実験まで取り組んだ。"
+    },
+    {
+      "title": "EMARF学生アンバサダー",
+      "file": "02_Works/linktoPage/EMARF/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/Emarf.png",
+      "thumbnail": "assets/work-thumbnails/emarf.webp",
+      "note": [
+        "June,2020"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "2020年7月〜9月の3か月間、クラウドプレカットサービスEMARFを使って制作し、情報発信を行う「EMARF学生アンバサダー」に参加した。この活動で、研究室のミーティングブースを制作した。",
+        "コンクリートで囲まれた無機質な場所で、物置になっていたポケットスペースを、有機的なデザインと木質感のある空間へ変えることを目指した。建築雑誌や模型を飾る棚を設け、昼休みに皆でランチをするような、笑顔の溢れる場所を意図した。",
+        "設計過程ではAR表示を行い、部材の納まりや全体の見た目を確認。凹凸のあるデザインを活かした小さな棚も制作した。EMARFを用いたデジタルファブリケーションと、制作過程の情報発信を組み合わせた活動である。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/1-IMG_7040.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/IMG_7047.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/2-IMG_7049.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/5-IMG_7162.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/emarf/3-IMG_7059.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "EMARF学生アンバサダーとして、研究室の物置化していたポケットスペースを木質感のあるミーティングブースへ転換。ARで納まりを検証。"
+    },
+    {
+      "title": "Laminate Stool",
+      "file": "02_Works/linktoPage/Stool/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/laminate-stool/stool.png",
+      "thumbnail": "assets/work-thumbnails/laminate-stool.webp",
+      "note": [
+        "July,2017"
+      ],
+      "kind": "設計概要",
+      "paragraphs": [
+        "広島工業大学建築デザイン学科・学部2年のデジタルファブリケーション授業で設計したスツール。厚さ12mm、850×850mmの合板から部材を切り出し、座面高さ400mmとする条件の課題だった。",
+        "限られた材料から積層させる部材を効率よく取り出すため、全体寸法とデザインを段階的に検討した。材料の取り方と積層による形状を一体で考え、与えられた材料条件の中で成立するスツールを目指した。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/laminate-stool/EkBFiLoVgAAbtYs.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "12mm合板850×850mmから座面高400mmのスツールを設計。限られた材料を積層形状へ展開するデジタルファブリケーション課題。"
+    },
+    {
+      "title": "Side Table",
+      "file": "02_Works/linktoPage/Sidetable/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/sidetable.png",
+      "thumbnail": "assets/work-thumbnails/side-table.webp",
+      "note": [
+        "July,2020"
+      ],
+      "kind": "設計概要",
+      "paragraphs": [
+        "広島工業大学大学院「環境構想論」の授業で制作したサイドテーブル。ひと続きの板が一枚の布のように滑らかに既存家具へ寄生していくデザインを目指した。",
+        "自分の部屋で使うことを想定し、既存の勉強机やベッドになじむよう寸法を調整。部屋のデッドスペースを有効活用し、部材が連続して見える構成を検討した。",
+        "3Dプリントしたジョイントを組み合わせた可動式テーブルも設計した。デスクワーク時にはアームレストやマウス置きとして機能することを想定し、家具の形状と可動機構を一体で考えた。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/1-IMG_1581.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/8-03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/7-%E6%9D%90%E6%96%99%E3%83%8A%E3%83%B3%E3%83%90%E3%83%AA%E3%83%B3%E3%82%B0.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/2-IMG_1641.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/3-Rotatetable02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/4-Rotatetable01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/6-CurveSurface02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/side-table/5-CurveSurface04.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "一枚の布のように既存家具へ寄り添うサイドテーブル。3Dプリントジョイントによる可動部を設け、アームレストやマウス置きとしても使える構成。"
+    },
+    {
+      "title": "Voronoi Clock 01",
+      "file": "02_Works/linktoPage/Voronoiclock01/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-01/voronoi01.png",
+      "thumbnail": "assets/work-thumbnails/voronoi-clock-01.webp",
+      "note": [
+        "February,2019"
+      ],
+      "kind": null,
+      "paragraphs": [
+        "ボロノイを用いて掛け時計と置き時計を制作した自主制作。掛け時計は、母の誕生日に、自分が学んできたことを活かしたものをプレゼントしたいと考えて制作した。",
+        "置き時計は、研究室で卒業する学部生5人のメンバーに、それぞれ異なるパターンを出力してプレゼントした。デジタルデザインの技術を、身近な家具・道具や贈り物へ展開した取り組みである。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-01/IMG_1375%20%281%29.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "ボロノイパターンを用いた掛け時計・置き時計の自主制作。学んだデジタルデザインを身近な道具や贈り物へ展開。"
+    },
+    {
+      "title": "Voronoi Clock 02",
+      "file": "02_Works/linktoPage/Voronoiclock02/index.html",
+      "thumb": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-02/voronoi02.png",
+      "thumbnail": "assets/work-thumbnails/voronoi-clock-02.webp",
+      "note": [
+        "March,2020"
+      ],
+      "kind": null,
+      "paragraphs": [
+        "ボロノイを用いて掛け時計と置き時計を制作した自主制作。掛け時計は、母の誕生日に、自分が学んできたことを活かしたものをプレゼントしたいと考えて制作した。",
+        "置き時計は、研究室で卒業する学部生5人のメンバーに、それぞれ異なるパターンを出力してプレゼントした。デジタルデザインの技術を、身近な家具・道具や贈り物へ展開した取り組みである。"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "src": "https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/works/voronoi-clock-02/IMG_5881.jpg"
+        }
+      ],
+      "listed": true,
+      "addresses": "ボロノイパターンを用いた掛け時計・置き時計の自主制作。研究室の卒業生5人へ異なるパターンを制作したシリーズ。"
+    }
+  ],
+  "unlisted": [
+    {
+      "title": "山根木材福山支店",
+      "file": "02_Works/linktoPage/sample.html",
+      "thumb": null,
+      "note": [
+        "May,2021"
+      ],
+      "kind": "プロジェクト概要",
+      "paragraphs": [
+        "山根木材福岡支店の改装プロジェクトに引き続き、広島工業大学杉田宗研究室は、福山支店の改装プロジェクトにて、木組み階段・パーテーションを設計し、設計から施工まで行った。私は今回のプロジェクトでも設計から施工まで主体的に関わり、福岡支店からさらに生産性を考慮した木組みシステムを考案した。",
+        "前回のプロジェクトでは多くのパーテーションを効率よく製作するために、生産性の高いデザインを模索したため、装飾以外の機能を持たせることができなかった。今回のプロジェクトでは、階段としての構造デザインのアップデートや加工データやモデルデータを一気通貫で作成できるように情報管理のアップデートにも試みた。",
+        "木組み階段は、前回のプロジェクトで製作した木組みシステムから、階段としてのデザインにアップデートし、構造最適計算も参考にしながら、デザインを考えた。規則性のある木組みが重なり合うデザインにすることで、引き締まった印象のある階段となった。",
+        "木組みパーテーションは、外からの流れを室内に取り込むようなグラデーションのデザインとした。柱材のデザインは全て異なるが、情報管理のアップデートにより、効率よく加工データが作成できるため、グラデーションデザインが実現できた。"
+      ],
+      "media": [],
+      "listed": false
+    }
+  ]
+}

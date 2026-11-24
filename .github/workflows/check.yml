@@ -1,0 +1,16 @@
+name: check
+
+on:
+  pull_request:
+
+concurrency:
+  group: check-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check generated HTML
+        run: python3 scripts/build.py --check
