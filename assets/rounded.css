@@ -16,7 +16,6 @@ html.design-rounded { --rounded-gap: 4px; --rounded-radius: 7px; }
 .design-rounded .page .shot img,
 .design-rounded .page .frame,
 .design-rounded .page .frame img,
-.design-rounded .profile-grid img,
 .design-rounded .page-hero img {border-radius:clamp(8px,1.8vw,18px);overflow:hidden;}
 .design-rounded .page .work-row .frame {border-radius:clamp(8px,1.8vw,18px);overflow:hidden;}
 .design-rounded .page .page-hero {border-radius:0 0 14px 14px;}
