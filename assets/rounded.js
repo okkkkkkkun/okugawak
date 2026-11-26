@@ -49,15 +49,14 @@
     });
   });
 
-  // Responsive editorial footer for the rounded design. Keep all original links and credits.
+  // Build the responsive footer from the page’s contact and credit information.
   document.querySelectorAll(".site-foot").forEach(function(foot){
     var original=Array.from(foot.querySelectorAll(":scope > p"));
-    if(original.length<5 || foot.querySelector(".foot-layout"))return;
+    if(original.length<4 || foot.querySelector(".foot-layout"))return;
     var affiliation=original[0].textContent.trim().split("/").filter(Boolean);
     var name=original[1].textContent.trim();
     var mail=original[2].querySelector("a");
-    var brand=original[3].querySelector("a");
-    var copyright=original[4].textContent.trim();
+    var copyright=original[original.length-1].textContent.trim();
     var layout=document.createElement("div");
     layout.className="foot-layout";
     var identity=document.createElement("div");
@@ -67,7 +66,7 @@
     kicker.textContent="KOTA OKUGAWA  /  PORTFOLIO";
     var signature=document.createElement("strong");
     signature.className="foot-signature";
-    signature.textContent="奥川航大  |  Kota okugawa";
+    signature.textContent=name;
     var org=document.createElement("p");
     org.className="foot-affiliation";
     affiliation.forEach(function(part,i){
@@ -81,7 +80,6 @@
     contactLabel.className="foot-kicker";
     contactLabel.textContent="CONTACT";
     if(mail){mail.className="foot-mail";contact.append(contactLabel,mail.cloneNode(true));}
-    if(brand){var link=brand.cloneNode(true);link.className="foot-brand";contact.appendChild(link);}
     var base=document.createElement("div");
     base.className="foot-base";
     var credit=document.createElement("small");

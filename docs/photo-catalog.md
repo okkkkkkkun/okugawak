@@ -1164,5 +1164,5 @@ R2 の画像は 139 点。ほかに、ページが参照するローカル写真
 
 ## 動画（画像ではない）
 
-- `https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/ComplementVirtual_movie_fin.mp4` — `02_Works/linktoPage/Fes/index.html`。Completement Virtual の詳細。静止画の代わりに先頭へ置いている。
+- `https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/ComplementVirtual_movie_fin.mp4` — `02_Works/linktoPage/Fes/index.html`。Complement Virtual の詳細。静止画の代わりに先頭へ置いている。
 - `https://pub-47d33dd99ef84f2d914d1825c4839e75.r2.dev/%E3%83%90%E3%83%BC%E3%83%81%E3%83%A3%E3%83%AB%E5%BA%83%E5%B7%A5%E5%A4%A7_shortmovie.mp4` — `02_Works/linktoPage/VirtualHIT/index.html`。バーチャル広工大の短い動画。
