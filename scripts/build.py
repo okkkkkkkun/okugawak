@@ -135,14 +135,13 @@ def chrome(from_file: str, current: str | None) -> str:
     )
 
 
-def footer(from_file: str, site: dict) -> str:
+def footer(site: dict) -> str:
     mail = site["email"]
     lines = "".join(f"<p>{esc(line)}</p>" for line in FOOTER_LINES)
     return (
         '<footer class="site-foot">'
         f"{lines}"
         f'<p>mail：<a href="mailto:{esc(mail)}">{esc(mail)}</a></p>'
-        f'<p><a href="{esc(href(from_file, "brand/index.html"))}">ブランド案</a></p>'
         f'<p>{esc(site["copyright"])}</p>'
         "</footer>"
         '<dialog class="lightbox"><form method="dialog"><button type="submit">閉じる</button></form>'
@@ -594,7 +593,7 @@ def section_page(from_file: str, current: str, en: str, ja: str, number: str, in
     {inner}
   </div>
 </main>
-{footer(from_file, site)}
+{footer(site)}
 """
     return document(from_file, f"{ja} | Kota Okugawa", f"{site['nameJa']} / {ja}", body, False, current)
 
