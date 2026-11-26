@@ -33,7 +33,7 @@ NAV = [
 
 FOOTER_LINES = [
     "鹿島建設株式会社/建築設計本部/デジタルデザイン統括グループ",
-    "奥川航大 | Kota okugawa",
+    "奥川航大 | Kota Okugawa",
 ]
 
 
@@ -135,14 +135,13 @@ def chrome(from_file: str, current: str | None) -> str:
     )
 
 
-def footer(from_file: str, site: dict) -> str:
+def footer(site: dict) -> str:
     mail = site["email"]
     lines = "".join(f"<p>{esc(line)}</p>" for line in FOOTER_LINES)
     return (
         '<footer class="site-foot">'
         f"{lines}"
         f'<p>mail：<a href="mailto:{esc(mail)}">{esc(mail)}</a></p>'
-        f'<p><a href="{esc(href(from_file, "brand/index.html"))}">ブランド案</a></p>'
         f'<p>{esc(site["copyright"])}</p>'
         "</footer>"
         '<dialog class="lightbox"><form method="dialog"><button type="submit">閉じる</button></form>'
@@ -594,7 +593,7 @@ def section_page(from_file: str, current: str, en: str, ja: str, number: str, in
     {inner}
   </div>
 </main>
-{footer(from_file, site)}
+{footer(site)}
 """
     return document(from_file, f"{ja} | Kota Okugawa", f"{site['nameJa']} / {ja}", body, False, current)
 
@@ -686,18 +685,32 @@ def replace_once(page: str, pattern: str, content: str) -> str:
     return rendered
 
 
-def render_detail_dates(page: str, work: dict) -> str:
+def render_work_detail(page: str, work: dict) -> str:
     date = esc(date_label(work))
     raw_notes = work.get("note") or []
     notes = " · ".join(raw_notes)
     repeated_date = len(raw_notes) == 1 and stamp(work) and re.fullmatch(r"[A-Za-z]{3,9}\s*,?\s*20\d{2}", notes.strip())
     hidden = " hidden" if repeated_date else ""
     page = replace_once(page, r'<p class="page-lead">[^<]*</p>', f'<p class="page-lead">{date}</p>')
-    return replace_once(
+    page = replace_once(
         page,
         r'<p class="work-note"(?: hidden)?>[^<]*</p>',
         f'<p class="work-note"{hidden}>{esc(notes)}</p>',
     )
+    summary_open = '<p class="lede work-detail-summary"><span class="tag">取り組み</span>'
+    page = replace_once(
+        page,
+        re.escape(summary_open) + r'[^<]*</p>',
+        f'{summary_open}{esc(work["addresses"])}</p>',
+    )
+    prose_open = '<div class="prose">'
+    prose_pattern = re.escape(prose_open) + r'(<h2>[^<]*</h2>)?(?:<p>[^<]*</p>)+</div>'
+    prose = re.search(prose_pattern, page)
+    if prose is None:
+        raise ValueError(f'Expected a work introduction in {work["file"]}')
+    heading = prose.group(1) or ""
+    paragraphs = "".join(f"<p>{esc(text)}</p>" for text in work["paragraphs"])
+    return replace_once(page, prose_pattern, f"{prose_open}{heading}{paragraphs}</div>")
 
 
 def main() -> int:
@@ -723,7 +736,7 @@ def main() -> int:
         replacement = f"{start}\n{content.strip()}\n{end}"
         status.append(update_page(path, lambda page: replace_once(page, pattern, replacement), options.check))
     for work in data["works"]:
-        status.append(update_page(work["file"], lambda page: render_detail_dates(page, work), options.check))
+        status.append(update_page(work["file"], lambda page: render_work_detail(page, work), options.check))
     return 0 if all(status) else 1
 
 
